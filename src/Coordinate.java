@@ -1,5 +1,8 @@
 
 public class Coordinate {
-private double coord;
 
+    private double coord;
+    public Coordinate(double x, double y){
+
+    }
 }
