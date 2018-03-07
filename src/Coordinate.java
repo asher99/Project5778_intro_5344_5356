@@ -5,5 +5,4 @@ public class Coordinate {
     public Coordinate(double x, double y){
 
     }
-    private void func(){}
 }
