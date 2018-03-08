@@ -1,9 +1,9 @@
-
+package primitives;
 
 
 public class Coordinate {
 
-public double coord;
+private double coord;
 
 // constant value for assumption of calculations
 final static double EPSILON = 0.00001;
@@ -11,7 +11,6 @@ final static double EPSILON = 0.00001;
     public Coordinate(double newCoord){
         this.coord = newCoord;
     }
-
 
     public double getCoord() {
         return coord;
@@ -23,11 +22,11 @@ final static double EPSILON = 0.00001;
 
     @Override
     public String toString() {
-        return super.toString();
+        return String.valueOf(Coord);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Coordinate other) {
+        return (coord - other.coord < EPSILON) ;
     }
 }
