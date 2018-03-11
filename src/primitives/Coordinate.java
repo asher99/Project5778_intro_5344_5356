@@ -30,6 +30,9 @@ private double coord;
     }
 
     public boolean equals(Coordinate other) {
+        if(this == other) return true;
+        if(other == null) return false;
+        if(!(other instanceof Coordinate)) return false;
         return (coord - other.coord < EPSILON) ;
     }
 

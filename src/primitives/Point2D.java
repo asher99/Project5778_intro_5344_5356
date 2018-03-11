@@ -1,5 +1,7 @@
 package primitives;
 
+import javax.print.attribute.standard.MediaSize;
+
 public class Point2D {
     private Coordinate x;
     private Coordinate y;
@@ -34,8 +36,8 @@ public class Point2D {
     }
 
     @Override
-    public boolean equals(Point2D other) {
-        return x.equals(other.x) && y.equals(other.y) ;
+    public boolean equals(Object other) {
+        return x.equals(((Point2D)other).x) && y.equals(((Point2D)other).y) ;
     }
 // ***************** Operations ******************** //
 
