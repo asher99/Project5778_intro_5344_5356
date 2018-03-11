@@ -15,14 +15,15 @@ private double coord;
         this.coord = newCoord;
     }
 
-    // ***************** Getters/Setters ********************** //
+    public Coordinate(Coordinate newCoord){
+        coord = newCoord.getCoord();
+    }
+    // ***************** Getters ********************** //
     public double getCoord() {
         return coord;
     }
 
-    public void setCoord(double coord) {
-        this.coord = coord;
-    }
+
 
     @Override
     public String toString() {

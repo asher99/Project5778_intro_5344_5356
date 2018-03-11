@@ -8,20 +8,12 @@ public class Point2D {
 
     // ***************** Constructor ********************** //
     public Point2D(double myX, double myY){
-        setX(myX);
-        setY(myY);
+        x = new Coordinate(myX);
+        y = new Coordinate(myY);
 
     }
 
-    // ***************** Getters/Setters ********************** //
-    public void setX(double X) {
-        this.x = new Coordinate(X);
-    }
-
-    public void setY(double Y) {
-        this.y = new Coordinate(Y);
-    }
-
+    // ***************** Getters ********************** //
     public Coordinate getX() {
         return x;
     }
