@@ -49,6 +49,11 @@ public class Vector {
         return Point3D.distance(vector, new Vector(0,0,0).vector);
     }
 
+    /**
+     * return the normal of the vector.
+     * that means that the size of the returned vector is 1, but it keeps the original direction.
+     * @return Vector
+     */
     public Vector normal(){
         double size = sizeOfVector();
         return multiplyByScalar(1/size);
