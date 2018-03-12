@@ -1,6 +1,5 @@
 package primitives;
 
-
 import javafx.scene.layout.CornerRadii;
 
 public class Coordinate {
@@ -18,12 +17,11 @@ private double coord;
     public Coordinate(Coordinate newCoord){
         coord = newCoord.getCoord();
     }
+
     // ***************** Getters ********************** //
     public double getCoord() {
         return coord;
     }
-
-
 
     @Override
     public String toString() {

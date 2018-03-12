@@ -3,23 +3,27 @@ package primitives;
 import javax.print.attribute.standard.MediaSize;
 
 public class Point2D {
-    private Coordinate x;
-    private Coordinate y;
+    protected Coordinate x;
+    protected Coordinate y;
 
     // ***************** Constructor ********************** //
     public Point2D(double myX, double myY){
         x = new Coordinate(myX);
         y = new Coordinate(myY);
+    }
 
+    public Point2D(Coordinate X, Coordinate Y){
+        x = X;
+        y = Y;
     }
 
     // ***************** Getters ********************** //
-    public Coordinate getX() {
-        return x;
+    public double getX() {
+        return x.getCoord();
     }
 
-    public Coordinate getY() {
-        return y;
+    public double getY() {
+        return y.getCoord();
     }
 
     @Override
@@ -33,4 +37,17 @@ public class Point2D {
     }
 // ***************** Operations ******************** //
 
+    public Point2D substract(Point2D a, Point2D b){
+      //  if(a == null || b == null)
+          //  throw  new Exception();
+        Coordinate X = Coordinate.substract(a.x,b.x);
+        Coordinate Z = Coordinate.substract(a.y,b.y);
+        Point2D newPoint = new Point2D(X,Z);
+        return  newPoint;
+    }
+
+    public double distance(Point2D a, Point2D b){
+        Point2D DPoint = substract(a,b);
+        return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2));
+    }
 }
