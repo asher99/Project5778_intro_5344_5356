@@ -2,7 +2,9 @@ package geometries;
 
 import primitives.*;
 
-
+/**
+ * class Geometry for geometrial shapes.
+ */
 public abstract class Geometry {
 
     //default constructor
@@ -12,5 +14,5 @@ public abstract class Geometry {
     public Geometry(final Geometry g){};
 
     // return the normal to a shape
-    protected abstract Vector getNormal(Object myPoint);
+    protected abstract Vector getNormal();
 }

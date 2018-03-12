@@ -42,14 +42,14 @@ public class Vector {
     }
 
     // execute a "dot product" operations on two vectors, and return the output scalar.
-    public double dotProduct(Vector a, Vector b){
+    public static double dotProduct(Vector a, Vector b){
         return  a.vector.getX() * b.vector.getX() +
                 a.vector.getY() * b.vector.getY() +
                 a.vector.getZ() * b.vector.getZ() ;
     }
 
     // execute a "cross product" operations on two vectors, and return the output vector.
-    public Vector crossProduct(Vector a , Vector b){
+    public static Vector crossProduct(Vector a , Vector b){
         return new Vector(a.vector.getY() * b.vector.getZ() - a.vector.getZ()* b.vector.getY(),
                           -(a.vector.getX() * b.vector.getZ() - a.vector.getZ()* b.vector.getX()),
                          a.vector.getX()* b.vector.getY() - a.vector.getY()*b.vector.getX());
