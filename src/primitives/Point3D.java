@@ -17,6 +17,12 @@ public class Point3D extends Point2D {
         z = new Coordinate(myZ);
     }
 
+    // build a point from a Vector
+    public Point3D(Vector v){
+        super(v.vector.x,v.vector.y);
+        z = v.vector.z;
+    }
+
     // ***************** Getters ********************** //
 
     public double getZ() {

@@ -17,8 +17,8 @@ public class Vector {
     }
 
     // build vector using an existing 3D point.
-    public Vector(Point3D vec) {
-        vector = vec;
+    public Vector(Point3D myPoint) {
+        vector = myPoint;
     }
 
     // ***************** Operations ******************** //
@@ -70,4 +70,16 @@ public class Vector {
         return multiplyByScalar(1/size);
     }
 
+    // return if a second vector has the same direction
+    @Override
+    public boolean equals(Object obj) {
+        Vector otherVector = (Vector)obj;
+        Vector thisVector = this.normal();
+
+       return thisVector.vector.equals(otherVector.normal().vector);
+    }
+
+    public Point3D getVector() {
+        return vector;
+    }
 }
