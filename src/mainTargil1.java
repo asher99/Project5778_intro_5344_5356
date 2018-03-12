@@ -15,7 +15,7 @@ public class mainTargil1 {
 
         // cross product Example
         Vector vector3 = Vector.crossProduct(vector1,vector2);
-        System.out.println(vector3);
+        System.out.println(vector3.toString());
 
         // multiply by scalar Example
         Vector vector4 = new Vector(5,0.5,3);

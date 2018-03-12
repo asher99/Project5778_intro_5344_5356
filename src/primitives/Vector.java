@@ -79,7 +79,13 @@ public class Vector {
        return thisVector.vector.equals(otherVector.normal().vector);
     }
 
+    @Override
+    public String toString() {
+        return vector.toString();
+    }
+
     public Point3D getVector() {
+
         return vector;
     }
 }
