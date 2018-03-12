@@ -23,6 +23,7 @@ public class Plain extends Geometry {
     double Cvalue;
     double Dvalue;
 
+    // ***************** Constructors ********************** //
     // constructor. set values also for A,B,C and call the method for finding D.
     public Plain(Point3D myPoint, Vector myOrthonormal){
         point = myPoint;
@@ -34,7 +35,7 @@ public class Plain extends Geometry {
         findD();
     }
 
-    //getters
+    // ***************** Getters/Setters ********************** //
     public Vector getOrthonormal() {
         return orthonormal;
     }

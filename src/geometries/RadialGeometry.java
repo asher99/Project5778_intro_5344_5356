@@ -9,6 +9,7 @@ public abstract class RadialGeometry extends Geometry {
 
     protected double _radius;
 
+    // ***************** Constructors ********************** //
     //default Constructor
     public RadialGeometry(){
         _radius = 0.0000;
@@ -24,11 +25,12 @@ public abstract class RadialGeometry extends Geometry {
         _radius = g._radius;
     }
 
-    //getter
+    // ***************** Getters/Setters ********************** //
     public double get_radius() {
         return _radius;
     }
 
+    // ***************** Operations ******************** //
     //override the "getNormal" with corresponding abstract method.
     @Override
     public abstract Vector getNormal();

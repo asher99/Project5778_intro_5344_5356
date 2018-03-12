@@ -1,5 +1,12 @@
+/**
+ * Targil1 example
+ * By Asher Alexander & Zvei Eliezer Nir
+ */
+
+
 import com.sun.source.util.SourcePositions;
-import primitives.Vector;
+import primitives.*;
+import geometries.*;
 
 public class mainTargil1 {
 
@@ -27,6 +34,16 @@ public class mainTargil1 {
         // dot product Example
         System.out.println(Vector.dotProduct(vector1,vector4));
 
+        Triangle myTriangle = new Triangle( new Point3D(0,0,0),
+                                            new Point3D(0,3,3),
+                                            new Point3D(6,0,1));
+
+        Plain myPlain = new Plain(new Point3D(18,4,13), new Vector(2,0,6));
+
+        Sphere mySphere = new Sphere(new Point3D(0,0,5),5);
+
+        Cylinder myCylinder = new Cylinder(2,
+                                            new Ray(new Point3D(1,1,5), new Vector(2,2,0)));
 
 
 

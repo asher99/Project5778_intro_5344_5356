@@ -12,6 +12,7 @@ public class Triangle extends Geometry{
     private Point3D b;
     private Point3D c;
 
+    // ***************** Constructors ********************** //
     //constructor
     public Triangle(Point3D myA, Point3D myB, Point3D myC)
     {
@@ -20,7 +21,7 @@ public class Triangle extends Geometry{
         c = myC;
     }
 
-    //getters
+    // ***************** Getters/Setters ********************** //
     public Point3D getA() {
         return a;
     }
@@ -33,6 +34,7 @@ public class Triangle extends Geometry{
         return c;
     }
 
+    // ***************** Operations ******************** //
     // for now return now.
     @Override
     protected Vector getNormal() {

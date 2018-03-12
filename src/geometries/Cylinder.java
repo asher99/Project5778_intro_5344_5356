@@ -12,14 +12,15 @@ public class Cylinder extends RadialGeometry {
 
     Ray orientaion;
 
+    // ***************** Constructors ********************** //
     //constructor
-    public Cylinder(double myRadius, double myHeight, Ray myRay){
+    public Cylinder(double myRadius, Ray myRay){
         _radius = myRadius;
 
         orientaion = myRay;
     }
 
-    //getters
+    // ***************** Getters/Setters ********************** //
     public Ray getOrientaion() {
         return orientaion;
     }
@@ -29,6 +30,7 @@ public class Cylinder extends RadialGeometry {
         return super.get_radius();
     }
 
+    // ***************** Operations ******************** //
     //for now return null.
     @Override
     public Vector getNormal() {

@@ -11,13 +11,14 @@ public class Sphere extends RadialGeometry {
 
     Point3D center;
 
+    // ***************** Constructors ********************** //
     // constructor
     public Sphere(Point3D myPoint, double myRadius){
         center = myPoint;
         _radius = myRadius;
     }
 
-    // getters
+    // ***************** Getters/Setters ********************** //
     public Point3D getCenter() {
         return center;
     }
@@ -27,11 +28,13 @@ public class Sphere extends RadialGeometry {
         return super.get_radius();
     }
 
+    // ***************** Operations ******************** //
     // for now return null.
     @Override
     public Vector getNormal() {
         return null;
     }
+
 
     // check if sphere are equals by comparing radius and the center points.
     @Override
