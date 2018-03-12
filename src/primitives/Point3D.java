@@ -29,7 +29,15 @@ public class Point3D extends Point2D {
         return '(' + x.toString() + ',' + y.toString() + ',' + z.toString() + ')';
     }
 
-    public Point3D substract(Point3D a, Point3D b){
+    public static Point3D add(Point3D a, Point3D b){
+        Coordinate X = Coordinate.add(a.x,b.x);
+        Coordinate Y = Coordinate.add(a.y,b.y);
+        Coordinate Z = Coordinate.add(a.z,b.z);
+        Point3D newPoint = new Point3D(X.getCoord(),Y.getCoord(),Z.getCoord());
+        return  newPoint;
+    }
+
+    public static Point3D substract(Point3D a, Point3D b){
         //  if(a == null || b == null)
         //  throw  new Exception();
         Coordinate X = Coordinate.substract(a.x,b.x);
@@ -39,7 +47,7 @@ public class Point3D extends Point2D {
         return  newPoint;
     }
 
-    public double distance(Point3D a, Point3D b){
+    public static double distance(Point3D a, Point3D b){
         Point3D DPoint = substract(a,b);
         return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2) + Math.pow(DPoint.getZ(),2));
     }
