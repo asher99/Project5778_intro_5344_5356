@@ -2,8 +2,12 @@ package primitives;
 
 import javafx.scene.layout.CornerRadii;
 
+/**
+ * class Coordinate for a single coordinate on a single axis.
+ */
 public class Coordinate {
 
+    // the coordinate value
 private double coord;
 
     // constant value for assumption of calculations
@@ -14,6 +18,7 @@ private double coord;
         this.coord = newCoord;
     }
 
+    // kind of copy constructor
     public Coordinate(Coordinate newCoord){
         coord = newCoord.getCoord();
     }
@@ -36,11 +41,13 @@ private double coord;
     }
 
     // ***************** Operations ******************** //
+    // add the value of two coordinates on the same axis and return the new coordinate.
     public static Coordinate add(Coordinate a, Coordinate b){
 
         return new Coordinate(a.coord + b.coord);
     }
 
+    // substract the value of two coordinates on the same axis and return the new coordinate.
     public static Coordinate substract(Coordinate a, Coordinate b){
 
         return new Coordinate(a.coord - b.coord);

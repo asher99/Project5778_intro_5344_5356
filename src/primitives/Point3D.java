@@ -1,11 +1,17 @@
 package primitives;
 
+/**
+ * class point3D for point in the space.
+ * this class EXTENDS the point2D class.
+ */
 public class Point3D extends Point2D {
 
+    //additional coordinate for the z axis.
     Coordinate z;
 
     // ***************** Constructor ********************** //
 
+    //build by three values for coordinates
     public Point3D(double myX, double myY,double myZ){
         super(myX,myY);
         z = new Coordinate(myZ);
@@ -29,6 +35,7 @@ public class Point3D extends Point2D {
         return '(' + x.toString() + ',' + y.toString() + ',' + z.toString() + ')';
     }
 
+    // receive two points and return new one (x1+x2,y1+y2,z1+z2).
     public static Point3D add(Point3D a, Point3D b){
         Coordinate X = Coordinate.add(a.x,b.x);
         Coordinate Y = Coordinate.add(a.y,b.y);
@@ -37,6 +44,7 @@ public class Point3D extends Point2D {
         return  newPoint;
     }
 
+    // receive two points and return new one (x1-x2,y1-y2,z1-z2).
     public static Point3D substract(Point3D a, Point3D b){
         //  if(a == null || b == null)
         //  throw  new Exception();
@@ -47,6 +55,7 @@ public class Point3D extends Point2D {
         return  newPoint;
     }
 
+    //return the distance between two points using the pythgore theorem.
     public static double distance(Point3D a, Point3D b){
         Point3D DPoint = substract(a,b);
         return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2) + Math.pow(DPoint.getZ(),2));

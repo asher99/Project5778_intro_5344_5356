@@ -11,7 +11,7 @@ public class Vector {
     protected Point3D vector;
 
     // ***************** Constructor ********************** //
-    // build vector upon three coordinate values.
+    // build vector by three coordinate values.
     public Vector(double x, double y, double z) {
         vector = new Point3D(x,y,z);
     }

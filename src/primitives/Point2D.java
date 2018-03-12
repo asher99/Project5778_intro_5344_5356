@@ -2,16 +2,22 @@ package primitives;
 
 import javax.print.attribute.standard.MediaSize;
 
+/**
+ * class point2D for a point in the plain.
+ */
 public class Point2D {
+    // the point 2 coordinates
     protected Coordinate x;
     protected Coordinate y;
 
     // ***************** Constructor ********************** //
+    // build by values
     public Point2D(double myX, double myY){
         x = new Coordinate(myX);
         y = new Coordinate(myY);
     }
 
+    //build by Coordinate objects
     public Point2D(Coordinate X, Coordinate Y){
         x = X;
         y = Y;
@@ -37,6 +43,7 @@ public class Point2D {
     }
 // ***************** Operations ******************** //
 
+    // receive two points and return new one (x1-x2,y1-y2)
     public Point2D substract(Point2D a, Point2D b){
       //  if(a == null || b == null)
           //  throw  new Exception();
@@ -46,6 +53,7 @@ public class Point2D {
         return  newPoint;
     }
 
+    //return the distance between two points using the pythgore theorem.
     public double distance(Point2D a, Point2D b){
         Point2D DPoint = substract(a,b);
         return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2));
