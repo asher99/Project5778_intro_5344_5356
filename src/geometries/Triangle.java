@@ -6,7 +6,7 @@ import primitives.*;
  * class Triangle for triangle in space.
  * the triangle is represnted by three points in space.
  */
-public class Triangle extends Geometry{
+public class Triangle extends Plain{
 
     private Point3D a;
     private Point3D b;
@@ -16,9 +16,12 @@ public class Triangle extends Geometry{
     //constructor
     public Triangle(Point3D myA, Point3D myB, Point3D myC)
     {
+        super(myA, myB, myC);
         a = myA;
         b = myB;
         c = myC;
+
+
     }
 
     // ***************** Getters/Setters ********************** //

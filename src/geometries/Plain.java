@@ -35,6 +35,11 @@ public class Plain extends Geometry {
         findD();
     }
 
+    public Plain(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3){
+        point = myPoint1;
+        orthonormal = getNormal();
+    }
+
     // ***************** Getters/Setters ********************** //
     public Vector getOrthonormal() {
         return orthonormal;
