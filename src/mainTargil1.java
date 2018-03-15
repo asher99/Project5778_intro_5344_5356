@@ -45,7 +45,8 @@ public class mainTargil1 {
         Sphere mySphere = new Sphere(new Point3D(0,0,5),5);
 
         Cylinder myCylinder = new Cylinder(2,
-                                            new Ray(new Point3D(1,1,5), new Vector(2,2,0)));
+                              new Ray(new Point3D(1,1,5),
+                              new Vector(2,2,0)));
 
 
 

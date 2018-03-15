@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
@@ -16,7 +17,6 @@ public class Cylinder extends RadialGeometry {
     //constructor
     public Cylinder(double myRadius, Ray myRay){
         _radius = myRadius;
-
         orientaion = myRay;
     }
 
@@ -33,7 +33,7 @@ public class Cylinder extends RadialGeometry {
     // ***************** Operations ******************** //
     //for now return null.
     @Override
-    public Vector getNormal() {
+    public Vector getNormal(Point3D somePoint) {
         return null;
     }
 }
