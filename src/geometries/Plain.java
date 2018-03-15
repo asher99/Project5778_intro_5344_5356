@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.net.PortUnreachableException;
+
 /**
  * class Plain for a plain in space.
  * the plaine is represented by a point and an orthogonal vector to the point.
@@ -35,9 +37,16 @@ public class Plain extends Geometry {
         findD();
     }
 
+    // constructor. receive three points, set one point as the class member "point"
+    // and use the three points to calculate the "orthonormal" member.
     public Plain(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3){
+
+        //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
+
         point = myPoint1;
-        orthonormal = getNormal();
+        Vector vec1 = new Vector(Point3D.substract(myPoint3,myPoint2));
+        Vector vec2 = new Vector(Point3D.substract(myPoint2,myPoint1));
+        orthonormal = Vector.crossProduct(vec1,vec2);
     }
 
     // ***************** Getters/Setters ********************** //
@@ -49,10 +58,13 @@ public class Plain extends Geometry {
         return point;
     }
 
-    // for now return null;
+
+    // ***************** Operations ******************** //
+
+    // the Normal is the "orthonormal" class member.
     @Override
-    protected Vector getNormal() {
-        return null;
+    protected Vector getNormal(Point3D somePoint) {
+        return orthonormal;
     }
 
     // we check if the vectors are the same.
@@ -75,6 +87,17 @@ public class Plain extends Geometry {
     // check if point (x,y,z) satisfy the equation: "Ax + By + Cz + D = 0".
     public boolean satisfyEquation(Point3D myPoint){
         return ((point.getX()*Avalue + point.getY()*Bvalue + point.getZ()*Cvalue + Dvalue) == 0);
+    }
+
+    // check if two points in space are lineraly dipendent.
+    boolean linearlyDipendent(Point3D point1, Point3D point2){
+        double xDiff = point1.getX() - point2.getX();
+        double yDiff = point1.getY() - point2.getY();
+        double zDiff = point1.getZ() - point2.getZ();
+
+        if (xDiff==yDiff&&yDiff==zDiff)
+            return true;
+        else return false;
     }
 
     /*

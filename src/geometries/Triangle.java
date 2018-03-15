@@ -40,8 +40,8 @@ public class Triangle extends Plain{
     // ***************** Operations ******************** //
     // for now return now.
     @Override
-    protected Vector getNormal() {
-        return null;
+    protected Vector getNormal(Point3D somePoint) {
+        return super.getNormal(somePoint);
     }
 
     /*

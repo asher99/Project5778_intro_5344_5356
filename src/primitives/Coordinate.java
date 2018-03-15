@@ -26,7 +26,7 @@ public class Coordinate {
     // ***************** Constructor ********************** //
     public Coordinate(double newCoord) {
         double expo = getExp(newCoord);
-        this.coord = ( expo < ACCURACY) ? 0.0 : newCoord;
+        this.coord = (expo < ACCURACY) ? 0.0 : newCoord;
         //this.coord = newCoord;
     }
 

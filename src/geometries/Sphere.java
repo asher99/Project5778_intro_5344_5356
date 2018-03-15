@@ -29,10 +29,14 @@ public class Sphere extends RadialGeometry {
     }
 
     // ***************** Operations ******************** //
-    // for now return null.
+    // check if a point is on the sphere surface by comaring the radius field to the distance from the point to the sphere center.
+    // in case it is, return the vector from the center to the point - this is the normal to the tangent plane at that point.
     @Override
-    public Vector getNormal() {
-        return null;
+    public Vector getNormal(Point3D myPoint) {
+        double dis_from_center = Point3D.distance(myPoint,center);
+        if (dis_from_center - _radius < 0.00001)
+            return new Vector(Point3D.substract(myPoint,center));
+        else return null;
     }
 
 

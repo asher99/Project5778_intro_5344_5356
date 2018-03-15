@@ -1,6 +1,6 @@
 package geometries;
 
-import primitives.Vector;
+import primitives.*;
 
 /**
  * class RadialGeometry for Shapes identified by a radius.
@@ -33,6 +33,6 @@ public abstract class RadialGeometry extends Geometry {
     // ***************** Operations ******************** //
     //override the "getNormal" with corresponding abstract method.
     @Override
-    public abstract Vector getNormal();
+    public abstract Vector getNormal(Point3D somePoint);
 
 }

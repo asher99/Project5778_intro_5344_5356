@@ -16,5 +16,5 @@ public abstract class Geometry {
 
     // ***************** Operations ******************** //
     // return the normal to a shape
-    protected abstract Vector getNormal();
+    protected abstract Vector getNormal(Point3D somePoint);
 }
