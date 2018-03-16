@@ -35,7 +35,7 @@ public class Sphere extends RadialGeometry {
     public Vector getNormal(Point3D myPoint) {
         double dis_from_center = Point3D.distance(myPoint,center);
         if (dis_from_center - _radius < 0.00001)
-            return new Vector(Point3D.substract(myPoint,center));
+            return new Vector(Point3D.subtract(myPoint,center));
         else return null;
     }
 

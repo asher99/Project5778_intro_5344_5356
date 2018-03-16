@@ -23,9 +23,9 @@ public class Vector {
 
     // ***************** Operations ******************** //
 
-    // execute a "substract" operations on two vectors, and return the output vector.
-    public Vector VectorialSubstract(Vector a , Vector b){
-      return new Vector(Point3D.substract(a.vector,b.vector)) ;
+    // execute a "subtract" operations on two vectors, and return the output vector.
+    public Vector Vectorialsubtract(Vector a , Vector b){
+      return new Vector(Point3D.subtract(a.vector,b.vector)) ;
     }
 
     // execute a "add" operations on two vectors, and return the output vector.

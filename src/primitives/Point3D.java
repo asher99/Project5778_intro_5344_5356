@@ -51,19 +51,19 @@ public class Point3D extends Point2D {
     }
 
     // receive two points and return new one (x1-x2,y1-y2,z1-z2).
-    public static Point3D substract(Point3D a, Point3D b){
+    public static Point3D subtract(Point3D a, Point3D b){
         //  if(a == null || b == null)
         //  throw  new Exception();
-        Coordinate X = Coordinate.substract(a.x,b.x);
-        Coordinate Y = Coordinate.substract(a.y,b.y);
-        Coordinate Z = Coordinate.substract(a.z,b.z);
+        Coordinate X = Coordinate.subtract(a.x,b.x);
+        Coordinate Y = Coordinate.subtract(a.y,b.y);
+        Coordinate Z = Coordinate.subtract(a.z,b.z);
         Point3D newPoint = new Point3D(X.getCoord(),Y.getCoord(),Z.getCoord());
         return  newPoint;
     }
 
     //return the distance between two points using the pythgore theorem.
     public static double distance(Point3D a, Point3D b){
-        Point3D DPoint = substract(a,b);
+        Point3D DPoint = subtract(a,b);
         return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2) + Math.pow(DPoint.getZ(),2));
     }
 }

@@ -44,18 +44,18 @@ public class Point2D {
 // ***************** Operations ******************** //
 
     // receive two points and return new one (x1-x2,y1-y2)
-    public Point2D substract(Point2D a, Point2D b){
+    public static Point2D subtract(Point2D a, Point2D b){
       //  if(a == null || b == null)
           //  throw  new Exception();
-        Coordinate X = Coordinate.substract(a.x,b.x);
-        Coordinate Z = Coordinate.substract(a.y,b.y);
-        Point2D newPoint = new Point2D(X,Z);
-        return  newPoint;
+        Coordinate X = Coordinate.subtract(a.x,b.x);
+        Coordinate Z = Coordinate.subtract(a.y,b.y);
+        return  new Point2D(X,Z);
+
     }
 
     //return the distance between two points using the pythgore theorem.
-    public double distance(Point2D a, Point2D b){
-        Point2D DPoint = substract(a,b);
+    public static double distance(Point2D a, Point2D b){
+        Point2D DPoint = subtract(a,b);
         return Math.sqrt(Math.pow(DPoint.getX(),2) + Math.pow(DPoint.getY(),2));
     }
 }

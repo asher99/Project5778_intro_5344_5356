@@ -34,9 +34,21 @@ public class CoordinateTest {
 
     @Test
     public void subtract() {
+        Coordinate a = new Coordinate(8.999999999);
+        Coordinate b = new Coordinate(9.0);
+        Coordinate c = new Coordinate(0.0);
+       Coordinate d = Coordinate.subtract(a,b);
+        assertTrue(d.equals(c));
+
     }
 
     @Test
     public void add() {
+        Coordinate a = new Coordinate(8.9999999);
+        Coordinate b = new Coordinate(0.1000001);
+        Coordinate c = Coordinate.add(a,b);
+        System.out.println(c.getCoord());
+      //  assertTrue(c.getCoord()== 9.1);
+        //assertFalse(c.getCoord()== 9.0);
     }
 }

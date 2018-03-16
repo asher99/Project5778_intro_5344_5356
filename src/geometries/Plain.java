@@ -44,8 +44,8 @@ public class Plain extends Geometry {
         //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
 
         point = myPoint1;
-        Vector vec1 = new Vector(Point3D.substract(myPoint3,myPoint2));
-        Vector vec2 = new Vector(Point3D.substract(myPoint2,myPoint1));
+        Vector vec1 = new Vector(Point3D.subtract(myPoint3,myPoint2));
+        Vector vec2 = new Vector(Point3D.subtract(myPoint2,myPoint1));
         orthonormal = Vector.crossProduct(vec1,vec2);
     }
 

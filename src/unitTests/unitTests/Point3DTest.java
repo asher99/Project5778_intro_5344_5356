@@ -25,10 +25,16 @@ public class Point3DTest {
     }
 
     @Test
-    public void substract() {
+    public void subtract() {
     }
 
     @Test
     public void distance() {
+        Point3D a = new Point3D(2,1,1);
+        Point3D b = new Point3D(2,1,1);
+        Point3D c = new Point3D(1,1,1);
+        assertTrue(Point3D.distance(a,b) == 0);
+        System.out.println(Point3D.distance(a,c));
+        assertTrue(Point3D.distance(a,c) == 1);
     }
 }
