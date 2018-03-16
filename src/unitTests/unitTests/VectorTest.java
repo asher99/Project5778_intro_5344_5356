@@ -66,10 +66,23 @@ public class VectorTest {
 
     @Test
     public void sizeOfVector() {
+
+        Vector a = new Vector(0,-3,4);
+        assertTrue(a.sizeOfVector()== 5);
+
     }
 
     @Test
     public void normal() {
+        Vector a = new Vector(0,0,0);
+        Vector b = new Vector(1,0,0);
+        Vector c = new Vector(1,2,-2);
+        Vector d = new Vector(0.33333333,0.666666,-0.666666);
+
+        assertTrue(a.normal().equals(a));
+        assertTrue(b.normal().equals(b));
+        assertTrue(c.normal().equals(d));
+
     }
 
     @Test

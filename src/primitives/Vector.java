@@ -57,6 +57,7 @@ public class Vector {
 
     // return the size of the vector. this is the squere root of X^2 + Y^2 + Z^2.
     public double sizeOfVector(){
+
         return Point3D.distance(vector, new Vector(0,0,0).vector);
     }
 
