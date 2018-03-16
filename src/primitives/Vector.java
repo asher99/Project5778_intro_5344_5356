@@ -66,6 +66,10 @@ public class Vector {
      * @return Vector
      */
     public Vector normal(){
+        if(vector.getX() == 0 &&
+                vector.getY() == 0 &&
+                vector.getZ()== 0 )
+            return new Vector(0,0,0);
         double size = sizeOfVector();
         return multiplyByScalar(1/size);
     }
@@ -81,6 +85,7 @@ public class Vector {
 
     @Override
     public String toString() {
+
         return vector.toString();
     }
 

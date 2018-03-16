@@ -21,20 +21,18 @@ public class Point3DTest {
     }
 
     @Test
-    public void add() {
-    }
-
-    @Test
-    public void subtract() {
-    }
-
-    @Test
     public void distance() {
         Point3D a = new Point3D(2,1,1);
         Point3D b = new Point3D(2,1,1);
         Point3D c = new Point3D(1,1,1);
+
         assertTrue(Point3D.distance(a,b) == 0);
-        System.out.println(Point3D.distance(a,c));
         assertTrue(Point3D.distance(a,c) == 1);
+
+        Point3D d = new Point3D(0.99,2.3,-0.5);
+        Point3D e = new Point3D(1.899,-12.34,2.5);
+
+       assertTrue(Point3D.distance(d,e)== 14.97183626012521);
+
     }
 }
