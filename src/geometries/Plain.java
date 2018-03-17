@@ -26,7 +26,7 @@ public class Plain extends Geometry {
     double Dvalue;
 
     // ***************** Constructors ********************** //
-    // constructor. set values also for A,B,C and call the method for finding D.
+    //  set values also for A,B,C and call the method for finding D.
     public Plain(Point3D myPoint, Vector myOrthonormal){
         point = myPoint;
         orthonormal = myOrthonormal;
@@ -81,6 +81,7 @@ public class Plain extends Geometry {
 
     // find the value of D from the equation: "D = -Ax -By -Cz"
     private void findD(){
+
         Dvalue = -1*(point.getX()*Avalue + point.getY()*Bvalue + point.getZ()*Cvalue);
     }
 

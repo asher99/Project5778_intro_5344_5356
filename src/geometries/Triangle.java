@@ -13,7 +13,6 @@ public class Triangle extends Plain{
     private Point3D c;
 
     // ***************** Constructors ********************** //
-    //constructor
     public Triangle(Point3D myA, Point3D myB, Point3D myC)
     {
         super(myA, myB, myC);
