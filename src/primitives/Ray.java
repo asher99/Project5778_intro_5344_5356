@@ -29,6 +29,7 @@ public class Ray {
     // ***************** Operations ******************** //
     @Override
     public String toString() {
+
         return point.toString() + " + k" + direction.toString();
     }
 

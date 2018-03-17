@@ -10,10 +10,19 @@ public class VectorTest {
     @Test
     public void vectorialsubtract() {
 
+        Vector a = new Vector(1,2,3);
+        Vector b = new Vector(2,4,6);
+        Vector c = Vector.Vectorialsubtract(b,a);
+        assertTrue(c.equals(a));
+
     }
 
     @Test
     public void vectorialAdd() {
+        Vector a = new Vector(1,2,3);
+        Vector b = new Vector(2,4,6);
+        Vector c = Vector.VectorialAdd(a,a);
+        assertTrue(c.equals(b));
     }
 
     @Test
