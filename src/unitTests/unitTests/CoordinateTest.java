@@ -44,11 +44,11 @@ public class CoordinateTest {
 
     @Test
     public void add() {
-        Coordinate a = new Coordinate(8.9999999);
-        Coordinate b = new Coordinate(0.1000001);
+        Coordinate a = new Coordinate(8.9999999999999999);
+        Coordinate b = new Coordinate(0.0000000000000001);
         Coordinate c = Coordinate.add(a,b);
         System.out.println(c.getCoord());
-      //  assertTrue(c.getCoord()== 9.1);
+        assertTrue(c.getCoord()== 9.0);
         //assertFalse(c.getCoord()== 9.0);
     }
 }
