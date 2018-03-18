@@ -18,6 +18,10 @@ public class Vector {
 
     // build vector using an existing 3D point.
     public Vector(Point3D myPoint) {
+        if(vector.getX() == 0 &&
+                vector.getY() == 0 &&
+                vector.getZ()== 0 )
+            //throw new ArithmeticException("a vector cannot be zero vector!");
         vector = myPoint;
     }
 
@@ -69,10 +73,6 @@ public class Vector {
      * @return Vector
      */
     public Vector normal(){
-        if(vector.getX() == 0 &&
-                vector.getY() == 0 &&
-                vector.getZ()== 0 )
-            return new Vector(0,0,0);
         double size = sizeOfVector();
         return multiplyByScalar(1/size);
     }

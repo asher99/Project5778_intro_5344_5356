@@ -67,7 +67,7 @@ public class Coordinate {
         double result = a.coord - b.coord;
         // if the result is too small tell that it is zero
         int resultExp = getExp(result);
-        return resultExp < ACCURACY ? new Coordinate(0.0) : new Coordinate(result);
+        return resultExp - thisExp < ACCURACY ? new Coordinate(0.0) : new Coordinate(result);
     }
 
 
@@ -83,7 +83,7 @@ public class Coordinate {
         double result = a.coord + b.coord;
         // if the result is too small tell that it is zero
         int resultExp = getExp(result);
-        return resultExp < ACCURACY ? new Coordinate(0.0) : new Coordinate(result);
+        return resultExp - thisExp < ACCURACY ? new Coordinate(0.0) : new Coordinate(result);
     }
 
    /*

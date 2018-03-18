@@ -40,7 +40,7 @@ public class mainTargil1 {
                                             new Point3D(0,3,3),
                                             new Point3D(6,0,1));
 
-        Plain myPlain = new Plain(new Point3D(18,4,13), new Vector(2,0,6));
+        Plane myPlain = new Plane(new Point3D(18,4,13), new Vector(2,0,6));
 
         Sphere mySphere = new Sphere(new Point3D(0,0,5),5);
 

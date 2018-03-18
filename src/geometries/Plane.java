@@ -5,21 +5,21 @@ import primitives.*;
 import java.net.PortUnreachableException;
 
 /**
- * class Plain for a plain in space.
- * the plaine is represented by a point and an orthogonal vector to the point.
- * to have even better image of the plain, we collect the data for the plain equation:
+ * class plane for a plane in space.
+ * the planee is represented by a point and an orthogonal vector to the point.
+ * to have even better image of the plane, we collect the data for the plane equation:
  * "Ax + By + Cz + D = 0".
  * A,B,C is from the orthogonal vector.
  * for D we placed A,B,C along with the point coordinates in the equation.
  *
- * Now, we can place any point in the equation, and see if it satisfy the equation -> and include in the plain.
+ * Now, we can place any point in the equation, and see if it satisfy the equation -> and include in the plane.
  */
-public class Plain extends Geometry {
+public class Plane extends Geometry {
 
     Point3D point;
     Vector orthonormal;
 
-    // the following variables represents the values in the plain equation: "Ax + By + Cz + D = 0"
+    // the following variables represents the values in the plane equation: "Ax + By + Cz + D = 0"
     double Avalue;
     double Bvalue;
     double Cvalue;
@@ -27,7 +27,7 @@ public class Plain extends Geometry {
 
     // ***************** Constructors ********************** //
     //  set values also for A,B,C and call the method for finding D.
-    public Plain(Point3D myPoint, Vector myOrthonormal){
+    public Plane(Point3D myPoint, Vector myOrthonormal){
         point = myPoint;
         orthonormal = myOrthonormal;
 
@@ -39,7 +39,7 @@ public class Plain extends Geometry {
 
     // constructor. receive three points, set one point as the class member "point"
     // and use the three points to calculate the "orthonormal" member.
-    public Plain(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3){
+    public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3){
 
         //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
 
@@ -68,15 +68,15 @@ public class Plain extends Geometry {
     }
 
     // we check if the vectors are the same.
-    // we check if the other plain point satisfy the equation.
-    // if both conditions exist - it is the same plain.
+    // we check if the other plane point satisfy the equation.
+    // if both conditions exist - it is the same plane.
     @Override
     public boolean equals(Object obj) {
-        Plain otherPlain = (Plain) obj;
-        boolean sameDirection =  (this.orthonormal.equals(otherPlain.orthonormal));
-        boolean samePlain = satisfyEquation(otherPlain.point);
+        Plane otherPlane = (Plane) obj;
+        boolean sameDirection =  (this.orthonormal.equals(otherPlane.orthonormal));
+        boolean samePlane = satisfyEquation(otherPlane.point);
 
-        return (sameDirection && samePlain);
+        return (sameDirection && samePlane);
     }
 
     // find the value of D from the equation: "D = -Ax -By -Cz"
