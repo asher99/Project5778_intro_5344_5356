@@ -18,6 +18,7 @@ public class Triangle extends Plane {
         a = myA;
         b = myB;
         c = myC;
+
     }
 
     // ***************** Getters/Setters ********************** //
@@ -45,10 +46,10 @@ public class Triangle extends Plane {
     public boolean equals(Object obj) {
         return false;
     }
-
+*/
     @Override
     public String toString() {
-        return null;
+        return a.toString() + "," + b.toString() + "," + a.toString() + ",";
     }
-    */
+
 }
