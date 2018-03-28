@@ -32,11 +32,12 @@ public class Vector {
      * @param myPoint
      */
     public Vector(Point3D myPoint) {
-        if (vector.getX() == 0 &&
-                vector.getY() == 0 &&
-                vector.getZ() == 0)
-            //throw new ArithmeticException("a vector cannot be zero vector!");
-            vector = myPoint;
+        if (myPoint.getX() == 0 &&
+                myPoint.getY() == 0 &&
+                myPoint.getZ() == 0)
+            throw new ArithmeticException("a vector cannot be zero vector!");
+
+        vector = myPoint;
     }
 
     // ***************** Operations ******************** //
@@ -99,6 +100,10 @@ public class Vector {
      * @return Vector
      */
     public static Vector crossProduct(Vector a, Vector b) {
+
+        if(a == null || b == null)
+            throw new NullPointerException("one of the vectors is null");
+
         return new Vector(a.vector.getY() * b.vector.getZ() - a.vector.getZ() * b.vector.getY(),
                 -(a.vector.getX() * b.vector.getZ() - a.vector.getZ() * b.vector.getX()),
                 a.vector.getX() * b.vector.getY() - a.vector.getY() * b.vector.getX());
