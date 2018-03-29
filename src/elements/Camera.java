@@ -19,8 +19,10 @@ public class Camera {
 
     // ***************** Constructor ********************** //
     public Camera(Point3D point, Vector up, Vector to) {
-        if (Vector.dotProduct(up, to) != 0 || up.sizeOfVector() == 0 || to.sizeOfVector() == 0)
-            throw new ArithmeticException("the Vectors are not otrhgonal!");
+        if (Vector.dotProduct(up, to) != 0)
+        throw new ArithmeticException("the Vectors are not otrhgonal!");
+        if (up.sizeOfVector() == 0 || to.sizeOfVector() == 0)
+        throw new ArithmeticException("the Vectors cannot be zero length.");
         p0 = point;
         vUp = up.normal();
         vTo = to.normal();
@@ -49,31 +51,29 @@ public class Camera {
         double pixelWidth = screenWidth / Nx;
 
         // finding Pij
-        Point3D temp = centerOfPixel(i,j,Nx,Ny,pixelHeight,pixelWidth,pointCenter);
+        Point3D temp = centerOfPixel(i, j, Nx, Ny, pixelHeight, pixelWidth, pointCenter);
 
         // finding the direction of the ray.
-        Vector vectorTowardsPixel = new Vector(Point3D.subtract(temp,p0));
+        Vector vectorTowardsPixel = new Vector(Point3D.subtract(temp, p0));
 
-        return new Ray(p0,vectorTowardsPixel.normal());
+        return new Ray(p0, vectorTowardsPixel.normal());
     }
 
 
-    Point3D centerOfPixel(int i, int j, int Nx, int Ny, double pHeight, double pWidth, Point3D centerOfMatrix){
+    Point3D centerOfPixel(int i, int j, int Nx, int Ny, double pHeight, double pWidth, Point3D centerOfMatrix) {
 
         double xPosition = 0, yPosition = 0;
 
-        if (Nx % 2 == 0){
-            xPosition = (i- Nx/2)*pWidth - pWidth/2;
-        }
-        else{
-            xPosition = (i- Nx/2)*pWidth;
+        if (Nx % 2 == 0) {
+            xPosition = (i - Nx / 2) * pWidth - pWidth / 2;
+        } else {
+            xPosition = (i - Nx / 2) * pWidth;
         }
 
-        if (Ny % 2 == 0){
-            yPosition = (j- Ny/2)*pHeight - pHeight/2;
-        }
-        else{
-            yPosition = (j- Ny/2)*pHeight;
+        if (Ny % 2 == 0) {
+            yPosition = (j - Ny / 2) * pHeight - pHeight / 2;
+        } else {
+            yPosition = (j - Ny / 2) * pHeight;
         }
 
         // finding the vectors in x axis and y axis.
@@ -81,6 +81,6 @@ public class Camera {
         Vector vRightMovment = vRight.multiplyByScalar(xPosition);
 
         // we add the sum of the vectors to the center of the matrix.
-        return Point3D.add(Point3D.add(centerOfMatrix,vUpMovment.getVector()),vRightMovment.getVector());
+        return Point3D.add(Point3D.add(centerOfMatrix, vUpMovment.getVector()), vRightMovment.getVector());
     }
 }
