@@ -1,9 +1,6 @@
 package elements;
 
-import primitives.Point2D;
-import primitives.Point3D;
-import primitives.Vector;
-import primitives.Ray;
+import primitives.*;
 
 import java.awt.*;
 
@@ -20,9 +17,9 @@ public class Camera {
     // ***************** Constructor ********************** //
     public Camera(Point3D point, Vector up, Vector to) {
         if (Vector.dotProduct(up, to) != 0)
-        throw new ArithmeticException("the Vectors are not otrhgonal!");
+            throw new ArithmeticException("the Vectors are not otrhgonal!");
         if (up.sizeOfVector() == 0 || to.sizeOfVector() == 0)
-        throw new ArithmeticException("the Vectors cannot be zero length.");
+            throw new ArithmeticException("the Vectors cannot be zero length.");
         p0 = point;
         vUp = up.normal();
         vTo = to.normal();
@@ -48,6 +45,7 @@ public class Camera {
 
         // finding height and width of pixel.
         double pixelHeight = screenHeight / Ny;
+
         double pixelWidth = screenWidth / Nx;
 
         // finding Pij
@@ -60,27 +58,31 @@ public class Camera {
     }
 
 
-    Point3D centerOfPixel(int i, int j, int Nx, int Ny, double pHeight, double pWidth, Point3D centerOfMatrix) {
+    public Point3D centerOfPixel(int i, int j, int Nx, int Ny, double pHeight, double pWidth, Point3D centerOfMatrix) {
 
         double xPosition = 0, yPosition = 0;
 
+        xPosition = (i - (Nx + 1) * 0.5) * pWidth;//- pWidth * 0.5;
+        yPosition = (j - (Ny + 1) * 0.5) * pHeight;//- pHeight * 0.5;
+        /*
         if (Nx % 2 == 0) {
-            xPosition = (i - Nx / 2) * pWidth - pWidth / 2;
+            xPosition = (i - Nx * 0.5) * pWidth - pWidth * 0.5;
         } else {
-            xPosition = (i - Nx / 2) * pWidth;
+            xPosition = (i - Nx * 0.5) * pWidth;
         }
 
         if (Ny % 2 == 0) {
-            yPosition = (j - Ny / 2) * pHeight - pHeight / 2;
+            yPosition = (j - Ny * 0.5) * pHeight - pHeight * 0.5;
         } else {
-            yPosition = (j - Ny / 2) * pHeight;
-        }
+            yPosition = (j - Ny * 0.5) * pHeight;
+        }*/
 
         // finding the vectors in x axis and y axis.
-        Vector vUpMovment = vUp.multiplyByScalar(-yPosition);
+        Vector vUpMovment = vUp.multiplyByScalar(-1 * yPosition);
         Vector vRightMovment = vRight.multiplyByScalar(xPosition);
 
         // we add the sum of the vectors to the center of the matrix.
         return Point3D.add(Point3D.add(centerOfMatrix, vUpMovment.getVector()), vRightMovment.getVector());
+
     }
 }
