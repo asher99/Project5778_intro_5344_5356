@@ -3,6 +3,7 @@ package elements;
 import primitives.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * camera class
@@ -13,13 +14,13 @@ public class Camera {
     Vector vUp;
     Vector vTo;
     Vector vRight;
-
     // ***************** Constructor ********************** //
     public Camera(Point3D point, Vector up, Vector to) {
-        if (Vector.dotProduct(up, to) != 0)
-            throw new ArithmeticException("the Vectors are not otrhgonal!");
         if (up.sizeOfVector() == 0 || to.sizeOfVector() == 0)
             throw new ArithmeticException("the Vectors cannot be zero length.");
+        if (Vector.dotProduct(up, to) != 0)
+            throw new ArithmeticException("the Vectors are not otrhgonal!");
+
         p0 = point;
         vUp = up.normal();
         vTo = to.normal();
@@ -38,7 +39,7 @@ public class Camera {
      * @param screenWidth    - width of matrix
      * @return Ray
      */
-    public Ray throghPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenHeight, double screenWidth) {
+    public Ray throughPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenHeight, double screenWidth) {
 
         // pointCenter is the point that represent the center of the matrix. pointCenter = p0 + d*vTo.
         Point3D pointCenter = Point3D.add(p0, (vTo.multiplyByScalar(screenDistance)).getVector());
