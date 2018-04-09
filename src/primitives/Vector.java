@@ -10,7 +10,7 @@ public class Vector {
     // any vector is based on a 3d point
     protected Point3D vector;
 
-    //  a static object
+    //  a static object, represent the zero-vector.
     public static Vector zeroVector = new Vector(0, 0, 0);
 
     // ***************** Constructor ********************** //
@@ -38,6 +38,15 @@ public class Vector {
             throw new ArithmeticException("a vector cannot be zero vector!");
 
         vector = myPoint;
+    }
+
+    /**
+     * constract a Vector object by Two 3D points.
+     * @param startPoint
+     * @param finishPoint
+     */
+    public Vector(Point3D startPoint, Point3D finishPoint){
+        vector = Point3D.subtract(finishPoint,startPoint);
     }
 
     // ***************** Operations ******************** //
@@ -117,6 +126,16 @@ public class Vector {
     public double sizeOfVector() {
 
         return Point3D.distance(vector, new Vector(0, 0, 0).vector);
+    }
+
+    /**
+     * calculate the "distance" between vectors as the distance between the vectors 3D points members.
+     * @param v1
+     * @param v2
+     * @return
+     */
+    public static double distance(Vector v1, Vector v2){
+        return Point3D.distance(v1.vector,v2.vector);
     }
 
     /**
