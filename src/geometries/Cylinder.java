@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * class Cylinder for cylinder in space.
  * a cylinder have direction and points => Ray orientation.
- * we decided to implement ifinite cylinder.
+ * we decided to implement infinite cylinder.
  */
 public class Cylinder extends RadialGeometry {
 

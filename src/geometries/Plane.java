@@ -20,10 +20,10 @@ public class Plane extends Geometry {
     Vector orthonormal;
 
     // the following variables represents the values in the plane equation: "Ax + By + Cz + D = 0"
-    double Avalue;
-    double Bvalue;
-    double Cvalue;
-    double Dvalue;
+    double aValue;
+    double bValue;
+    double cValue;
+    double dValue;
 
     // ***************** Constructors ********************** //
     //  set values also for A,B,C and call the method for finding D.
@@ -31,9 +31,9 @@ public class Plane extends Geometry {
         point = myPoint;
         orthonormal = myOrthonormal;
 
-        Avalue = orthonormal.getVector().getX();
-        Bvalue = orthonormal.getVector().getY();
-        Cvalue = orthonormal.getVector().getZ();
+        aValue = orthonormal.getVector().getX();
+        bValue = orthonormal.getVector().getY();
+        cValue = orthonormal.getVector().getZ();
         findD();
     }
 
@@ -82,12 +82,12 @@ public class Plane extends Geometry {
     // find the value of D from the equation: "D = -Ax -By -Cz"
     private void findD(){
 
-        Dvalue = -1*(point.getX()*Avalue + point.getY()*Bvalue + point.getZ()*Cvalue);
+        dValue = -1*(point.getX()*aValue + point.getY()*bValue + point.getZ()*cValue);
     }
 
     // check if point (x,y,z) satisfy the equation: "Ax + By + Cz + D = 0".
     public boolean satisfyEquation(Point3D myPoint){
-        return ((point.getX()*Avalue + point.getY()*Bvalue + point.getZ()*Cvalue + Dvalue) == 0);
+        return ((point.getX()*aValue + point.getY()*bValue + point.getZ()*cValue + dValue) == 0);
     }
 
     // check if two points in space are lineraly dipendent.
