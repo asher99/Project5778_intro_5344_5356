@@ -59,8 +59,8 @@ public class Cylinder extends RadialGeometry {
         Vector toPointInFront = new Vector(orientation.getPoint(),pointInFront);
 
         if(Vector.dotProduct(orientation.getDirection(),toPointBehind) == 0)
-            return toPointBehind;
+            return toPointBehind.normal();
         else
-            return  toPointInFront;
+            return  toPointInFront.normal();
     }
 }
