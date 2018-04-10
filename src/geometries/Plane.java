@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 
 import java.net.PortUnreachableException;
+import java.util.ArrayList;
 
 /**
  * class plane for a plane in space.
@@ -101,6 +102,8 @@ public class Plane extends Geometry {
         else return false;
     }
 
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray myRay){return null;}
     /*
     @Override
     public String toString() {

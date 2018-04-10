@@ -39,7 +39,7 @@ public class Camera {
      * @param screenWidth    - width of matrix
      * @return Ray
      */
-    public Ray throughPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenHeight, double screenWidth) {
+    public Ray ConstractRaythroughPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenHeight, double screenWidth) {
 
         // pointCenter is the point that represent the center of the matrix. pointCenter = p0 + d*vTo.
         Point3D pointCenter = Point3D.add(p0, (vTo.multiplyByScalar(screenDistance)).getVector());
@@ -63,10 +63,10 @@ public class Camera {
 
         double xPosition = 0, yPosition = 0;
 
-        xPosition = (i - (Nx + 1) * 0.5) * pWidth;//- pWidth * 0.5;
-        yPosition = (j - (Ny + 1) * 0.5) * pHeight;//- pHeight * 0.5;
-        /*
-        if (Nx % 2 == 0) {
+        xPosition = (i - (Nx  * 0.5)) * pWidth - pWidth * 0.5;
+        yPosition = (j - (Ny  * 0.5)) * pHeight - pHeight * 0.5;
+
+       /* if (Nx % 2 == 0) {
             xPosition = (i - Nx * 0.5) * pWidth - pWidth * 0.5;
         } else {
             xPosition = (i - Nx * 0.5) * pWidth;

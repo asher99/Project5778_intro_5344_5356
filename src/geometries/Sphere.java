@@ -2,7 +2,10 @@ package geometries;
 
 import primitives.Coordinate;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.ArrayList;
 
 /**
  * class Sphere for a sphere in space.
@@ -47,6 +50,12 @@ public class Sphere extends RadialGeometry {
     public boolean equals(Object obj) {
         Sphere otherSphere = (Sphere)obj;
         return ((center.equals(otherSphere.getCenter())) && (_radius==otherSphere._radius));
+    }
+
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray myRay)
+    {
+        return null;
     }
 
     /*
