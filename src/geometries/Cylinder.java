@@ -5,6 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * class Cylinder for cylinder in space.
@@ -63,4 +64,7 @@ public class Cylinder extends RadialGeometry {
         else
             return  toPointInFront.normal();
     }
+
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray myRay){return null;}
 }
