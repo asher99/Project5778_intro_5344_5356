@@ -41,8 +41,6 @@ public class VectorTest {
         assertTrue(f.equals(a));
         assertTrue(f.equals(b));
         assertFalse(f.equals(g));
-
-
     }
 
     @Test
@@ -57,8 +55,6 @@ public class VectorTest {
         Vector e = new Vector(6,0,3);
         Vector f = new Vector(1,2,-2);
         assertTrue(Vector.dotProduct(e,f) == 0 );
-
-
     }
 
     @Test
@@ -70,7 +66,6 @@ public class VectorTest {
         Vector d = new Vector(0,0,0);
 
         assertTrue(c.equals(d));
-
     }
 
     @Test
@@ -78,7 +73,6 @@ public class VectorTest {
 
         Vector a = new Vector(0,-3,4);
         assertTrue(a.sizeOfVector()== 5);
-
     }
 
     @Test
@@ -91,7 +85,6 @@ public class VectorTest {
        // assertTrue(a.normal().equals(a));
         assertTrue(b.normal().equals(b));
         assertTrue(c.normal().equals(d));
-
     }
 
     @Test

@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
 
@@ -34,7 +35,8 @@ public class Sphere extends RadialGeometry {
     @Override
     public Vector getNormal(Point3D myPoint) {
         double dis_from_center = Point3D.distance(myPoint,center);
-        if (dis_from_center - _radius < 0.00001)
+        Coordinate test = Coordinate.subtract(new Coordinate(dis_from_center),new Coordinate(_radius));
+        if (test.equals(new Coordinate(0)))
             return new Vector(Point3D.subtract(myPoint,center));
         else return null;
     }

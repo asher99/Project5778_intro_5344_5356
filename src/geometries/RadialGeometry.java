@@ -20,7 +20,7 @@ public abstract class RadialGeometry extends Geometry {
         _radius = myRadius;
     }
 
-    //copi constructor
+    //copy constructor
     public RadialGeometry(final RadialGeometry g){
         _radius = g._radius;
     }

@@ -26,10 +26,6 @@ public class CoordinateTest {
         assertTrue(c.equals(d));
         assertTrue(d.equals(c));
         assertTrue(h.equals(i));
-
-
-
-
     }
 
     @Test
@@ -39,7 +35,6 @@ public class CoordinateTest {
         Coordinate c = new Coordinate(0.0);
        Coordinate d = Coordinate.subtract(a,b);
         assertTrue(d.equals(c));
-
     }
 
     @Test
@@ -49,6 +44,5 @@ public class CoordinateTest {
         Coordinate c = Coordinate.add(a,b);
         System.out.println(c.getCoord());
         assertTrue(c.getCoord()== 9.0);
-        //assertFalse(c.getCoord()== 9.0);
     }
 }

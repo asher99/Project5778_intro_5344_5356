@@ -37,16 +37,26 @@ public class Triangle extends Plane {
     // ***************** Operations ******************** //
     // for now return now.
     @Override
-    protected Vector getNormal(Point3D somePoint) {
+    public Vector getNormal(Point3D somePoint) {
         return super.getNormal(somePoint);
     }
 
-    /*
+
     @Override
     public boolean equals(Object obj) {
-        return false;
+
+        if (!(obj instanceof Triangle) || obj == null)
+            return false;
+
+        // checks if all points in both triangles are equal in every possible combination
+        return (a.equals(((Triangle) obj).a) && b.equals(((Triangle) obj).b) && c.equals(((Triangle) obj).c)) ||
+                (a.equals(((Triangle) obj).a) && b.equals(((Triangle) obj).c) && c.equals(((Triangle) obj).b)) ||
+                (a.equals(((Triangle) obj).b) && b.equals(((Triangle) obj).c) && c.equals(((Triangle) obj).a)) ||
+                (a.equals(((Triangle) obj).b) && b.equals(((Triangle) obj).a) && c.equals(((Triangle) obj).c)) ||
+                (a.equals(((Triangle) obj).c) && b.equals(((Triangle) obj).b) && c.equals(((Triangle) obj).a)) ||
+                (a.equals(((Triangle) obj).c) && b.equals(((Triangle) obj).a) && c.equals(((Triangle) obj).b));
     }
-*/
+
     @Override
     public String toString() {
         return a.toString() + "," + b.toString() + "," + a.toString() + ",";
