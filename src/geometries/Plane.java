@@ -103,7 +103,9 @@ public class Plane extends Geometry {
     }
 
     @Override
-    public ArrayList<Point3D> findIntersections(Ray myRay){return null;}
+    public ArrayList<Point3D> findIntersections(Ray myRay){
+        return null;
+    }
     /*
     @Override
     public String toString() {

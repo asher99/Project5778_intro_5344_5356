@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
+
 /**
  * class Triangle for triangle in space.
  * the triangle is represnted by three points in space.
@@ -62,4 +64,8 @@ public class Triangle extends Plane {
         return a.toString() + "," + b.toString() + "," + a.toString() + ",";
     }
 
+    // receive a Ray and return all the points that Ray intersevt with the Geometry.
+    public ArrayList<Point3D> findIntersections(Ray myRay){
+        return null;
+    }
 }

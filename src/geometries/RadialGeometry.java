@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
+
 /**
  * class RadialGeometry for Shapes identified by a radius.
  */
@@ -34,5 +36,8 @@ public abstract class RadialGeometry extends Geometry {
     //override the "getNormal" with corresponding abstract method.
     @Override
     public abstract Vector getNormal(Point3D somePoint);
+
+    // receive a Ray and return all the points that Ray intersevt with the Geometry.
+    protected abstract ArrayList<Point3D> findIntersections(Ray myRay);
 
 }

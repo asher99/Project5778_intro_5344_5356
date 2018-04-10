@@ -14,7 +14,7 @@ public abstract class Geometry {
     //default constructor
     public Geometry(){};
 
-    // copy constuctor
+    // copy constructor
     public Geometry(final Geometry g){};
 
     // ***************** Operations ******************** //
