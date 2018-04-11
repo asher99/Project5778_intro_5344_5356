@@ -6,7 +6,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * camera class
+ * class Camera.
+ * represent a camera in space.
+ * the camera has location (point in space) and orientation ( vector up, vector to).
  */
 public class Camera {
 
@@ -32,12 +34,12 @@ public class Camera {
      *
      * @param Nx             - Number of Pixels on X axis
      * @param Ny             - Number of Pixels on Y axis
-     * @param i              - index of pixel on X axis
-     * @param j              - index of pixel on Y axis
+     * @param i              - index of pixel on X axis, left to right.
+     * @param j              - index of pixel on Y axis, up to down.
      * @param screenDistance - distance of Matrix from the camera point.
      * @param screenHeight   - height of matrix
      * @param screenWidth    - width of matrix
-     * @return Ray
+     * @return Ray from the camera position thorugh a pixel (i,j).
      */
     public Ray ConstractRaythroughPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenHeight, double screenWidth) {
 
@@ -59,6 +61,18 @@ public class Camera {
     }
 
 
+    /**
+     *
+     * @param i         index of pixel in the horizontal axis, right to left.
+     * @param j         index of pixel in the horizontal axis, up to down.
+     *                  both i and j starts from 1.
+     * @param Nx        number of pixels in the horizontal axis.
+     * @param Ny        number of pixels in the vertcal axis.
+     * @param pHeight           piexl height
+     * @param pWidth            pixel width
+     * @param centerOfMatrix    the point in space that represent the center of the matrix.
+     * @return a point in space which is the center of pixel (i,j).
+     */
     public Point3D centerOfPixel(int i, int j, int Nx, int Ny, double pHeight, double pWidth, Point3D centerOfMatrix) {
 
         double xPosition = 0, yPosition = 0;
