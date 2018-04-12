@@ -102,10 +102,25 @@ public class Plane extends Geometry {
         else return false;
     }
 
+    /**
+     *
+     * @param myRay a ray that may intersect the Plane.
+     * @return an ArrayList of the intersection point between the ray and Plane, if exist.
+     */
     @Override
     public ArrayList<Point3D> findIntersections(Ray myRay){
-        return null;
+
+        double scalart = (Vector.dotProduct(orthonormal,new Vector(myRay.getPoint(),point)))/(Vector.dotProduct(orthonormal,myRay.getDirection()));
+        if (scalart >= 0) {
+            Point3D intersectionPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(scalart).getVector());
+            ArrayList<Point3D> result = new ArrayList<Point3D>();
+            result.add(intersectionPoint);
+            return result;
+        }
+        else return null;
     }
+
+
     /*
     @Override
     public String toString() {

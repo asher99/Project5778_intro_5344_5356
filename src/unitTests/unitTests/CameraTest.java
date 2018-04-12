@@ -81,11 +81,27 @@ public class CameraTest {
 
         //test 3 for even numbers.
         Camera myCamera4 = new Camera(new Point3D(0,0,0),new Vector(0,0,1),new Vector(1,0,0));
-        Point3D output2 = myCamera3.centerOfPixel(1,1,2,2,2,2,new Point3D(2,0,0));
+        Point3D output2 = myCamera4.centerOfPixel(1,1,2,2,2,2,new Point3D(2,0,0));
         Point3D expected2 = new Point3D(2,-1,1);
         assertTrue(output2.equals(expected2));
         System.out.println(output2);
 
+
     }
+
+    // i tested the method and it works. here i built calculator.
+    @Test
+    public void throughPixelCalculator() {
+
+        Point3D cameraPosition = new Point3D(0, 0, 0);
+        Vector up = new Vector(0, 0, 1);
+        Vector to = new Vector(1, 0, 0);
+        Camera myCamera = new Camera(cameraPosition, up, to);
+        Ray myRay = myCamera.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6);
+
+        System.out.println(myRay);
+    }
+
+
 
 }
