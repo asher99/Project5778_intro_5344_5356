@@ -64,8 +64,47 @@ public class Triangle extends Plane {
         return a.toString() + "," + b.toString() + "," + a.toString() + ",";
     }
 
-    // receive a Ray and return all the points that Ray intersevt with the Geometry.
+    /**
+     *
+     * @param myRay a ray that may intersect the Plane.
+     * @return ArrayList with the intersection point, if exist.
+     */
     public ArrayList<Point3D> findIntersections(Ray myRay){
-        return null;
+
+        // first, get the point where the Ray intersect with the Plane that include the Triangle.
+        // we may had no point such that, so an exception is possible.
+        try {
+            ArrayList<Point3D> superOutput = super.findIntersections(myRay);
+            Point3D pointOnPlane = superOutput.get(0);
+
+            // defined vectors from the point represnt the Ray to each one od the Triangle vertices.
+            Vector V1 = new Vector(myRay.getPoint(), a);
+            Vector V2 = new Vector(myRay.getPoint(), b);
+            Vector V3 = new Vector(myRay.getPoint(), c);
+
+            // now we can define three normals and create a virtual pyramid.
+            Vector N1 = Vector.crossProduct(V1, V2);
+            Vector N2 = Vector.crossProduct(V2, V3);
+            Vector N3 = Vector.crossProduct(V3, V1);
+
+            // to make sure the ray goes through the pyramid, we calculate the projection of the ray
+            // on each normal to the pyramid we calculate before.
+            // if all projections have the same sign (+/-) so we know the ray hit the Triangle!
+            double projection1 = Vector.dotProduct(N1,new Vector(myRay.getPoint(),pointOnPlane));
+            double projection2 = Vector.dotProduct(N2,new Vector(myRay.getPoint(),pointOnPlane));
+            double projection3 = Vector.dotProduct(N3,new Vector(myRay.getPoint(),pointOnPlane));
+
+            // time to determine where the ray pass:
+            if (projection1 > 0 && projection2 > 0 && projection3 > 0 ||
+                    projection1 < 0 && projection2 < 0 && projection3 < 0){
+
+                return superOutput;
+            }
+            else return null;
+
+        }catch(NullPointerException e){
+            return null;
+        }
     }
+
 }
