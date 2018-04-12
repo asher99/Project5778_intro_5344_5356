@@ -52,12 +52,17 @@ public class Sphere extends RadialGeometry {
         return ((center.equals(otherSphere.getCenter())) && (_radius == otherSphere._radius));
     }
 
+    /**
+     *
+     * @param myRay a ray that may intersect the Sphere.
+     * @return an ArrayList of all intersection points between the ray and sphere.
+     */
     @Override
     public ArrayList<Point3D> findIntersections(Ray myRay) {
 
         ArrayList<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
-        Vector u = new Vector(center, myRay.getPoint());
+        Vector u = new Vector( myRay.getPoint(),center);
         double tm = Vector.dotProduct(myRay.getDirection(), u);
         double d = Math.sqrt(Math.pow(u.sizeOfVector(), 2) - Math.pow(tm, 2));
 
@@ -65,12 +70,23 @@ public class Sphere extends RadialGeometry {
         if (d > _radius)
             return null;
         // if there is one intersection
-        if (d == _radius)
+        if (new Coordinate(d).equals(new Coordinate(_radius)))
             listOfIntersections.add(Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(tm).getVector())) ;
 
-        double th = Math.sqrt(Math.pow(_radius, 2) - Math.pow(d, 2));
-        // to be continued...
+        else if (d < _radius) {
+            double th = Math.sqrt(Math.pow(_radius, 2) - Math.pow(d, 2));
 
+            double t1 = tm + th;
+            double t2 = tm - th;
+
+            if(t1 >= 0)
+                listOfIntersections.add(Point3D.add(myRay.getPoint(),
+                                                    myRay.getDirection().multiplyByScalar(t2).getVector()));
+            if(t2 >= 0)
+                listOfIntersections.add(Point3D.add(myRay.getPoint(),
+                                                    myRay.getDirection().multiplyByScalar(t1).getVector()));
+
+        }
         return  listOfIntersections;
     }
 
