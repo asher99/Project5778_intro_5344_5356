@@ -97,7 +97,7 @@ public class CameraTest {
         Vector up = new Vector(0, 0, 1);
         Vector to = new Vector(1, 0, 0);
         Camera myCamera = new Camera(cameraPosition, up, to);
-        Ray myRay = myCamera.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6);
+        Ray myRay = myCamera.ConstractRaythroughPixel(11, 3, 6, 1, 4, 6, 11);
 
         System.out.println(myRay);
     }

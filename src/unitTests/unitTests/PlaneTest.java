@@ -2,6 +2,7 @@ package unitTests;
 
 import elements.Camera;
 import geometries.Plane;
+import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point2D;
 import primitives.Point3D;
@@ -90,6 +91,25 @@ public class PlaneTest {
             ArrayList<Point3D> output = myPlane2.findIntersections(myCamera2.ConstractRaythroughPixel(100, 100, 26, 1, 5, 120, 120));
 
             assertNull(output);
+
+        }catch (NullPointerException e){}
+    }
+
+    /**
+     * calculator for findong intersections.
+     */
+    @Test
+    public void intersectionsCalculator()
+    {
+        try {
+            Camera myCamera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
+            Plane myPlane = new Plane(new Point3D(10, -5, 1), new Point3D(10, 5, 1), new Point3D(10, 0, 11));
+
+            ArrayList<Point3D> output = myPlane.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
+
+            for (Point3D p: output) {
+                System.out.println(p);
+            }
 
         }catch (NullPointerException e){}
     }
