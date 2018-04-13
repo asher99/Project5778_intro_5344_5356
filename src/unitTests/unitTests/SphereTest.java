@@ -25,6 +25,27 @@ public class SphereTest {
 
     @Test
     public void getNormal() {
+        /*
+        Test: Sphere at (0,1,0) radius is one.
+        testing the radius at (0,1,-2) and (2/sqrt(12),1+ 2/sqrt(12),2/sqrt(12)), and at (10,10,10).
+         */
+        Sphere mySphere = new Sphere(new Point3D(0,1,0),2);
+
+        double sqrt12 = Math.sqrt(12);
+        double sqrt3 = Math.sqrt(3);
+
+        Vector test1 = mySphere.getNormal(new Point3D(0,1,-2));
+        Vector test2 = mySphere.getNormal(new Point3D(2/sqrt3,1 + 2/sqrt3,2/sqrt3));
+        Vector test3 = mySphere.getNormal(new Point3D(10,10,10));
+
+        System.out.println(test1);
+        System.out.println(test2);
+
+        assertTrue(test1.equals(new Vector(0,0,-1)));
+
+        assertTrue(test2.equals(new Vector(sqrt3,sqrt3,sqrt3)));
+
+        assertNull(test3);
     }
 
     @Test
