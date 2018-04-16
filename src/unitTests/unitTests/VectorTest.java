@@ -85,6 +85,7 @@ public class VectorTest {
        // assertTrue(a.normal().equals(a));
         assertTrue(b.normal().equals(b));
         assertTrue(c.normal().equals(d));
+
     }
 
     @Test

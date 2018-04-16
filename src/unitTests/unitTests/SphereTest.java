@@ -100,7 +100,7 @@ public class SphereTest {
             Camera myCamera3 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(0, 1, 0));
             Sphere mySphere3 = new Sphere(new Point3D(0, 10, 0), 3);
             ArrayList<Point3D> outputList3 = mySphere3.findIntersections(myCamera3.ConstractRaythroughPixel(40, 40, 1, 1, 2, 2, 2));
-            
+
 
             assertNull(outputList3);
 
