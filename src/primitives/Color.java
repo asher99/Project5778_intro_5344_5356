@@ -24,7 +24,13 @@ public class Color {
      * @param b - blue integer index
      */
     public Color(int r, int g, int b){
-        color = new java.awt.Color(r,g,b);
+
+        // corrects overflows
+        int[] RGB = setBoundaries(r,g,b);
+
+        // set this Color to this sum of colors.
+        color = new java.awt.Color(RGB[0],RGB[1],RGB[2]);
+
     }
 
     /**
@@ -35,7 +41,7 @@ public class Color {
      */
     public Color(float r, float g, float b){
 
-        if ( r > 1 || r < 0 || g > 1 || g < 0 || b > 1 || b < 0)
+        if ( r > 1.0 || r < 0.0 || g > 1.0 || g < 0.0 || b > 1.0 || b < 0.0)
             throw new ExceptionInInitializerError("one or more value is ilegal. note that all values should be in range: 0.0 - 1.0");
 
         else color = new java.awt.Color(r,g,b);

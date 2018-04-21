@@ -1,5 +1,6 @@
 package scene;
 
+import elements.AmbientLight;
 import elements.Camera;
 import geometries.Geometries;
 import geometries.Geometry;
@@ -20,6 +21,7 @@ public class Scene {
     private Geometries shapesInScene;
     private Camera sceneCamera;
     private double cameraScreenDistance;
+    private AmbientLight sceneAmbientLight;
 
     // ***************** Constructors ********************** //
 
@@ -36,6 +38,7 @@ public class Scene {
         shapesInScene = new Geometries();
         sceneCamera = new Camera( new Point3D(0,0,0), new Vector(0,0,1), new Vector(1,0,0));
         cameraScreenDistance = 4;
+        sceneAmbientLight = new AmbientLight();
     }
 
     // ***************** Getters/Setters ********************** //
@@ -62,6 +65,14 @@ public class Scene {
 
     public void setCameraScreenDistance(double cameraScreenDistance) {
         this.cameraScreenDistance = cameraScreenDistance;
+    }
+
+    public void setSceneAmbientLight(AmbientLight sceneAmbientLight) {
+        this.sceneAmbientLight = sceneAmbientLight;
+    }
+
+    public AmbientLight getSceneAmbientLight() {
+        return sceneAmbientLight;
     }
 
     // ***************** Operations ******************** //
