@@ -1,6 +1,7 @@
 package scene;
 
 import elements.Camera;
+import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Point3D;
 import primitives.Vector;
@@ -16,7 +17,7 @@ public class Scene {
 
     private String sceneName;
     private Color sceneBackgroundColor;
-    private ArrayList<Geometry> shapesInScene;
+    private Geometries shapesInScene;
     private Camera sceneCamera;
     private double cameraScreenDistance;
 
@@ -32,7 +33,7 @@ public class Scene {
     {
         sceneName = str;
         sceneBackgroundColor = Color.WHITE;
-        shapesInScene = new ArrayList<Geometry>();
+        shapesInScene = new Geometries();
         sceneCamera = new Camera( new Point3D(0,0,0), new Vector(0,0,1), new Vector(1,0,0));
         cameraScreenDistance = 4;
     }
@@ -70,8 +71,7 @@ public class Scene {
      * @param myGeometry - a Geometry object to insert the list of shapes in scene.
      */
     public void addGeometry( Geometry myGeometry){
-
-        shapesInScene.add(myGeometry);
+        shapesInScene.addGeometry(myGeometry);
     }
 
 

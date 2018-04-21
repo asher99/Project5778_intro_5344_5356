@@ -4,6 +4,7 @@ import primitives.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class Geometry for geometrial shapes.
@@ -19,8 +20,10 @@ public abstract class Geometry {
 
     // ***************** Operations ******************** //
     // return the normal to a shape
-    protected abstract Vector getNormal(Point3D somePoint);
+    protected Vector getNormal(Point3D somePoint){
+        return null;
+    }
 
     // receive a Ray and return all the points that Ray intersevt with the Geometry.
-    protected abstract ArrayList<Point3D> findIntersections(Ray myRay);
+    protected abstract List<Point3D> findIntersections(Ray myRay);
 }
