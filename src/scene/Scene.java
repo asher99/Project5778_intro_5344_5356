@@ -89,6 +89,16 @@ public class Scene {
         shapesInScene.addGeometry(myGeometry);
     }
 
+    /**
+     * add multiple Geometries.
+     * @param myGeometries
+     */
+    public void addGeometries(Geometry... myGeometries){
+        for (Geometry g: myGeometries) {
+            addGeometry(g);
+        }
+    }
+
 
 
 

@@ -1,8 +1,11 @@
 package renderer;
 
+import elements.Camera;
 import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Vector;
 import scene.Scene;
 
 import java.awt.*;
@@ -48,5 +51,37 @@ public class ImageWriterTest {
         ballImageRenderer.printGrid(50);
         ballImageRenderer.getImageWriter().writeToimage();
     }
+
+    @Test
+    public void writeToImage3(){
+
+        Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49));
+        Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49));
+        Triangle downLeft   = new Triangle(new Point3D(100,0,-49),new Point3D(0,-100,-49),new Point3D(100,-100,-49));
+        Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49));
+
+        Sphere middle = new Sphere(new Point3D(0,0,-50),35);
+
+        Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
+
+        Scene myScene = new Scene("Triangles and Sphere, Asher and Zvei, Targil 4");
+        myScene.setCameraScreenDistance(50);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(75,127,190));
+
+        myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
+
+        ImageWriter sceneWriter = new ImageWriter("Triangles and Sphere, Asher and Zvei, Targil 4",500,500,500,500);
+        Render myRender = new Render();
+        myRender.setScene(myScene);
+        myRender.setImageWriter(sceneWriter);
+
+        myRender.renderImage();
+        myRender.printGrid(50);
+        myRender.getImageWriter().writeToimage();
+
+
+    }
+
 
 }
