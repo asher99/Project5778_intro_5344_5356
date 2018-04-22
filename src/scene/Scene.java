@@ -41,9 +41,28 @@ public class Scene {
         sceneAmbientLight = new AmbientLight();
     }
 
+    /**
+     * set scene name upon user argument , sets all fields by demand
+     * @param str
+     * @param color
+     * @param g
+     * @param camera
+     * @param distance
+     * @param light
+     */
+    public Scene(String str,Color color,Geometries g, Camera camera, double distance, AmbientLight light)
+    {
+        sceneName = str;
+        sceneBackgroundColor = color;
+        shapesInScene = g;
+        sceneCamera =camera;
+        cameraScreenDistance = distance;
+        sceneAmbientLight =light;
+    }
     // ***************** Getters/Setters ********************** //
 
     public Color getSceneBackgroundColor() {
+
         return sceneBackgroundColor;
     }
 
