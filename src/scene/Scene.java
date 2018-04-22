@@ -34,7 +34,7 @@ public class Scene {
     public Scene(String str)
     {
         sceneName = str;
-        sceneBackgroundColor = Color.WHITE;
+        sceneBackgroundColor = Color.BLACK;
         shapesInScene = new Geometries();
         sceneCamera = new Camera( new Point3D(0,0,0), new Vector(0,0,1), new Vector(1,0,0));
         cameraScreenDistance = 4;

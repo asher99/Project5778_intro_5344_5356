@@ -35,7 +35,8 @@ public class ImageWriterTest {
     public void writeToimage2() {
 
         Scene ballScene = new Scene("ball example scene");
-        ballScene.addGeometry(new Sphere(new Point3D(10,0,0),3));
+        ballScene.addGeometry(new Sphere(new Point3D(60,0,0),40));
+        ballScene.setCameraScreenDistance(50);
 
         ImageWriter ballWriter = new ImageWriter("ball example image",500,500,500,500);
 

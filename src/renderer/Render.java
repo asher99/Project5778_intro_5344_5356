@@ -26,7 +26,7 @@ public class Render {
     public void renderImage(){
 
         // foreach pixel i,j:
-        for (int i = 0; i <= imageWriter.getNx(); i++) {
+        for (int i = 0; i < imageWriter.getNx(); i++) {
             for (int j = imageWriter.getNy()-1; j > 0; j--) {
 
                 // construct ray through that pixel
