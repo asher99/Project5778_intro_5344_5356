@@ -7,21 +7,37 @@ import primitives.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List of Geometry objects.
+ */
 public class Geometries extends Geometry {
 
     private List<Geometry> geometries = new ArrayList<Geometry>();
 
-    public List<Point3D> findIntersections(Ray ray){
-        List<Point3D> listOfIntersections = new ArrayList<Point3D>();
+    /**
+     * find the intersections of the ray with all Geometries.
+     * @param ray
+     * @return
+     */
+    public ArrayList<Point3D> findIntersections(Ray ray){
+        ArrayList<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
         for (Geometry g :geometries ) {
-            for (Point3D point:g.findIntersections(ray)) {
-                listOfIntersections.add(point);
+
+            ArrayList<Point3D> temp = g.findIntersections(ray);
+            if(temp != null) {
+                for (Point3D point :temp) {
+                    listOfIntersections.add(point);
+                }
             }
         }
         return listOfIntersections;
     }
 
+    /**
+     * add geometry 'g' to the list.
+     * @param g
+     */
     public void addGeometry(Geometry g){
         geometries.add(g);
     }

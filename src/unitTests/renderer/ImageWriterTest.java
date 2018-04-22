@@ -1,6 +1,9 @@
 package renderer;
 
+import geometries.Sphere;
 import org.junit.Test;
+import primitives.Point3D;
+import scene.Scene;
 
 import java.awt.*;
 
@@ -27,4 +30,22 @@ public class ImageWriterTest {
         gridWriter.writeToimage();
 
     }
+
+    @Test
+    public void writeToimage2() {
+
+        Scene ballScene = new Scene("ball example scene");
+        ballScene.addGeometry(new Sphere(new Point3D(10,0,0),3));
+
+        ImageWriter ballWriter = new ImageWriter("ball example image",500,500,500,500);
+
+        Render ballImageRenderer = new Render();
+        ballImageRenderer.setImageWriter(ballWriter);
+        ballImageRenderer.setScene(ballScene);
+
+        ballImageRenderer.renderImage();
+        ballImageRenderer.printGrid(50);
+        ballImageRenderer.getImageWriter().writeToimage();
+    }
+
 }

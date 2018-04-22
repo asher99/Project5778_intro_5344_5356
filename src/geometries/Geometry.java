@@ -25,5 +25,5 @@ public abstract class Geometry {
     }
 
     // receive a Ray and return all the points that Ray intersevt with the Geometry.
-    protected abstract List<Point3D> findIntersections(Ray myRay);
+    protected abstract ArrayList<Point3D> findIntersections(Ray myRay);
 }

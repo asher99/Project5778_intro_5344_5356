@@ -75,6 +75,10 @@ public class Scene {
         return sceneAmbientLight;
     }
 
+    public Geometries getShapesInScene() {
+        return shapesInScene;
+    }
+
     // ***************** Operations ******************** //
 
     /**

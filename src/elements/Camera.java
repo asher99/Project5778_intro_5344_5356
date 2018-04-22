@@ -100,4 +100,12 @@ public class Camera {
         return Point3D.add(Point3D.add(centerOfMatrix, vUpMovment.getVector()), vRightMovment.getVector());
 
     }
+
+    /**
+     * return the camera position.
+     * @return
+     */
+    public Point3D getP0() {
+        return p0;
+    }
 }
