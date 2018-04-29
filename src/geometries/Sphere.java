@@ -37,11 +37,11 @@ public class Sphere extends RadialGeometry {
     // in case it is, return the vector from the center to the point - this is the normal to the tangent plane at that point.
     @Override
     public Vector getNormal(Point3D myPoint) {
-        double dis_from_center = Point3D.distance(myPoint, center);
+    /*    double dis_from_center = Point3D.distance(myPoint, center);
         Coordinate test = Coordinate.subtract(new Coordinate(dis_from_center), new Coordinate(_radius));
-        if (test.equals(new Coordinate(0)))
+        if (test.equals(new Coordinate(0)))*/
             return new Vector(Point3D.subtract(myPoint, center)).normal();
-        else return null;
+       // else return null;
     }
 
 

@@ -35,6 +35,11 @@ public class Point2D {
         y = Y;
     }
 
+    /**
+     * default Constructor
+     */
+    public Point2D(){}
+
     // ***************** Getters ********************** //
     public double getX() {
         return x.getCoord();

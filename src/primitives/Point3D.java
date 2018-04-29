@@ -33,6 +33,12 @@ public class Point3D extends Point2D {
         z = v.vector.z;
     }
 
+    public Point3D(Point3D p){
+        super.x = new Coordinate(p.getX());
+        super.y = new Coordinate(p.getY());
+        this.z = new Coordinate(p.getZ());
+    }
+
     // ***************** Getters ********************** //
 
     /**

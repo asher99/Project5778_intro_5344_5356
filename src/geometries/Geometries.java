@@ -19,12 +19,12 @@ public class Geometries extends Geometry {
      * @param ray
      * @return
      */
-    public ArrayList<Point3D> findIntersections(Ray ray){
-        ArrayList<Point3D> listOfIntersections = new ArrayList<Point3D>();
+    public List<Point3D> findIntersections(Ray ray){
+        List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
         for (Geometry g :geometries ) {
 
-            ArrayList<Point3D> temp = g.findIntersections(ray);
+            List<Point3D> temp = g.findIntersections(ray);
             if(temp != null) {
                 for (Point3D point :temp) {
                     listOfIntersections.add(point);
@@ -42,4 +42,7 @@ public class Geometries extends Geometry {
         geometries.add(g);
     }
 
+    public List<Geometry> getGeometries() {
+        return geometries;
+    }
 }

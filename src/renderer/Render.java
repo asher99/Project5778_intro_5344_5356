@@ -1,13 +1,13 @@
 package renderer;
 
+import geometries.Geometry;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
+import primitives.Vector;
 import scene.Scene;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  *  Class Render. implementation of the graphic renderer.
@@ -35,7 +35,7 @@ public class Render {
                        i,j,scene.getCameraScreenDistance(),imageWriter.getWidth(),imageWriter.getHeight());
 
                //find the intersections of the ray with the scene geometries.
-               ArrayList<Point3D> intersectionPoints = scene.getShapesInScene().findIntersections(ray);
+               List<Point3D> intersectionPoints = scene.getShapesInScene().findIntersections(ray);
 
                // write to that pixel the right color.
                if (intersectionPoints.isEmpty())
@@ -66,7 +66,7 @@ public class Render {
      * @param p
      * @return
      */
-    public Color calcColor(Point3D p){
+    public Color calcColor(Geometry geo, Point3D p){
         return scene.getSceneAmbientLight().getIntensity();
 
        /* Random rn = new Random();
@@ -79,23 +79,43 @@ public class Render {
     }
 
     /**
-     * @param list
+     * @param intersectionPoints
      * @return
      */
-    public Point3D getClosestPoint(ArrayList<Point3D> list){
+    public Map<Geometry,Point3D> getClosestPoint(Map<Geometry,List<Point3D>> intersectionPoints){
 
-        Point3D closestPoint = list.get(0);
+        double distance = Double.MAX_VALUE;
+        Point3D p0 = scene.getSceneCamera().getP0();
+        Map<Geometry, Point3D> minDistancePoint = new HashMap<Geometry, Point3D>();
 
-        for (Point3D p: list) {
-            if (Point3D.distance(scene.getSceneCamera().getP0(),closestPoint) > Point3D.distance(scene.getSceneCamera().getP0(),p))
-                closestPoint = p;
+        for (HashMap.Entry<Geometry,List<Point3D>> pair: intersectionPoints.entrySet()) {
+            for (Point3D point : pair.getValue()) {
+                if (p0.distance(p0,point) < distance) {
+                    minDistancePoint.clear(); // make it empty
+                    minDistancePoint.put(pair.getKey(), new Point3D(point));
+                    distance = p0.distance(p0,point);
+                }
+            }
         }
 
-        return closestPoint;
+
+
     }
 
-    public List<Point3D> getSceneRayIntersections(Ray ray){
-        return null;
+
+    /**
+     * builds a map of intersection points by shapes in Scene
+     * @param ray - the Ray we build the map for.
+     * @return
+     */
+    public Map<Geometry,List<Point3D>> getSceneRayIntersections(Ray ray){
+
+        Map<Geometry,List<Point3D>> intersectionPoint = new HashMap<Geometry, List<Point3D>>();
+        for (Geometry geo: scene.getShapesInScene().getGeometries()) {
+            List<Point3D> geometryIntersectionPoints = geo.findIntersections(ray);
+            intersectionPoint.put(geo,geometryIntersectionPoints);
+        }
+        return intersectionPoint;
     }
 
 
