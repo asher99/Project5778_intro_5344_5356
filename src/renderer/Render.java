@@ -7,6 +7,7 @@ import scene.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *  Class Render. implementation of the graphic renderer.
@@ -67,6 +68,14 @@ public class Render {
      */
     public Color calcColor(Point3D p){
         return scene.getSceneAmbientLight().getIntensity();
+
+       /* Random rn = new Random();
+        int red = rn.nextInt();
+        int green = rn.nextInt();
+        int blue = rn.nextInt();
+
+        Color output = new Color(red,green,blue);
+        return output; */
     }
 
     /**

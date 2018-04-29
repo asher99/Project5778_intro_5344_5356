@@ -6,6 +6,7 @@ import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point2D;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
@@ -113,5 +114,7 @@ public class PlaneTest {
 
         }catch (NullPointerException e){}
     }
+
+
 
 }
