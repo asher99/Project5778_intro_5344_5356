@@ -3,7 +3,7 @@ package geometries;
 import primitives.*;
 
 import java.util.ArrayList;
-
+import java.util.List;
 /**
  * class Triangle for triangle in space.
  * the triangle is represnted by three points in space.
@@ -15,8 +15,8 @@ public class Triangle extends Plane {
     private Point3D c;
 
     // ***************** Constructors ********************** //
-    public Triangle(Point3D myA, Point3D myB, Point3D myC) {
-        super(myA, myB, myC);
+    public Triangle(Point3D myA, Point3D myB, Point3D myC, Color e) {
+        super(myA, myB, myC, e);
         a = myA;
         b = myB;
         c = myC;
@@ -34,6 +34,10 @@ public class Triangle extends Plane {
 
     public Point3D getC() {
         return c;
+    }
+
+    public Color getEmission(){
+        return super.getEmission();
     }
 
     // ***************** Operations ******************** //
@@ -65,16 +69,15 @@ public class Triangle extends Plane {
     }
 
     /**
-     *
      * @param myRay a ray that may intersect the Plane.
      * @return ArrayList with the intersection point, if exist.
      */
-    public ArrayList<Point3D> findIntersections(Ray myRay){
+    public List<Point3D> findIntersections(Ray myRay) {
 
         // first, get the point where the Ray intersect with the Plane that include the Triangle.
         // we may had no point such that, so an exception is possible.
         try {
-            ArrayList<Point3D> superOutput = super.findIntersections(myRay);
+            List<Point3D> superOutput = super.findIntersections(myRay);
             Point3D pointOnPlane = superOutput.get(0);
 
             // defined vectors from the point represnt the Ray to each one od the Triangle vertices.
@@ -90,19 +93,18 @@ public class Triangle extends Plane {
             // to make sure the ray goes through the pyramid, we calculate the projection of the ray
             // on each normal to the pyramid we calculate before.
             // if all projections have the same sign (+/-) so we know the ray hit the Triangle!
-            double projection1 = Vector.dotProduct(N1,new Vector(myRay.getPoint(),pointOnPlane));
-            double projection2 = Vector.dotProduct(N2,new Vector(myRay.getPoint(),pointOnPlane));
-            double projection3 = Vector.dotProduct(N3,new Vector(myRay.getPoint(),pointOnPlane));
+            double projection1 = Vector.dotProduct(N1, new Vector(myRay.getPoint(), pointOnPlane));
+            double projection2 = Vector.dotProduct(N2, new Vector(myRay.getPoint(), pointOnPlane));
+            double projection3 = Vector.dotProduct(N3, new Vector(myRay.getPoint(), pointOnPlane));
 
             // time to determine where the ray pass:
             if (projection1 > 0 && projection2 > 0 && projection3 > 0 ||
-                    projection1 < 0 && projection2 < 0 && projection3 < 0){
+                    projection1 < 0 && projection2 < 0 && projection3 < 0) {
 
                 return superOutput;
-            }
-            else return null;
+            } else return null;
 
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             return null;
         }
     }

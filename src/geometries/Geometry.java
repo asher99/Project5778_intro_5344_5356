@@ -13,21 +13,40 @@ public abstract class Geometry {
 
 
     //represent Geometry color
-    public Color emmission;
+    public Color emission;
 
     // ***************** Constructors ********************** //
     //default constructor
-    public Geometry(){};
+    public Geometry() {
+        emission = new Color();
+    }
+
+    public Geometry(Color e ) {
+        emission = new Color(e);
+    }
 
     // copy constructor
-    public Geometry(final Geometry g){};
+    public Geometry(final Geometry g) {
+        emission = new Color(g.emission);
+    }
 
     // ***************** Operations ******************** //
-    // return the normal to a shape
-    protected Vector getNormal(Point3D somePoint){
+    /**
+     * get
+     */
+    public Color getEmission() {
+        return emission;
+    }
+
+    /**
+     * return the normal to a shape
+     */
+    protected Vector getNormal(Point3D somePoint) {
         return null;
     }
 
-    // receive a Ray and return all the points that Ray intersevt with the Geometry.
+    /**
+     * receive a Ray and return all the points that Ray intersevt with the Geometry.
+     */
     public abstract List<Point3D> findIntersections(Ray myRay);
 }

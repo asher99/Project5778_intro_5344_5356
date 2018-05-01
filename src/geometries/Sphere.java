@@ -4,9 +4,10 @@ import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+import primitives.Color;
 
 import java.util.ArrayList;
-
+import java.util.List;
 /**
  * class Sphere for a sphere in space.
  * sphere is represented by a point in space and radius.
@@ -17,7 +18,8 @@ public class Sphere extends RadialGeometry {
 
     // ***************** Constructors ********************** //
 
-    public Sphere(Point3D myPoint, double myRadius) {
+    public Sphere(Point3D myPoint, double myRadius,Color e) {
+        super(myRadius,e);
         center = myPoint;
         _radius = myRadius;
     }
@@ -30,6 +32,10 @@ public class Sphere extends RadialGeometry {
     @Override
     public double get_radius() {
         return super.get_radius();
+    }
+
+    public Color getEmission(){
+        return super.getEmission();
     }
 
     // ***************** Operations ******************** //
@@ -58,9 +64,9 @@ public class Sphere extends RadialGeometry {
      * @return an ArrayList of all intersection points between the ray and sphere.
      */
     @Override
-    public ArrayList<Point3D> findIntersections(Ray myRay) {
+    public List<Point3D> findIntersections(Ray myRay) {
 
-        ArrayList<Point3D> listOfIntersections = new ArrayList<Point3D>();
+        List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
         Vector u = new Vector( myRay.getPoint(),center);
         double tm = Vector.dotProduct(myRay.getDirection(), u);
