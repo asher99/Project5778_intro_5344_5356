@@ -62,12 +62,14 @@ public class Render {
     }
 
     /**
-     * for now, just return the only "ambient light" in the scene.
+     * for now, just return the only "ambient light" in the scene and color of the geometry.
      * @param p
      * @return
      */
     public Color calcColor(Geometry geo, Point3D p){
-        return scene.getSceneAmbientLight().getIntensity();
+        Color color = scene.getSceneAmbientLight().getIntensity();
+        color.add(geo.getEmission());
+        return color;
 
        /* Random rn = new Random();
         int red = rn.nextInt();
@@ -97,9 +99,7 @@ public class Render {
                 }
             }
         }
-
-
-
+        return minDistancePoint;
     }
 
 

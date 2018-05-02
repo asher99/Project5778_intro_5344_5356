@@ -6,6 +6,7 @@ import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
+import primitives.Color;
 import scene.Scene;
 
 import java.awt.*;
@@ -104,6 +105,38 @@ public class ImageWriterTest {
         myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
 
         ImageWriter sceneWriter = new ImageWriter("ubanubu",500,500,500,500);
+        Render myRender = new Render();
+        myRender.setScene(myScene);
+        myRender.setImageWriter(sceneWriter);
+
+        myRender.renderImage();
+        myRender.printGrid(50);
+        myRender.getImageWriter().writeToimage();
+
+
+    }
+
+    @Test
+    public void writeToImage5(){
+
+        // defining Geometries.
+        Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49),new Color(200,126,70));
+        Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49),new Color(50,200,170));
+        Triangle downLeft   = new Triangle(new Point3D(100,0,-49),new Point3D(0,-100,-49),new Point3D(100,-100,-49),new Color(0,255,0));
+        Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49),new Color(255,0,0));
+
+        Sphere middle = new Sphere(new Point3D(0,0,-50),35,new Color(100,100,100));
+
+        Camera camera = new Camera(new Point3D(0,-50,50),new Vector(0,Math.sqrt(2),Math.sqrt(2)),new Vector(0,Math.sqrt(2),-Math.sqrt(2)));
+
+        Scene myScene = new Scene("colored geometrys");
+        myScene.setCameraScreenDistance(50);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(75,127,190));
+
+        myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
+
+        ImageWriter sceneWriter = new ImageWriter("colored geometrys",500,500,500,500);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);

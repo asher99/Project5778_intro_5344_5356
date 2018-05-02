@@ -26,6 +26,13 @@ public class Cylinder extends RadialGeometry {
         orientation = myRay;
     }
 
+    // constructor with no color uses the defualt color.
+    public Cylinder(double myRadius, Ray myRay) {
+        super(myRadius);
+        _radius = myRadius;
+        orientation = myRay;
+    }
+
     // ***************** Getters/Setters ********************** //
     public Ray getOrientaion() {
         return orientation;

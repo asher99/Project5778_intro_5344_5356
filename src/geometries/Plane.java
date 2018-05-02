@@ -53,6 +53,15 @@ public class Plane extends Geometry {
         orthonormal = Vector.crossProduct(vec1, vec2).normal();
     }
 
+    public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3) {
+        super();
+        //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
+
+        point = myPoint1;
+        Vector vec1 = new Vector(Point3D.subtract(myPoint3, myPoint2));
+        Vector vec2 = new Vector(Point3D.subtract(myPoint2, myPoint1));
+        orthonormal = Vector.crossProduct(vec1, vec2).normal();
+    }
     // ***************** Getters/Setters ********************** //
     public Vector getOrthonormal() {
 

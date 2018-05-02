@@ -23,6 +23,12 @@ public abstract class RadialGeometry extends Geometry {
         _radius = myRadius;
     }
 
+    // constructor with no color uses the defualt color.
+    public RadialGeometry(double myRadius){
+        super();
+        _radius = myRadius;
+    }
+
     //copy constructor
     public RadialGeometry(final RadialGeometry g,Color e){
         super(e);

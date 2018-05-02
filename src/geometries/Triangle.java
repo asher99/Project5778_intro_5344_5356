@@ -23,6 +23,14 @@ public class Triangle extends Plane {
 
     }
 
+    // constructor with no color gives the difualt color
+    public Triangle(Point3D myA, Point3D myB, Point3D myC) {
+        super(myA, myB, myC);
+        a = myA;
+        b = myB;
+        c = myC;
+
+    }
     // ***************** Getters/Setters ********************** //
     public Point3D getA() {
         return a;
