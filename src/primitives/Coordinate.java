@@ -2,9 +2,11 @@ package primitives;
 
 import javafx.scene.layout.CornerRadii;
 
+
 /**
  * class Coordinate for a single coordinate on a single axis.
  */
+
 public class Coordinate {
 
     // the coordinate value

@@ -24,9 +24,9 @@ public class ImageWriterTest {
             for (int j = 499; j > 0; j--){
 
                 if (i % 50 == 0 || j % 50 == 0)
-                    gridWriter.writePixel(i,j, Color.WHITE);
+                    gridWriter.writePixel(i,j, java.awt.Color.WHITE);
 
-                else gridWriter.writePixel(i,j,Color.BLACK);
+                else gridWriter.writePixel(i,j,java.awt.Color.BLACK);
             }
 
         }
