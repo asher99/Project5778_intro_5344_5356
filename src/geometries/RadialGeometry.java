@@ -4,6 +4,8 @@ import primitives.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 /**
  * class RadialGeometry for Shapes identified by a radius.
  */
@@ -51,7 +53,7 @@ public abstract class RadialGeometry extends Geometry {
     public abstract Vector getNormal(Point3D somePoint);
 
     // receive a Ray and return all the points that Ray intersevt with the Geometry.
-    public abstract List<Point3D> findIntersections(Ray myRay);
+    public abstract Map<Geometry, List<Point3D>> findIntersections(Ray myRay);
 
 
 }

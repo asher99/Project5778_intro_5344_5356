@@ -7,7 +7,9 @@ import primitives.Vector;
 import primitives.Color;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * class Sphere for a sphere in space.
@@ -68,11 +70,12 @@ public class Sphere extends RadialGeometry {
 
     /**
      * @param myRay a ray that may intersect the Sphere.
-     * @return an ArrayList of all intersection points between the ray and sphere.
+     * @return an Map Entry of all intersection points between the ray and sphere, the key is this Geometry.
      */
     @Override
-    public List<Point3D> findIntersections(Ray myRay) {
+    public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
 
+        Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
         Vector u = new Vector(myRay.getPoint(), center);
@@ -100,7 +103,8 @@ public class Sphere extends RadialGeometry {
                         myRay.getDirection().multiplyByScalar(t1).getVector()));
 
         }
-        return listOfIntersections;
+        geometryListMap.put(this,listOfIntersections);
+        return geometryListMap;
     }
 
     /*

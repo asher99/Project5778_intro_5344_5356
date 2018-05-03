@@ -5,7 +5,9 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * List of Geometry objects.
@@ -17,22 +19,23 @@ public class Geometries extends Geometry {
     /**
      * find the intersections of the ray with all Geometries.
      * @param ray
-     * @return
+     * @return Map of all intersection points by the Geometries.
      */
-    public List<Point3D> findIntersections(Ray ray){
-        List<Point3D> listOfIntersections = new ArrayList<Point3D>();
+    public Map<Geometry, List<Point3D>> findIntersections(Ray ray){
+        Map<Geometry, List<Point3D>> geometriesListMap = new HashMap<>();
 
         for (Geometry g :geometries ) {
 
-            List<Point3D> temp = g.findIntersections(ray);
-            if(temp != null) {
-                for (Point3D point :temp) {
-                    listOfIntersections.add(point);
+            Map<Geometry, List<Point3D>> temp = g.findIntersections(ray);
+            if(geometriesListMap != null) {
+                geometriesListMap.putAll(temp);
                 }
             }
+            return geometriesListMap;
         }
-        return listOfIntersections;
-    }
+
+
+
 
     /**
      * add geometry 'g' to the list.

@@ -4,6 +4,8 @@ import primitives.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 /**
  * class Triangle for triangle in space.
  * the triangle is represnted by three points in space.
@@ -78,15 +80,16 @@ public class Triangle extends Plane {
 
     /**
      * @param myRay a ray that may intersect the Plane.
-     * @return ArrayList with the intersection point, if exist.
+     * @return Map with the intersection point, if exist. the key is this Geometry.
      */
-    public List<Point3D> findIntersections(Ray myRay) {
+    @Override
+    public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
 
         // first, get the point where the Ray intersect with the Plane that include the Triangle.
         // we may had no point such that, so an exception is possible.
         try {
-            List<Point3D> superOutput = super.findIntersections(myRay);
-            Point3D pointOnPlane = superOutput.get(0);
+            Map<Geometry, List<Point3D>> superOutput = super.findIntersections(myRay);
+            Point3D pointOnPlane = superOutput.get(this).get(0);
 
             // defined vectors from the point represnt the Ray to each one od the Triangle vertices.
             Vector V1 = new Vector(myRay.getPoint(), a);

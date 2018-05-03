@@ -8,6 +8,7 @@ import primitives.Vector;
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * class Cylinder for cylinder in space.
@@ -80,7 +81,7 @@ public class Cylinder extends RadialGeometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray myRay) {
+    public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
         return null;
     }
 }

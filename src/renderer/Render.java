@@ -35,13 +35,13 @@ public class Render {
                        i,j,scene.getCameraScreenDistance(),imageWriter.getWidth(),imageWriter.getHeight());
 
                //find the intersections of the ray with the scene geometries.
-               List<Point3D> intersectionPoints = scene.getShapesInScene().findIntersections(ray);
+              Map<Geometry,List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(ray);
 
                // write to that pixel the right color.
                if (intersectionPoints.isEmpty())
                    imageWriter.writePixel(i,j,scene.getSceneBackgroundColor());
                else {
-                   Point3D closestPoint = getClosestPoint(intersectionPoints);
+                   Map<Geometry,Point3D> closestPoint = getClosestPoint(intersectionPoints);
                    imageWriter.writePixel(i,j,calcColor(closestPoint).getColor());
                }
             }
@@ -102,13 +102,12 @@ public class Render {
         return minDistancePoint;
     }
 
-
-    /**
-     * builds a map of intersection points by shapes in Scene
-     * @param ray - the Ray we build the map for.
-     * @return
-     */
-    public Map<Geometry,List<Point3D>> getSceneRayIntersections(Ray ray){
+        /**
+         * builds a map of intersection points by shapes in Scene
+         * @param ray - the Ray we build the map for.
+         * @return
+         */
+    /*public Map<Geometry,List<Point3D>> getSceneRayIntersections(Ray ray){
 
         Map<Geometry,List<Point3D>> intersectionPoint = new HashMap<Geometry, List<Point3D>>();
         for (Geometry geo: scene.getShapesInScene().getGeometries()) {
@@ -116,7 +115,7 @@ public class Render {
             intersectionPoint.put(geo,geometryIntersectionPoints);
         }
         return intersectionPoint;
-    }
+    }*/
 
 
     /****************setters/getters********************/

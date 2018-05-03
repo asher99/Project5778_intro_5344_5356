@@ -4,7 +4,9 @@ import primitives.*;
 
 import java.net.PortUnreachableException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * class plane for a plane in space.
@@ -121,17 +123,19 @@ public class Plane extends Geometry {
 
     /**
      * @param myRay a ray that may intersect the Plane.
-     * @return an ArrayList of the intersection point between the ray and Plane, if exist.
+     * @return an Map entry of the intersection point between the ray and Plane, if exist. the key is this Geometry.
      */
     @Override
-    public List<Point3D> findIntersections(Ray myRay) {
+    public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
 
         double scalart = (Vector.dotProduct(orthonormal, new Vector(myRay.getPoint(), point))) / (Vector.dotProduct(orthonormal, myRay.getDirection()));
         if (scalart >= 0) {
             Point3D intersectionPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(scalart).getVector());
             List<Point3D> result = new ArrayList<Point3D>();
             result.add(intersectionPoint);
-            return result;
+            Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
+            geometryListMap.put(this,result);
+            return geometryListMap;
         } else return null;
     }
 
