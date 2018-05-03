@@ -43,6 +43,18 @@ public class Plane extends Geometry {
 
     }
 
+    public Plane(Point3D myPoint, Vector myOrthonormal) {
+        super(new Color(255,255,255));
+        point = myPoint;
+        orthonormal = myOrthonormal.normal();
+
+        aValue = orthonormal.getVector().getX();
+        bValue = orthonormal.getVector().getY();
+        cValue = orthonormal.getVector().getZ();
+        findD();
+
+    }
+
     // constructor. receive three points, set one point as the class member "point"
     // and use the three points to calculate the "orthonormal" member.
     public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3, Color emission) {

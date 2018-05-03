@@ -27,7 +27,7 @@ public class Geometries extends Geometry {
         for (Geometry g :geometries ) {
 
             Map<Geometry, List<Point3D>> temp = g.findIntersections(ray);
-            if(geometriesListMap != null) {
+            if(temp != null) {
                 geometriesListMap.putAll(temp);
                 }
             }

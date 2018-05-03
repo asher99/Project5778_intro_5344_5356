@@ -1,12 +1,16 @@
 package unitTests;
 
 import elements.Camera;
+import geometries.Geometry;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -54,16 +58,16 @@ public class TriangleTest {
         Camera myCamera = new Camera(new Point3D(0,0,0),new Vector(0,0,1),new Vector(1,0,0));
         Triangle myTriangle = new Triangle(new Point3D(10,-5,1),new Point3D(10,5,1),new Point3D(10,0,11));
 
-       ArrayList<Point3D> alistThroughCenter   = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 6, 2, 4, 6, 11));
-       ArrayList<Point3D> alistThroughUpCenter = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 6, 1, 4, 6, 11));
-       ArrayList<Point3D> alistThroughUpEdge   = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
+       Map<Geometry,List<Point3D>> alistThroughCenter   = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 6, 2, 4, 6, 11));
+        Map<Geometry,List<Point3D>> alistThroughUpCenter = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 6, 1, 4, 6, 11));
+        Map<Geometry,List<Point3D>> alistThroughUpEdge   = myTriangle.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
 
        assertNull(alistThroughCenter);
        assertNull(alistThroughUpEdge);
 
-        for (Point3D p:alistThroughUpCenter) {
+      /*  for (Point3D p:alistThroughUpCenter.get()) {
             System.out.println(p);
-        }
+        }*/
 
         ArrayList<Point3D> expected = new ArrayList<Point3D>();
         expected.add(new Point3D(10,0,5));

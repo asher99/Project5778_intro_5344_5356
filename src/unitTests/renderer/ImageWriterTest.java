@@ -1,5 +1,6 @@
 package renderer;
 
+import elements.AmbientLight;
 import elements.Camera;
 import geometries.Sphere;
 import geometries.Triangle;
@@ -39,8 +40,11 @@ public class ImageWriterTest {
     public void writeToimage2() {
 
         Scene ballScene = new Scene("ball example scene");
-        ballScene.addGeometry(new Sphere(new Point3D(60,0,0),40));
+        Sphere ball = new Sphere(new Point3D(60,0,0),40);
+        ball.emission = new Color(255,0,0);
+        ballScene.addGeometry(ball);
         ballScene.setCameraScreenDistance(50);
+        ballScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
 
         ImageWriter ballWriter = new ImageWriter("ball example image",500,500,500,500);
 
@@ -63,6 +67,14 @@ public class ImageWriterTest {
         Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49));
         Sphere middle = new Sphere(new Point3D(0,0,-50),35);
 
+
+        //give some colors to those shapes.
+        //upLeft.emission = new Color(0,255,0);
+        //downLeft.emission = new Color(255,0,0);
+        //downRight.emission= new Color(0,0,255);
+       // upRight.emission = new Color(0,255,255);
+        middle.emission = new Color(255,255,255);
+
         //camera and scene
         Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
         Scene myScene = new Scene("Triangles and Sphere, Asher and Zvei, Targil 4");
@@ -70,6 +82,7 @@ public class ImageWriterTest {
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(75,127,190));
         myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
 
         // image writer and Renderer.
         ImageWriter sceneWriter = new ImageWriter("Triangles and Sphere, Asher and Zvei, Targil 4",500,500,500,500);

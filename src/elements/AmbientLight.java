@@ -25,7 +25,7 @@ public class AmbientLight {
    public AmbientLight(Color myColor, double myKa){
 
        color = myColor;
-       if (myKa > 1.0 || myKa > 0.0)
+       if (myKa > 1.0 || myKa < 0.0)
            throw new ExceptionInInitializerError("scaling is between: (0.0,1.0)");
 
        Ka = myKa;

@@ -14,7 +14,7 @@ public class Color {
      * Construt new Color object and set the default value to (255,255,255) = Black.
      */
     public Color() {
-        color = new java.awt.Color(255, 255, 255);
+        color = new java.awt.Color(0, 0, 0);
     }
 
     /**

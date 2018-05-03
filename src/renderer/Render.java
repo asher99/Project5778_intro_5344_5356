@@ -42,7 +42,9 @@ public class Render {
                    imageWriter.writePixel(i,j,scene.getSceneBackgroundColor());
                else {
                    Map<Geometry,Point3D> closestPoint = getClosestPoint(intersectionPoints);
-                   imageWriter.writePixel(i,j,calcColor(closestPoint).getColor());
+                   Map.Entry<Geometry,Point3D> entry = closestPoint.entrySet().iterator().next();
+
+                   imageWriter.writePixel(i,j,calcColor(entry.getKey(),entry.getValue()).getColor());
                }
             }
         }
@@ -66,18 +68,10 @@ public class Render {
      * @param p
      * @return
      */
-    public Color calcColor(Geometry geo, Point3D p){
+    public Color calcColor(Geometry geo, Point3D p) {
         Color color = scene.getSceneAmbientLight().getIntensity();
         color.add(geo.getEmission());
         return color;
-
-       /* Random rn = new Random();
-        int red = rn.nextInt();
-        int green = rn.nextInt();
-        int blue = rn.nextInt();
-
-        Color output = new Color(red,green,blue);
-        return output; */
     }
 
     /**

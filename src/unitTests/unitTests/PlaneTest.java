@@ -1,6 +1,7 @@
 package unitTests;
 
 import elements.Camera;
+import geometries.Geometry;
 import geometries.Plane;
 import geometries.Triangle;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -48,9 +51,9 @@ public class PlaneTest {
             Camera myCamera1 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
             Plane myPlane1 = new Plane(new Point3D(10, 0, 0), new Vector(1, 0, 0));
 
-            ArrayList<Point3D> alistCenter = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 3, 6, 6));
-            ArrayList<Point3D> alistUpper = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 1, 3, 6, 6));
-            ArrayList<Point3D> alistLeftDown = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6));
+            Map<Geometry,List<Point3D>> alistCenter = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 3, 6, 6));
+            Map<Geometry,List<Point3D>> alistUpper = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 1, 3, 6, 6));
+            Map<Geometry,List<Point3D>> alistLeftDown = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6));
 
             Point3D expectedCenterPoint = new Point3D(10, 0, 0);
             Point3D expectedUpperPoint = new Point3D(10, 0, 6.666666666666667);
@@ -65,7 +68,7 @@ public class PlaneTest {
             ArrayList<Point3D> expectedAlistLeftDown = new ArrayList<Point3D>();
             expectedAlistLeftDown.add(expectedLeftDownPoint);
 
-            for (Point3D p : alistCenter) {
+           /* for (Point3D p : alistCenter) {
                 System.out.println(p);
             }
             for (Point3D p : alistUpper) {
@@ -74,7 +77,7 @@ public class PlaneTest {
             for (Point3D p : alistLeftDown) {
                 System.out.println(p);
             }
-
+*/
             assertTrue(alistCenter.equals(expectedAlistCenter));
             assertTrue(alistUpper.equals(expectedAlistUpper));
             assertTrue(alistLeftDown.equals(expectedAlistLeftDown));
@@ -89,7 +92,7 @@ public class PlaneTest {
             Camera myCamera2 = new Camera(new Point3D(0, 0, 0), new Vector(0, 1, 0), new Vector(0, 0, -1));
             Plane myPlane2 = new Plane(new Point3D(00, 0, 0.05), new Vector(0, 0, 1));
 
-            ArrayList<Point3D> output = myPlane2.findIntersections(myCamera2.ConstractRaythroughPixel(100, 100, 26, 1, 5, 120, 120));
+            Map<Geometry,List<Point3D>> output = myPlane2.findIntersections(myCamera2.ConstractRaythroughPixel(100, 100, 26, 1, 5, 120, 120));
 
             assertNull(output);
 
@@ -106,12 +109,12 @@ public class PlaneTest {
             Camera myCamera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
             Plane myPlane = new Plane(new Point3D(10, -5, 1), new Point3D(10, 5, 1), new Point3D(10, 0, 11));
 
-            ArrayList<Point3D> output = myPlane.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
+            Map<Geometry,List<Point3D>> output = myPlane.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
 
-            for (Point3D p: output) {
+          /*  for (Point3D p: output) {
                 System.out.println(p);
             }
-
+*/
         }catch (NullPointerException e){}
     }
 
