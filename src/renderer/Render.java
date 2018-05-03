@@ -43,7 +43,6 @@ public class Render {
                else {
                    Map<Geometry,Point3D> closestPoint = getClosestPoint(intersectionPoints);
                    Map.Entry<Geometry,Point3D> entry = closestPoint.entrySet().iterator().next();
-
                    imageWriter.writePixel(i,j,calcColor(entry.getKey(),entry.getValue()).getColor());
                }
             }

@@ -140,7 +140,7 @@ public class ImageWriterTest {
 
         Sphere middle = new Sphere(new Point3D(0,0,-50),35,new Color(100,100,100));
 
-        Camera camera = new Camera(new Point3D(0,-50,50),new Vector(0,Math.sqrt(2),Math.sqrt(2)),new Vector(0,Math.sqrt(2),-Math.sqrt(2)));
+        Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
 
         Scene myScene = new Scene("colored geometrys");
         myScene.setCameraScreenDistance(50);
