@@ -2,15 +2,19 @@ package renderer;
 
 import elements.AmbientLight;
 import elements.Camera;
+import geometries.Geometry;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 import primitives.Color;
 import scene.Scene;
 
 import java.awt.*;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -69,18 +73,18 @@ public class ImageWriterTest {
 
 
         //give some colors to those shapes.
-        //upLeft.emission = new Color(0,255,0);
-        //downLeft.emission = new Color(255,0,0);
-        //downRight.emission= new Color(0,0,255);
-       // upRight.emission = new Color(0,255,255);
-        middle.emission = new Color(255,255,255);
+        upLeft.emission = new Color(0,255,0);
+        downLeft.emission = new Color(255,0,0);
+        downRight.emission= new Color(0,0,255);
+        upRight.emission = new Color(0,255,255);
+        middle.emission = new Color(255,255,0);
 
         //camera and scene
         Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
         Scene myScene = new Scene("Triangles and Sphere, Asher and Zvei, Targil 4");
         myScene.setCameraScreenDistance(50);
         myScene.setSceneCamera(camera);
-        myScene.setSceneBackgroundColor(new java.awt.Color(75,127,190));
+        myScene.setSceneBackgroundColor(new java.awt.Color(220,220,220));
         myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
 
@@ -90,11 +94,33 @@ public class ImageWriterTest {
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
 
+//        testRenderSpecificIndex(175,325,myRender);
+//        testRenderSpecificIndex(325,325,myRender);
         myRender.renderImage();
+
         myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
 
 
+    }
+
+    public void testRenderSpecificIndex(int i, int j, Render render) {
+
+
+        Ray ray = render.getScene().getSceneCamera().ConstractRaythroughPixel(render.getImageWriter().getNx(), render.getImageWriter().getNy(),
+                i, j, render.getScene().getCameraScreenDistance(), render.getImageWriter().getWidth(),render.getImageWriter().getHeight());
+
+        //find the intersections of the ray with the scene geometries.
+        Map<Geometry, List<Point3D>> intersectionPoints = render.getScene().getShapesInScene().findIntersections(ray);
+
+        // write to that pixel the right color.
+        if (intersectionPoints.isEmpty())
+            render.getImageWriter().writePixel(i, j, render.getScene().getSceneBackgroundColor());
+        else {
+            Map<Geometry, Point3D> closestPoint = render.getClosestPoint(intersectionPoints);
+            Map.Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
+            render.getImageWriter().writePixel(i, j, render.calcColor(entry.getKey(), entry.getValue()).getColor());
+        }
     }
 
     @Test
