@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * class Camera.
- * represent a camera in space.
+ * represent a camera in the scene.
  * the camera has location (point in space) and orientation ( vector up, vector to).
  */
 public class Camera {
@@ -17,16 +17,20 @@ public class Camera {
     Vector vTo;
     Vector vRight;
     // ***************** Constructor ********************** //
-    public Camera(Point3D point, Vector up, Vector to) {
-        if (up.sizeOfVector() == 0 || to.sizeOfVector() == 0)
-            throw new ArithmeticException("the Vectors cannot be zero length.");
-        if (Vector.dotProduct(up, to) != 0)
-            throw new ArithmeticException("the Vectors are not otrhgonal!");
 
-        p0 = point;
-        vUp = up.normal();
-        vTo = to.normal();
-        vRight = (Vector.crossProduct(up, to)).normal();
+    /**
+     * constructor.
+     * get the point in the 3D scene where the camera is,
+     * and also two vectors of the camera orientation.
+     * the third is calculated automatically.
+     *
+     * we use the method "setCameraLocation"
+     * @param point
+     * @param up
+     * @param to
+     */
+    public Camera(Point3D point, Vector up, Vector to) {
+       setCameraLocation(point,up,to);
     }
 
     /**
@@ -62,7 +66,7 @@ public class Camera {
 
 
     /**
-     *
+     * calculated the center of the pixel in which the ray pass.
      * @param i         index of pixel in the horizontal axis, right to left.
      * @param j         index of pixel in the horizontal axis, up to down.
      *                  both i and j starts from 1.
@@ -99,6 +103,53 @@ public class Camera {
         // we add the sum of the vectors to the center of the matrix.
         return Point3D.add(Point3D.add(centerOfMatrix, vUpMovment.getVector()), vRightMovment.getVector());
 
+    }
+
+    /*************getters/setters**********************/
+
+    /**
+     * this is the setter for all the camera position parameters.
+     * it is wrong to let the user set only one field:
+     * for example: if we set only the vUp, there are limitless possibilities for the vTo and vRight.
+     * we can't ignore changing them - because we must keep the view plane vectors orthogonal.
+     * @param myP0
+     * @param myVup
+     * @param myVto
+     */
+    public void setCameraLocation(Point3D myP0, Vector myVup, Vector myVto){
+        if (myVup.sizeOfVector() == 0 || myVto.sizeOfVector() == 0)
+            throw new ArithmeticException("the Vectors cannot be zero length.");
+        if (Vector.dotProduct(myVup, myVto) != 0)
+            throw new ArithmeticException("the Vectors are not otrhgonal!");
+
+        p0 = myP0;
+        vUp = myVup.normal();
+        vTo = myVto.normal();
+        vRight = (Vector.crossProduct(myVup, myVto)).normal();
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public Vector getvRight() {
+        return vRight;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public Vector getvTo() {
+        return vTo;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public Vector getvUp() {
+        return vUp;
     }
 
     /**

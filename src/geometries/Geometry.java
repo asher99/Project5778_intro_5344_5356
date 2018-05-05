@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * class Geometry for geometrial shapes.
+ * class Geometry for geometrical shapes.
+ * this is an abstract class include features shared by all kinds of shapes in space.
  */
 public abstract class Geometry {
 
@@ -17,16 +18,26 @@ public abstract class Geometry {
     public Color emission;
 
     // ***************** Constructors ********************** //
-    //default constructor
+
+    /**
+     * default constructor
+     */
     public Geometry() {
         emission = new Color();
     }
 
+    /**
+     * constructor
+     * @param e
+     */
     public Geometry(Color e ) {
         emission = new Color(e);
     }
 
-    // copy constructor
+    /**
+     * default constructor
+     * @param g
+     */
     public Geometry(final Geometry g) {
         emission = new Color(g.emission);
     }
@@ -51,4 +62,11 @@ public abstract class Geometry {
      */
     public abstract Map<Geometry, List<Point3D>> findIntersections(Ray myRay);
 
+    /**
+     * setter
+     * @param emission
+     */
+    public void setEmission(Color emission) {
+        this.emission = emission;
+    }
 }

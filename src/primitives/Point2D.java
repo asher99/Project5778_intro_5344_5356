@@ -41,19 +41,37 @@ public class Point2D {
     public Point2D(){}
 
     // ***************** Getters ********************** //
+
+    /**
+     * getter.
+     * @return
+     */
     public double getX() {
         return x.getCoord();
     }
 
+    /**
+     * getter.
+     * @return
+     */
     public double getY() {
         return y.getCoord();
     }
 
+    /**
+     * toString
+     * @return
+     */
     @Override
     public String toString() {
         return '(' + x.toString() + ',' + y.toString() + ')';
     }
 
+    /**
+     * check if another ibject is equal to this one.
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) {
         return x.equals(((Point2D) other).x) && y.equals(((Point2D) other).y);

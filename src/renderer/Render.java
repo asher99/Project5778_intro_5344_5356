@@ -112,18 +112,35 @@ public class Render {
 
 
     /****************setters/getters********************/
+
+    /**
+     * setter
+     * @param imageWriter
+     */
     public void setImageWriter(ImageWriter imageWriter) {
         this.imageWriter = imageWriter;
     }
 
+    /**
+     * setter
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public ImageWriter getImageWriter() {
         return imageWriter;
     }

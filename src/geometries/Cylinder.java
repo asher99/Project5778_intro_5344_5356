@@ -20,14 +20,24 @@ public class Cylinder extends RadialGeometry {
     Ray orientation;
 
     // ***************** Constructors ********************** //
-    //constructor
+
+    /**
+     * constructor
+     * @param myRadius
+     * @param myRay
+     * @param e
+     */
     public Cylinder(double myRadius, Ray myRay, Color e) {
         super(myRadius,e);
         _radius = myRadius;
         orientation = myRay;
     }
 
-    // constructor with no color uses the defualt color.
+    /**
+     * constructor with no color uses the default color.
+     * @param myRadius
+     * @param myRay
+     */
     public Cylinder(double myRadius, Ray myRay) {
         super(myRadius);
         _radius = myRadius;
@@ -35,27 +45,43 @@ public class Cylinder extends RadialGeometry {
     }
 
     // ***************** Getters/Setters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public Ray getOrientaion() {
         return orientation;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Color getEmission(){
         return super.getEmission();
     }
 
+    /**
+     * getter
+     * @return
+     */
     @Override
     public double get_radius() {
         return super.get_radius();
     }
 
     // ***************** Operations ******************** //
-    /*calculate the vector from somePoint to the point that defines the Cylinder orientation.
-        if the dot product of that vector and the vector that defines the orientation is zero,
 
-    */
+    /**
+     * calculate the vector from somePoint to the point that defines the Cylinder orientation.
+     * full explanation in the code.
+     * @param somePoint
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D somePoint) {
-        // first, we need to have all componments for pythgore theorm.
+        // first, we need to have all components for Pythgore theorem.
         // we already have the radius - which is one of the bases,
         // and the reminder will be the vector from the point that defines the orientation to somePoint.
         Vector reminder = new Vector(somePoint, orientation.getPoint());
@@ -80,6 +106,12 @@ public class Cylinder extends RadialGeometry {
             return toPointInFront.normal();
     }
 
+    /**
+     * return map of the Ray intersection points with the Cylinder.
+     * no implementation, for now.
+     * @param myRay
+     * @return
+     */
     @Override
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
         return null;

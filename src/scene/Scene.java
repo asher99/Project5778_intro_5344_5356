@@ -61,39 +61,75 @@ public class Scene {
     }
     // ***************** Getters/Setters ********************** //
 
+    /**
+     * getter
+     * @return
+     */
     public Color getSceneBackgroundColor() {
 
         return sceneBackgroundColor;
     }
 
+    /**
+     * setter
+     * @param sceneBackgroundColor
+     */
     public void setSceneBackgroundColor(Color sceneBackgroundColor) {
         this.sceneBackgroundColor = sceneBackgroundColor;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Camera getSceneCamera() {
         return sceneCamera;
     }
 
+    /**
+     * setter
+     * @param sceneCamera
+     */
     public void setSceneCamera(Camera sceneCamera) {
         this.sceneCamera = sceneCamera;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public double getCameraScreenDistance() {
         return cameraScreenDistance;
     }
 
+    /**
+     * setter
+     * @param cameraScreenDistance
+     */
     public void setCameraScreenDistance(double cameraScreenDistance) {
         this.cameraScreenDistance = cameraScreenDistance;
     }
 
+    /**
+     * setter
+     * @param sceneAmbientLight
+     */
     public void setSceneAmbientLight(AmbientLight sceneAmbientLight) {
         this.sceneAmbientLight = sceneAmbientLight;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public AmbientLight getSceneAmbientLight() {
         return sceneAmbientLight;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Geometries getShapesInScene() {
         return shapesInScene;
     }

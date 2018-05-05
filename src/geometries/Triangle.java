@@ -17,6 +17,14 @@ public class Triangle extends Plane {
     private Point3D c;
 
     // ***************** Constructors ********************** //
+
+    /**
+     * constructor with three points and color
+     * @param myA
+     * @param myB
+     * @param myC
+     * @param e
+     */
     public Triangle(Point3D myA, Point3D myB, Point3D myC, Color e) {
         super(myA, myB, myC, e);
         a = myA;
@@ -25,7 +33,12 @@ public class Triangle extends Plane {
 
     }
 
-    // constructor with no color gives the difualt color
+    /**
+     * constructor with no color gives the default color
+     * @param myA
+     * @param myB
+     * @param myC
+     */
     public Triangle(Point3D myA, Point3D myB, Point3D myC) {
         super(myA, myB, myC);
         a = myA;
@@ -34,30 +47,57 @@ public class Triangle extends Plane {
 
     }
     // ***************** Getters/Setters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public Point3D getA() {
         return a;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Point3D getB() {
         return b;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Point3D getC() {
         return c;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Color getEmission(){
         return super.getEmission();
     }
 
     // ***************** Operations ******************** //
-    // for now return now.
+
+    /**
+     * return the parent Plane normal
+     * @param somePoint
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D somePoint) {
         return super.getNormal(somePoint);
     }
 
 
+    /**
+     * check if a Triangle object is equal to this one.
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
 
@@ -73,6 +113,10 @@ public class Triangle extends Plane {
                 (a.equals(((Triangle) obj).c) && b.equals(((Triangle) obj).a) && c.equals(((Triangle) obj).b));
     }
 
+    /**
+     * toString
+     * @return
+     */
     @Override
     public String toString() {
         return a.toString() + "," + b.toString() + "," + a.toString() + ",";

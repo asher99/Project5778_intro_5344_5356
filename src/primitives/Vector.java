@@ -163,12 +163,21 @@ public class Vector {
         return thisVector.vector.equals(otherVector.normal().vector);
     }
 
+    /**
+     * toString
+     * @return
+     */
     @Override
     public String toString() {
 
         return vector.toString();
     }
 
+    // ***************** Getters ********************** //
+    /**
+     * getter
+     * @return
+     */
     public Point3D getVector() {
 
         return vector;

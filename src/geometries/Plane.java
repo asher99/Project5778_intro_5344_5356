@@ -30,7 +30,13 @@ public class Plane extends Geometry {
     double dValue;
 
     // ***************** Constructors ********************** //
-    //  set values also for A,B,C and call the method for finding D.
+    /**
+     * constructor.
+     * set values also for A,B,C and call the method for finding D.
+     * @param myOrthonormal
+     * @param myPoint
+     * @param emission
+     */
     public Plane(Point3D myPoint, Vector myOrthonormal, Color emission) {
         super(emission);
         point = myPoint;
@@ -43,6 +49,12 @@ public class Plane extends Geometry {
 
     }
 
+    /**
+     * constructor with default emission.
+     * set values also for A,B,C and call the method for finding D.
+     * @param myPoint
+     * @param myOrthonormal
+     */
     public Plane(Point3D myPoint, Vector myOrthonormal) {
         super(new Color(255,255,255));
         point = myPoint;
@@ -55,8 +67,14 @@ public class Plane extends Geometry {
 
     }
 
-    // constructor. receive three points, set one point as the class member "point"
-    // and use the three points to calculate the "orthonormal" member.
+    /**
+     * constructor. receive three points, set one point as the class member "point"
+     * and use the three points to calculate the "orthonormal" member.
+     * @param myPoint1
+     * @param myPoint2
+     * @param myPoint3
+     * @param emission
+     */
     public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3, Color emission) {
         super(emission);
         //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
@@ -67,6 +85,14 @@ public class Plane extends Geometry {
         orthonormal = Vector.crossProduct(vec1, vec2).normal();
     }
 
+    /**
+     * constructor. receive three points, set one point as the class member "point"
+     * and use the three points to calculate the "orthonormal" member.
+     * @param myPoint1
+     * @param myPoint2
+     * @param myPoint3
+     *
+     */
     public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3) {
         super();
         //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
@@ -77,15 +103,28 @@ public class Plane extends Geometry {
         orthonormal = Vector.crossProduct(vec1, vec2).normal();
     }
     // ***************** Getters/Setters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public Vector getOrthonormal() {
 
         return orthonormal;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Point3D getPoint() {
         return point;
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Color getEmission(){
         return super.getEmission();
     }
@@ -93,15 +132,23 @@ public class Plane extends Geometry {
 
     // ***************** Operations ******************** //
 
-    // the Normal is the "orthonormal" class member.
+    /**
+     * the Normal is the "orthonormal" class member.
+     * @param somePoint
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D somePoint) {
         return orthonormal;
     }
 
-    // we check if the vectors are the same.
-    // we check if the other plane point satisfy the equation.
-    // if both conditions exist - it is the same plane.
+    /**
+     * we check if the vectors are the same.
+     * we check if the other plane point satisfy the equation.
+     * if both conditions exist - it is the same plane.
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         Plane otherPlane = (Plane) obj;
@@ -111,18 +158,29 @@ public class Plane extends Geometry {
         return (sameDirection && samePlane);
     }
 
-    // find the value of D from the equation: "D = -Ax -By -Cz"
+    /**
+     *     find the value of D from the equation: "D = -Ax -By -Cz"
+     */
     private void findD() {
 
         dValue = -1 * (point.getX() * aValue + point.getY() * bValue + point.getZ() * cValue);
     }
 
-    // check if point (x,y,z) satisfy the equation: "Ax + By + Cz + D = 0".
+    /**
+     * check if point (x,y,z) satisfy the equation: "Ax + By + Cz + D = 0".
+     * @param myPoint
+     * @return
+     */
     public boolean satisfyEquation(Point3D myPoint) {
         return ((point.getX() * aValue + point.getY() * bValue + point.getZ() * cValue + dValue) == 0);
     }
 
-    // check if two points in space are lineraly dipendent.
+    /**
+     *  check if two points in space are lineraly dipendent.
+     * @param point1
+     * @param point2
+     * @return
+     */
     boolean linearlyDipendent(Point3D point1, Point3D point2) {
         double xDiff = point1.getX() - point2.getX();
         double yDiff = point1.getY() - point2.getY();

@@ -21,13 +21,24 @@ public class Sphere extends RadialGeometry {
 
     // ***************** Constructors ********************** //
 
+    /**
+     * constructor
+     * @param myPoint
+     * @param myRadius
+     * @param e
+     */
     public Sphere(Point3D myPoint, double myRadius, Color e) {
         super(myRadius, e);
         center = myPoint;
         _radius = myRadius;
     }
 
-    // constructor with no color uses the defualt color.
+
+    /**
+     * constructor with no color uses the default color.
+     * @param myPoint
+     * @param myRadius
+     */
     public Sphere(Point3D myPoint, double myRadius) {
         super(myRadius);
         center = myPoint;
@@ -35,22 +46,40 @@ public class Sphere extends RadialGeometry {
     }
 
     // ***************** Getters/Setters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public Point3D getCenter() {
         return center;
     }
 
+    /**
+     * getter
+     * @return
+     */
     @Override
     public double get_radius() {
         return super.get_radius();
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Color getEmission() {
         return super.getEmission();
     }
 
     // ***************** Operations ******************** //
-    // check if a point is on the sphere surface by comaring the radius field to the distance from the point to the sphere center.
-    // in case it is, return the vector from the center to the point - this is the normal to the tangent plane at that point.
+
+    /**
+     * check if a point is on the sphere surface by comaring the radius field to the distance from the point to the sphere center.
+     * in case it is, return the vector from the center to the point - this is the normal to the tangent plane at that point.
+     * @param myPoint
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D myPoint) {
     /*    double dis_from_center = Point3D.distance(myPoint, center);
@@ -61,7 +90,11 @@ public class Sphere extends RadialGeometry {
     }
 
 
-    // check if sphere are equals by comparing radius and the center points.
+    /**
+     * check if sphere are equals by comparing radius and the center points.
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         Sphere otherSphere = (Sphere) obj;

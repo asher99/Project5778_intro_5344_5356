@@ -28,22 +28,39 @@ public class Coordinate {
 
 
     // ***************** Constructor ********************** //
+
+    /**
+     * constructor
+     * @param newCoord
+     */
     public Coordinate(double newCoord) {
         double expo = getExp(newCoord);
         this.coord = (expo < ACCURACY) ? 0.0 : newCoord;
         //this.coord = newCoord;
     }
 
-    // kind of copy constructor
+    /**
+     * kind of copy constructor
+     * @param newCoord
+     */
     public Coordinate(Coordinate newCoord) {
         coord = newCoord.getCoord();
     }
 
     // ***************** Getters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public double getCoord() {
         return coord;
     }
 
+    /**
+     * toString
+     * @return
+     */
     @Override
     public String toString() {
         return String.valueOf(coord);

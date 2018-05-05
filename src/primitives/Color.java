@@ -11,7 +11,7 @@ public class Color {
     // ***************** Constructor ********************** //
 
     /**
-     * Construt new Color object and set the default value to (255,255,255) = Black.
+     * Construct new Color object and set the default value to (255,255,255) = Black.
      */
     public Color() {
         color = new java.awt.Color(0, 0, 0);
@@ -64,6 +64,11 @@ public class Color {
 
 
     // ***************** Getters ********************** //
+
+    /**
+     * getter
+     * @return
+     */
     public java.awt.Color getColor() {
         return color;
     }
@@ -71,7 +76,7 @@ public class Color {
     // ***************** Operations ******************** //
 
     /**
-     * recieve other color(s) and fuse them to one Color.
+     * receive other color(s) and fuse them to one Color.
      *
      * @param otherColors
      */
@@ -139,6 +144,11 @@ public class Color {
         color = new java.awt.Color(RGB[0], RGB[1], RGB[2]);
     }
 
+    /**
+     * check if another object is equal to this one.
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(Object other) {
 
@@ -147,6 +157,7 @@ public class Color {
     }
 
     /**
+     * toString
      * @return String
      */
     @Override

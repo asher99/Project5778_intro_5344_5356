@@ -33,6 +33,10 @@ public class Point3D extends Point2D {
         z = v.vector.z;
     }
 
+    /**
+     * "copy" constructor.
+     * @param p
+     */
     public Point3D(Point3D p){
         super.x = new Coordinate(p.getX());
         super.y = new Coordinate(p.getY());
@@ -42,6 +46,7 @@ public class Point3D extends Point2D {
     // ***************** Getters ********************** //
 
     /**
+     * getter
      * @return double
      */
     public double getZ() {
@@ -51,6 +56,7 @@ public class Point3D extends Point2D {
     // ***************** Operations ******************** //
 
     /**
+     * check if another object is equal to this one.
      * @param other
      * @return boolean
      */
@@ -60,6 +66,7 @@ public class Point3D extends Point2D {
     }
 
     /**
+     * toString.
      * @return String
      */
     @Override

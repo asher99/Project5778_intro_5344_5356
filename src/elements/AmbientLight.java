@@ -3,7 +3,8 @@ package elements;
 import primitives.Color;
 
 /**
- * class that represents a scene that has only one color
+ * class AmbientLigt.
+ * determine the ambient light of a scene.
  */
 public class AmbientLight {
 
@@ -33,7 +34,7 @@ public class AmbientLight {
 
     /*************operations**********************/
     /**
-     *
+     * return copy of the AmbientLight object scaled by the Ka factor.
      * @return Color
      */
     public Color getIntensity()
@@ -44,18 +45,34 @@ public class AmbientLight {
     }
 
     /*************getters/setters**********************/
+    /**
+     * setter
+     * @param color
+     */
     public void setColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * setter
+     * @param ka
+     */
     public void setKa(double ka) {
         Ka = ka;
     }
 
+    /**
+     * getter
+     * @return the object's color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * getter
+     * @return the object's scaling factor
+     */
     public double getKa() {
         return Ka;
     }

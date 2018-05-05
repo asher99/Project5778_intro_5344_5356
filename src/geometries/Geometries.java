@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * List of Geometry objects.
+ * class Geometries.
+ * this is actually a class that represent a List of Geometry objects.
  */
 public class Geometries extends Geometry {
 
@@ -45,6 +46,10 @@ public class Geometries extends Geometry {
         geometries.add(g);
     }
 
+    /**
+     * getter
+     * @return
+     */
     public List<Geometry> getGeometries() {
         return geometries;
     }
