@@ -1,5 +1,6 @@
 package renderer;
 
+import elements.LightSource;
 import geometries.Geometry;
 import primitives.Color;
 import primitives.Point3D;
@@ -64,14 +65,39 @@ public class Render {
     }
 
     /**
-     * for now, just return the only "ambient light" and "emission light" in the scene and color of the geometry.
+     * calculate color in a point.
+     * using Phong Reflectance model:
+     * ambient light.
+     * emission light
+     * diffusion light
+     * specular light
      *
      * @param p
      * @return
      */
     public Color calcColor(Geometry geo, Point3D p) {
+
+        //ambient light
         Color color = scene.getSceneAmbientLight().getIntensity();
+
+        //emission light
         color.add(geo.getEmission());
+
+        //prepare for iterating over all light sources.
+        //identify the material, get the normal vector in the checked point.
+        Vector n = geo.getNormal(p);
+        int nShininess = geo.getMaterial().getnShininess();
+        double kd = geo.getMaterial().getKd();
+        double ks = geo.getMaterial().getKs();
+
+        // foreach light source in the scene: add the diffusion and specular lights.
+        for (LightSource lightSource : scene.getSceneLightSources()) {
+            Color lightIntensity = lightSource.getIntensity(p);
+            Vector l = lightSource.getL(p);
+            Vector v = new Vector(Point3D.subtract(scene.getSceneCamera().getP0(), p));
+            color.add(calcDiffusive(kd, l, n, lightIntensity),
+                    calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+        }
         return color;
     }
 
@@ -95,6 +121,70 @@ public class Render {
             }
         }
         return minDistancePoint;
+    }
+
+    /**
+     * calculate the Diffusive effect in Phong's model.
+     *
+     * @param kd             - the material diffusive factor.
+     * @param l              - vector from the light source to the object.
+     * @param n              - the normal vector to the geometry in the intersection point.
+     * @param lightIntensity - the light source intensity.
+     * @return scale lightIntensity by: Kd * dotProduct(l,n)
+     */
+    public Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
+        Color result = new Color(lightIntensity);
+        double scalingFactor = kd * Vector.dotProduct(l, n);
+
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        Vector v = scene.getSceneCamera().getvTo();
+        if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        }
+        else{
+            return new Color(0,0,0);
+        }
+    }
+
+
+    /**
+     * calculate the Specular effect in Phong's model.
+     *
+     * @param ks             - the material specular factor.
+     * @param l              - vector from the light source to the object
+     * @param n              - the normal vector to the geometry in the intersection point.
+     * @param v              - the Scene Camera vTo component (the direction of the camera).
+     * @param nShininess     - the material shininess.
+     * @param lightIntensity - the light source intensity.
+     * @return scale lightIntensity by: Ks* dotProduct(-v,r)^nShininess.
+     * where r is: l − 2* dotProduct(l⋅n)n
+     */
+    public Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
+
+        Color result = new Color(lightIntensity);
+
+        // calculating "Ks* dotProduct(-v,r)^nShininess" and 'r' itself.
+        double temp = -2 * Vector.dotProduct(l, n.normal());
+        Vector nComponent = n.multiplyByScalar(temp);
+        Vector r = new Vector(l.getVector(),nComponent.getVector());
+        double scalingFactor = ks * Math.pow(Vector.dotProduct(v.multiplyByScalar(-1),r),nShininess);
+
+
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        if ((Vector.dotProduct(l,n) > 0 && Vector.dotProduct(v,n) > 0)||(Vector.dotProduct(l,n) < 0 && Vector.dotProduct(v,n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        }
+        else{
+            return new Color(0,0,0);
+        }
     }
 
     /**

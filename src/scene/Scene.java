@@ -111,6 +111,14 @@ public class Scene {
     }
 
     /**
+     * getter
+     * @return
+     */
+    public List<LightSource> getSceneLightSources() {
+        return sceneLightSources;
+    }
+
+    /**
      * setter
      *
      * @param cameraScreenDistance

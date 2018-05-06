@@ -91,7 +91,7 @@ public abstract class Geometry {
     /**
      * return the normal to a shape
      */
-    protected Vector getNormal(Point3D somePoint) {
+    public Vector getNormal(Point3D somePoint) {
         return null;
     }
 

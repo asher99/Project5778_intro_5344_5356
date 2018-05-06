@@ -35,7 +35,7 @@ public class SpotLight extends PointLight {
 
         //position
         Vector l = new Vector(position,p);
-        double numerator = Vector.dotProduct(direction,l);
+        double numerator = Vector.dotProduct(direction,l.normal());
 
         //scale
         Color result = new Color(color);
