@@ -2,6 +2,8 @@ package scene;
 
 import elements.AmbientLight;
 import elements.Camera;
+import elements.Light;
+import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Point3D;
@@ -9,6 +11,7 @@ import primitives.Vector;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class Scene represents a scene.
@@ -22,6 +25,7 @@ public class Scene {
     private Camera sceneCamera;
     private double cameraScreenDistance;
     private AmbientLight sceneAmbientLight;
+    private List<LightSource> sceneLightSources;
 
     // ***************** Constructors ********************** //
 
@@ -37,6 +41,7 @@ public class Scene {
         sceneCamera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
         cameraScreenDistance = 4;
         sceneAmbientLight = new AmbientLight();
+        sceneLightSources = new ArrayList<LightSource>();
     }
 
     /**
@@ -144,7 +149,7 @@ public class Scene {
     // ***************** Operations ******************** //
 
     /**
-     * add a Geomtry to this Scene.
+     * add a Geometry to this Scene.
      *
      * @param myGeometry - a Geometry object to insert the list of shapes in scene.
      */
@@ -160,6 +165,24 @@ public class Scene {
     public void addGeometries(Geometry... myGeometries) {
         for (Geometry g : myGeometries) {
             addGeometry(g);
+        }
+    }
+
+    /**
+     *adding a light source to a scene.
+     * @param ls
+     */
+    public void addLightSource(LightSource ls){
+        sceneLightSources.add(ls);
+    }
+
+    /**
+     * add multiple light sources
+     * @param myLightSources
+     */
+    public void addLightSources(LightSource... myLightSources){
+        for (LightSource ls: myLightSources){
+            addLightSource(ls);
         }
     }
 
