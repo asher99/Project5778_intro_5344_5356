@@ -38,9 +38,10 @@ public class Plane extends Geometry {
      * @param myOrthonormal
      * @param myPoint
      * @param emission
+     * @param m
      */
-    public Plane(Point3D myPoint, Vector myOrthonormal, Color emission) {
-        super(emission);
+    public Plane(Point3D myPoint, Vector myOrthonormal, Color emission, Material m) {
+        super(emission, m);
         point = myPoint;
         orthonormal = myOrthonormal.normal();
 
@@ -58,7 +59,7 @@ public class Plane extends Geometry {
      * @param myOrthonormal
      */
     public Plane(Point3D myPoint, Vector myOrthonormal) {
-        super(new Color(255, 255, 255));
+        super(new Color(255, 255, 255), new Material());
         point = myPoint;
         orthonormal = myOrthonormal.normal();
 
@@ -76,9 +77,10 @@ public class Plane extends Geometry {
      * @param myPoint2
      * @param myPoint3
      * @param emission
+     * @param m
      */
-    public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3, Color emission) {
-        super(emission);
+    public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3, Color emission, Material m) {
+        super(emission,m);
         //if(linearlyDipendent(myPoint1,myPoint2)||linearlyDipendent(myPoint1,myPoint3)||linearlyDipendent(myPoint2,myPoint3))
 
         point = myPoint1;

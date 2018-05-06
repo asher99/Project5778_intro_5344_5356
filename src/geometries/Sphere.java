@@ -1,10 +1,6 @@
 package geometries;
 
-import primitives.Coordinate;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
-import primitives.Color;
+import primitives.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +22,10 @@ public class Sphere extends RadialGeometry {
      * @param myPoint
      * @param myRadius
      * @param e
+     * @param m
      */
-    public Sphere(Point3D myPoint, double myRadius, Color e) {
-        super(myRadius, e);
+    public Sphere(Point3D myPoint, double myRadius, Color e, Material m) {
+        super(myRadius, e, m);
         center = myPoint;
         _radius = myRadius;
     }

@@ -45,7 +45,7 @@ public class ImageWriterTest {
 
         Scene ballScene = new Scene("ball example scene");
         Sphere ball = new Sphere(new Point3D(60,0,0),59);
-        ball.emission = new Color(255,0,0);
+        ball.setEmission(new Color(255,0,0));
         ballScene.addGeometry(ball);
         ballScene.setCameraScreenDistance(50);
         ballScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
@@ -73,11 +73,11 @@ public class ImageWriterTest {
 
 
         //give some colors to those shapes.
-        upLeft.emission = new Color(0,255,0);
-        downLeft.emission = new Color(255,0,0);
-        downRight.emission= new Color(0,0,255);
-        upRight.emission = new Color(0,255,255);
-        middle.emission = new Color(255,255,0);
+        upLeft.setEmission(new Color(0,255,0));
+        downLeft.setEmission(new Color(255,0,0));
+        downRight.setEmission(new Color(0,0,255));
+        upRight.setEmission(new Color(0,255,255));
+        middle.setEmission(new Color(255,255,0));
 
         //camera and scene
         Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
@@ -168,11 +168,11 @@ public class ImageWriterTest {
 
 
         //give some colors to those shapes.
-        upLeft.emission = new Color(0,255,0);
-        downLeft.emission = new Color(255,0,0);
-        downRight.emission= new Color(0,0,255);
-        upRight.emission = new Color(0,255,255);
-        middle.emission = new Color(255,255,0);
+        upLeft.setEmission(new Color(0,255,0));
+        downLeft.setEmission(new Color(255,0,0));
+        downRight.setEmission(new Color(0,0,255));
+        upRight.setEmission(new Color(0,255,255));
+        middle.setEmission(new Color(255,255,0));
 
         //camera and scene
         Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));

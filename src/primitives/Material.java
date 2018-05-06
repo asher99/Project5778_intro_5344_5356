@@ -4,14 +4,20 @@ package primitives;
  * Class Material to represent the Material of a geometry.
  */
 public class Material {
+
+    // the diffuse factor.
     protected double Kd;
+
+    // the specular factor.
     protected double Ks;
+
+    // shininess factor.
     int nShininess;
 
     // ***************** Constructors ********************** //
 
     /**
-     * constructor.
+     * default constructor.
      */
     public Material() {
         Kd = 1;

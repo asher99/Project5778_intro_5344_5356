@@ -27,14 +27,15 @@ public abstract class RadialGeometry extends Geometry {
      *
      * @param myRadius
      * @param e
+     * @param m
      */
-    public RadialGeometry(double myRadius, Color e) {
-        super(e);
+    public RadialGeometry(double myRadius, Color e, Material m) {
+        super(e,m);
         _radius = myRadius;
     }
 
     /**
-     * constructor with no color uses the defualt color.
+     * constructor with no color uses the default color.
      *
      * @param myRadius
      */
@@ -47,10 +48,9 @@ public abstract class RadialGeometry extends Geometry {
      * "copy" constructor
      *
      * @param g
-     * @param e
      */
-    public RadialGeometry(final RadialGeometry g, Color e) {
-        super(e);
+    public RadialGeometry(final RadialGeometry g) {
+        super(g.getEmission(),g.getMaterial());
         _radius = g._radius;
     }
 

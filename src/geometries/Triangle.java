@@ -25,9 +25,10 @@ public class Triangle extends Plane {
      * @param myB
      * @param myC
      * @param e
+     * @param m
      */
-    public Triangle(Point3D myA, Point3D myB, Point3D myC, Color e) {
-        super(myA, myB, myC, e);
+    public Triangle(Point3D myA, Point3D myB, Point3D myC, Color e, Material m) {
+        super(myA, myB, myC, e, m);
         a = myA;
         b = myB;
         c = myC;

@@ -17,7 +17,12 @@ public abstract class Geometry {
     /**
      * represent Geometry color
      */
-    public Color emission;
+    protected Color emission;
+
+    /**
+     * the Geometry material.
+     */
+    protected Material material;
 
     // ***************** Constructors ********************** //
 
@@ -33,26 +38,54 @@ public abstract class Geometry {
      *
      * @param e
      */
-    public Geometry(Color e) {
+    public Geometry(Color e, Material m) {
         emission = new Color(e);
+        material = m;
     }
 
     /**
-     * default constructor
+     * copy constructor
      *
      * @param g
      */
     public Geometry(final Geometry g) {
-        emission = new Color(g.emission);
+        emission = new Color(g.getEmission());
+        material = g.getMaterial();
     }
 
     // ***************** Operations ******************** //
 
     /**
-     * get
+     * getter
+     * @return
      */
     public Color getEmission() {
         return emission;
+    }
+
+    /**
+     * getter
+     * @return
+     */
+    public Material getMaterial() {
+        return material;
+    }
+
+    /**
+     * setter
+     *
+     * @param emission
+     */
+    public void setEmission(Color emission) {
+        this.emission = emission;
+    }
+
+    /**
+     * setter
+     * @param material
+     */
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     /**
@@ -67,12 +100,5 @@ public abstract class Geometry {
      */
     public abstract Map<Geometry, List<Point3D>> findIntersections(Ray myRay);
 
-    /**
-     * setter
-     *
-     * @param emission
-     */
-    public void setEmission(Color emission) {
-        this.emission = emission;
-    }
+
 }

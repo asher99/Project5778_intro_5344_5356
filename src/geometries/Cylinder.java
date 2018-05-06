@@ -1,9 +1,7 @@
 package geometries;
 
+import primitives.*;
 import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
 
 import java.awt.*;
 import java.util.List;
@@ -27,9 +25,10 @@ public class Cylinder extends RadialGeometry {
      * @param myRadius
      * @param myRay
      * @param e
+     * @param m
      */
-    public Cylinder(double myRadius, Ray myRay, Color e) {
-        super(myRadius, e);
+    public Cylinder(double myRadius, Ray myRay, Color e, Material m) {
+        super(myRadius, e, m);
         _radius = myRadius;
         orientation = myRay;
     }

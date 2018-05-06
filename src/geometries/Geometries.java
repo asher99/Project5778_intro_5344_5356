@@ -39,7 +39,6 @@ public class Geometries extends Geometry {
 
     /**
      * add geometry 'g' to the list.
-     *
      * @param g
      */
     public void addGeometry(Geometry g) {
@@ -48,7 +47,6 @@ public class Geometries extends Geometry {
 
     /**
      * getter
-     *
      * @return
      */
     public List<Geometry> getGeometries() {
