@@ -3,7 +3,7 @@ package elements;
 import primitives.*;
 
 /**
- *
+ * a light that has a point
  */
 public class PointLight {
     /**
