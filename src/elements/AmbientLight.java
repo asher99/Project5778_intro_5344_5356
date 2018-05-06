@@ -6,9 +6,9 @@ import primitives.Color;
  * class AmbientLigt.
  * determine the ambient light of a scene.
  */
-public class AmbientLight {
+public class AmbientLight extends Light{
 
-    protected Color color;
+    //protected Color color;
     protected double Ka;
 
     /*************constructors**********************/
@@ -17,7 +17,7 @@ public class AmbientLight {
      * default constructor.
      */
     public AmbientLight() {
-        color = new Color(255, 255, 255);
+        super.color = new Color(255, 255, 255);
         Ka = 1.0;
     }
 
@@ -29,7 +29,7 @@ public class AmbientLight {
      */
     public AmbientLight(Color myColor, double myKa) {
 
-        color = myColor;
+        super.color = myColor;
         if (myKa > 1.0 || myKa < 0.0)
             throw new ExceptionInInitializerError("scaling is between: (0.0,1.0)");
 
@@ -43,7 +43,7 @@ public class AmbientLight {
      * @return Color
      */
     public Color getIntensity() {
-        Color temp = new Color(color);
+        Color temp = new Color(super.color);
         temp.scale(Ka);
         return temp;
     }
@@ -55,7 +55,7 @@ public class AmbientLight {
      * @param color
      */
     public void setColor(Color color) {
-        this.color = color;
+        super.color = color;
     }
 
     /**
@@ -73,7 +73,7 @@ public class AmbientLight {
      * @return the object's color
      */
     public Color getColor() {
-        return color;
+        return super.color;
     }
 
     /**

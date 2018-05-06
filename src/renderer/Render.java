@@ -64,7 +64,7 @@ public class Render {
     }
 
     /**
-     * for now, just return the only "ambient light" in the scene and color of the geometry.
+     * for now, just return the only "ambient light" and "emission light" in the scene and color of the geometry.
      *
      * @param p
      * @return

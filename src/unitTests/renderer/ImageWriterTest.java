@@ -44,20 +44,20 @@ public class ImageWriterTest {
     public void writeToimage2() {
 
         Scene ballScene = new Scene("ball example scene");
-        Sphere ball = new Sphere(new Point3D(60,0,0),40);
+        Sphere ball = new Sphere(new Point3D(60,0,0),59);
         ball.emission = new Color(255,0,0);
         ballScene.addGeometry(ball);
         ballScene.setCameraScreenDistance(50);
         ballScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
 
-        ImageWriter ballWriter = new ImageWriter("ball example image",500,500,500,500);
+        ImageWriter ballWriter = new ImageWriter("ball example image",1000,1000,1000,1000);
 
         Render ballImageRenderer = new Render();
         ballImageRenderer.setImageWriter(ballWriter);
         ballImageRenderer.setScene(ballScene);
 
         ballImageRenderer.renderImage();
-        ballImageRenderer.printGrid(50);
+       // ballImageRenderer.printGrid(100);
         ballImageRenderer.getImageWriter().writeToimage();
     }
 
@@ -155,32 +155,44 @@ public class ImageWriterTest {
 
     }
 
+
     @Test
     public void writeToImage5(){
 
-        // defining Geometries.
-        Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49),new Color(200,126,70));
-        Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49),new Color(50,200,170));
-        Triangle downLeft   = new Triangle(new Point3D(100,0,-49),new Point3D(0,-100,-49),new Point3D(100,-100,-49),new Color(0,255,0));
-        Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49),new Color(255,0,0));
+        // define Geometries.
+        Triangle upLeft     = new Triangle(new Point3D(100,0,-49),new Point3D(0,100,-49),new Point3D(100,100,-49));
+        Triangle upRight    = new Triangle(new Point3D(-100,0,-49),new Point3D(0,100,-49),new Point3D(-100,100,-49));
+        Triangle downLeft   = new Triangle(new Point3D(100,0,-49),new Point3D(0,-100,-49),new Point3D(100,-100,-49));
+        Triangle downRight  = new Triangle(new Point3D(-100,0,-49),new Point3D(0,-100,-49),new Point3D(-100,-100,-49));
+        Sphere middle = new Sphere(new Point3D(0,0,-50),35);
 
-        Sphere middle = new Sphere(new Point3D(0,0,-50),35,new Color(100,100,100));
 
+        //give some colors to those shapes.
+        upLeft.emission = new Color(0,255,0);
+        downLeft.emission = new Color(255,0,0);
+        downRight.emission= new Color(0,0,255);
+        upRight.emission = new Color(0,255,255);
+        middle.emission = new Color(255,255,0);
+
+        //camera and scene
         Camera camera = new Camera(new Point3D(0,0,0),new Vector(0,-1,0),new Vector(0,0,-1));
-
-        Scene myScene = new Scene("colored geometrys");
+        Scene myScene = new Scene("ambient test");
         myScene.setCameraScreenDistance(50);
         myScene.setSceneCamera(camera);
-        myScene.setSceneBackgroundColor(new java.awt.Color(75,127,190));
-
+        myScene.setSceneBackgroundColor(new java.awt.Color(220,220,220));
         myScene.addGeometries(upLeft,upRight,downLeft,downRight,middle);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(255,255,255),0.4));
 
-        ImageWriter sceneWriter = new ImageWriter("colored geometrys",500,500,500,500);
+        // image writer and Renderer.
+        ImageWriter sceneWriter = new ImageWriter("ambient test",500,500,500,500);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
 
+//        testRenderSpecificIndex(175,325,myRender);
+//        testRenderSpecificIndex(325,325,myRender);
         myRender.renderImage();
+
         myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
 

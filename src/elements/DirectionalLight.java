@@ -3,19 +3,13 @@ package elements;
 import primitives.*;
 
 /**
- * a light that has a point
+ * class DirectionalLight for a LightSource in the infinity and beyond.
+ * had only direction.
  */
-public class PointLight extends Light implements LightSource {
-    /**
-     *
-     */
-   public Point3D position;
+public class DirectionalLight extends Light implements LightSource{
 
-   double Kc;
+    Vector direction;
 
-   double Ki;
-
-   double Kq;
 
     /**
      * @return Color of a point
@@ -36,5 +30,4 @@ public class PointLight extends Light implements LightSource {
      */
     @Override
     public Vector getD(Point3D p){return null;};
-
 }
