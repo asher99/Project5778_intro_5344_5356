@@ -12,10 +12,11 @@ public class Ray {
 
     /**
      * build by vector and point.
+     *
      * @param myPoint
      * @param myVector
      */
-    public Ray(Point3D myPoint, Vector myVector){
+    public Ray(Point3D myPoint, Vector myVector) {
 
         point = myPoint;
         direction = myVector.normal();
@@ -25,6 +26,7 @@ public class Ray {
 
     /**
      * getter
+     *
      * @return
      */
     public Vector getDirection() {
@@ -33,6 +35,7 @@ public class Ray {
 
     /**
      * getter.
+     *
      * @return
      */
     public Point3D getPoint() {
@@ -43,6 +46,7 @@ public class Ray {
 
     /**
      * toString
+     *
      * @return
      */
     @Override
@@ -53,12 +57,13 @@ public class Ray {
 
     /**
      * check if another object is equal to this one.
+     *
      * @param obj
      * @return
      */
     @Override
     public boolean equals(Object obj) {
-        Ray otherRay = (Ray)obj;
+        Ray otherRay = (Ray) obj;
         return (this.point.equals(otherRay.point) && this.direction.equals(otherRay.direction));
     }
 }

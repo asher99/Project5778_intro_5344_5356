@@ -42,11 +42,12 @@ public class Vector {
 
     /**
      * constract a Vector object by Two 3D points.
+     *
      * @param startPoint
      * @param finishPoint
      */
-    public Vector(Point3D startPoint, Point3D finishPoint){
-        vector = Point3D.subtract(finishPoint,startPoint);
+    public Vector(Point3D startPoint, Point3D finishPoint) {
+        vector = Point3D.subtract(finishPoint, startPoint);
     }
 
     // ***************** Operations ******************** //
@@ -110,7 +111,7 @@ public class Vector {
      */
     public static Vector crossProduct(Vector a, Vector b) {
 
-        if(a == null || b == null)
+        if (a == null || b == null)
             throw new NullPointerException("one of the vectors is null");
 
         return new Vector(a.vector.getY() * b.vector.getZ() - a.vector.getZ() * b.vector.getY(),
@@ -130,12 +131,13 @@ public class Vector {
 
     /**
      * calculate the "distance" between vectors as the distance between the vectors 3D points members.
+     *
      * @param v1
      * @param v2
      * @return
      */
-    public static double distance(Vector v1, Vector v2){
-        return Point3D.distance(v1.vector,v2.vector);
+    public static double distance(Vector v1, Vector v2) {
+        return Point3D.distance(v1.vector, v2.vector);
     }
 
     /**
@@ -165,6 +167,7 @@ public class Vector {
 
     /**
      * toString
+     *
      * @return
      */
     @Override
@@ -174,8 +177,10 @@ public class Vector {
     }
 
     // ***************** Getters ********************** //
+
     /**
      * getter
+     *
      * @return
      */
     public Point3D getVector() {

@@ -38,12 +38,14 @@ public class Point2D {
     /**
      * default Constructor
      */
-    public Point2D(){}
+    public Point2D() {
+    }
 
     // ***************** Getters ********************** //
 
     /**
      * getter.
+     *
      * @return
      */
     public double getX() {
@@ -52,6 +54,7 @@ public class Point2D {
 
     /**
      * getter.
+     *
      * @return
      */
     public double getY() {
@@ -60,6 +63,7 @@ public class Point2D {
 
     /**
      * toString
+     *
      * @return
      */
     @Override
@@ -69,6 +73,7 @@ public class Point2D {
 
     /**
      * check if another ibject is equal to this one.
+     *
      * @param other
      * @return
      */

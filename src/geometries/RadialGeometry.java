@@ -14,39 +14,42 @@ public abstract class RadialGeometry extends Geometry {
     protected double _radius;
 
     // ***************** Constructors ********************** //
+
     /**
-     *     default Constructor
+     * default Constructor
      */
-    public RadialGeometry(){
+    public RadialGeometry() {
         _radius = 0.0000;
     }
 
     /**
      * constructor
+     *
      * @param myRadius
      * @param e
      */
-    public RadialGeometry(double myRadius, Color e){
+    public RadialGeometry(double myRadius, Color e) {
         super(e);
         _radius = myRadius;
     }
 
     /**
      * constructor with no color uses the defualt color.
+     *
      * @param myRadius
      */
-    public RadialGeometry(double myRadius){
+    public RadialGeometry(double myRadius) {
         super();
         _radius = myRadius;
     }
 
     /**
-     *
      * "copy" constructor
+     *
      * @param g
      * @param e
      */
-    public RadialGeometry(final RadialGeometry g,Color e){
+    public RadialGeometry(final RadialGeometry g, Color e) {
         super(e);
         _radius = g._radius;
     }
@@ -55,6 +58,7 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * getter
+     *
      * @return
      */
     public double get_radius() {
@@ -64,9 +68,10 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * getter
+     *
      * @return
      */
-    public Color getEmission(){
+    public Color getEmission() {
         return super.getEmission();
     }
 
@@ -74,6 +79,7 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * override the "getNormal" with corresponding abstract method.
+     *
      * @param somePoint
      * @return
      */
@@ -82,6 +88,7 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * receive a Ray and return all the points that Ray intersevt with the Geometry.
+     *
      * @param myRay
      * @return
      */

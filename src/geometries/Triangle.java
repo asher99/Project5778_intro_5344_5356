@@ -20,6 +20,7 @@ public class Triangle extends Plane {
 
     /**
      * constructor with three points and color
+     *
      * @param myA
      * @param myB
      * @param myC
@@ -35,6 +36,7 @@ public class Triangle extends Plane {
 
     /**
      * constructor with no color gives the default color
+     *
      * @param myA
      * @param myB
      * @param myC
@@ -50,6 +52,7 @@ public class Triangle extends Plane {
 
     /**
      * getter
+     *
      * @return
      */
     public Point3D getA() {
@@ -58,6 +61,7 @@ public class Triangle extends Plane {
 
     /**
      * getter
+     *
      * @return
      */
     public Point3D getB() {
@@ -66,6 +70,7 @@ public class Triangle extends Plane {
 
     /**
      * getter
+     *
      * @return
      */
     public Point3D getC() {
@@ -74,9 +79,10 @@ public class Triangle extends Plane {
 
     /**
      * getter
+     *
      * @return
      */
-    public Color getEmission(){
+    public Color getEmission() {
         return super.getEmission();
     }
 
@@ -84,6 +90,7 @@ public class Triangle extends Plane {
 
     /**
      * return the parent Plane normal
+     *
      * @param somePoint
      * @return
      */
@@ -95,6 +102,7 @@ public class Triangle extends Plane {
 
     /**
      * check if a Triangle object is equal to this one.
+     *
      * @param obj
      * @return
      */
@@ -115,6 +123,7 @@ public class Triangle extends Plane {
 
     /**
      * toString
+     *
      * @return
      */
     @Override

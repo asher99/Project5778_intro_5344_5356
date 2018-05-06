@@ -14,7 +14,9 @@ import java.util.Map;
 public abstract class Geometry {
 
 
-    //represent Geometry color
+    /**
+     * represent Geometry color
+     */
     public Color emission;
 
     // ***************** Constructors ********************** //
@@ -28,14 +30,16 @@ public abstract class Geometry {
 
     /**
      * constructor
+     *
      * @param e
      */
-    public Geometry(Color e ) {
+    public Geometry(Color e) {
         emission = new Color(e);
     }
 
     /**
      * default constructor
+     *
      * @param g
      */
     public Geometry(final Geometry g) {
@@ -43,6 +47,7 @@ public abstract class Geometry {
     }
 
     // ***************** Operations ******************** //
+
     /**
      * get
      */
@@ -64,6 +69,7 @@ public abstract class Geometry {
 
     /**
      * setter
+     *
      * @param emission
      */
     public void setEmission(Color emission) {

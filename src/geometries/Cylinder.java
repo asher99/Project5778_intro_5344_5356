@@ -23,18 +23,20 @@ public class Cylinder extends RadialGeometry {
 
     /**
      * constructor
+     *
      * @param myRadius
      * @param myRay
      * @param e
      */
     public Cylinder(double myRadius, Ray myRay, Color e) {
-        super(myRadius,e);
+        super(myRadius, e);
         _radius = myRadius;
         orientation = myRay;
     }
 
     /**
      * constructor with no color uses the default color.
+     *
      * @param myRadius
      * @param myRay
      */
@@ -48,6 +50,7 @@ public class Cylinder extends RadialGeometry {
 
     /**
      * getter
+     *
      * @return
      */
     public Ray getOrientaion() {
@@ -56,14 +59,16 @@ public class Cylinder extends RadialGeometry {
 
     /**
      * getter
+     *
      * @return
      */
-    public Color getEmission(){
+    public Color getEmission() {
         return super.getEmission();
     }
 
     /**
      * getter
+     *
      * @return
      */
     @Override
@@ -76,6 +81,7 @@ public class Cylinder extends RadialGeometry {
     /**
      * calculate the vector from somePoint to the point that defines the Cylinder orientation.
      * full explanation in the code.
+     *
      * @param somePoint
      * @return
      */
@@ -109,6 +115,7 @@ public class Cylinder extends RadialGeometry {
     /**
      * return map of the Ray intersection points with the Cylinder.
      * no implementation, for now.
+     *
      * @param myRay
      * @return
      */

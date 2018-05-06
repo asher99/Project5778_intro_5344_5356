@@ -32,21 +32,21 @@ public class SphereTest {
         Test: Sphere at (0,1,0) radius is one.
         testing the radius at (0,1,-2) and (2/sqrt(12),1+ 2/sqrt(12),2/sqrt(12)), and at (10,10,10).
          */
-        Sphere mySphere = new Sphere(new Point3D(0,1,0),2);
+        Sphere mySphere = new Sphere(new Point3D(0, 1, 0), 2);
 
         double sqrt12 = Math.sqrt(12);
         double sqrt3 = Math.sqrt(3);
 
-        Vector test1 = mySphere.getNormal(new Point3D(0,1,-2));
-        Vector test2 = mySphere.getNormal(new Point3D(2/sqrt3,1 + 2/sqrt3,2/sqrt3));
-        Vector test3 = mySphere.getNormal(new Point3D(10,10,10));
+        Vector test1 = mySphere.getNormal(new Point3D(0, 1, -2));
+        Vector test2 = mySphere.getNormal(new Point3D(2 / sqrt3, 1 + 2 / sqrt3, 2 / sqrt3));
+        Vector test3 = mySphere.getNormal(new Point3D(10, 10, 10));
 
         System.out.println(test1);
         System.out.println(test2);
 
-        assertTrue(test1.equals(new Vector(0,0,-1)));
+        assertTrue(test1.equals(new Vector(0, 0, -1)));
 
-        assertTrue(test2.equals(new Vector(sqrt3,sqrt3,sqrt3)));
+        assertTrue(test2.equals(new Vector(sqrt3, sqrt3, sqrt3)));
 
         assertNull(test3);
     }
@@ -68,7 +68,7 @@ public class SphereTest {
          */
             Camera myCamera1 = new Camera(new Point3D(0, 0, 0), new Vector(1, 0, 0), new Vector(0, 0, -1));
             Sphere mySphere1 = new Sphere(new Point3D(0, 0, -3), 1);
-            Map<Geometry,List<Point3D>> outputList1 = mySphere1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 1, 3, 3));
+            Map<Geometry, List<Point3D>> outputList1 = mySphere1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 1, 3, 3));
             ArrayList<Point3D> expectedOutput1 = new ArrayList<Point3D>();
             expectedOutput1.add(new Point3D(0, 0, -2));
             expectedOutput1.add(new Point3D(0, 0, -4));
@@ -86,7 +86,7 @@ public class SphereTest {
          */
             Camera myCamera2 = new Camera(new Point3D(0, 0, 6), new Vector(1, 0, 1), new Vector(1, 0, -1));
             Sphere mySphere2 = new Sphere(new Point3D(4, 0, 0), Math.sqrt(2));
-            Map<Geometry,List<Point3D>> outputList2 = mySphere2.findIntersections(myCamera2.ConstractRaythroughPixel(15, 15, 8, 8, 1, 5, 5));
+            Map<Geometry, List<Point3D>> outputList2 = mySphere2.findIntersections(myCamera2.ConstractRaythroughPixel(15, 15, 8, 8, 1, 5, 5));
             ArrayList<Point3D> expectedOutput2 = new ArrayList<Point3D>();
             expectedOutput2.add(new Point3D(4.999999999999999, 0, 0.9999999999999982));
 
@@ -102,12 +102,13 @@ public class SphereTest {
         */
             Camera myCamera3 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(0, 1, 0));
             Sphere mySphere3 = new Sphere(new Point3D(0, 10, 0), 3);
-            Map<Geometry,List<Point3D>> outputList3 = mySphere3.findIntersections(myCamera3.ConstractRaythroughPixel(40, 40, 1, 1, 2, 2, 2));
+            Map<Geometry, List<Point3D>> outputList3 = mySphere3.findIntersections(myCamera3.ConstractRaythroughPixel(40, 40, 1, 1, 2, 2, 2));
 
 
             assertNull(outputList3);
 
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
     }
 
 }

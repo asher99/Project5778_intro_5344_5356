@@ -26,23 +26,22 @@ public class Scene {
     // ***************** Constructors ********************** //
 
     /**
-     *
      * @param str scene name determined by the user.
-     *
-     *  set scene name upon user argument, set all other fields with default value.
+     *            <p>
+     *            set scene name upon user argument, set all other fields with default value.
      */
-    public Scene(String str)
-    {
+    public Scene(String str) {
         sceneName = str;
         sceneBackgroundColor = Color.BLACK;
         shapesInScene = new Geometries();
-        sceneCamera = new Camera( new Point3D(0,0,0), new Vector(0,0,1), new Vector(1,0,0));
+        sceneCamera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
         cameraScreenDistance = 4;
         sceneAmbientLight = new AmbientLight();
     }
 
     /**
      * set scene name upon user argument , sets all fields by demand
+     *
      * @param str
      * @param color
      * @param g
@@ -50,19 +49,19 @@ public class Scene {
      * @param distance
      * @param light
      */
-    public Scene(String str,Color color,Geometries g, Camera camera, double distance, AmbientLight light)
-    {
+    public Scene(String str, Color color, Geometries g, Camera camera, double distance, AmbientLight light) {
         sceneName = str;
         sceneBackgroundColor = color;
         shapesInScene = g;
-        sceneCamera =camera;
+        sceneCamera = camera;
         cameraScreenDistance = distance;
-        sceneAmbientLight =light;
+        sceneAmbientLight = light;
     }
     // ***************** Getters/Setters ********************** //
 
     /**
      * getter
+     *
      * @return
      */
     public Color getSceneBackgroundColor() {
@@ -72,6 +71,7 @@ public class Scene {
 
     /**
      * setter
+     *
      * @param sceneBackgroundColor
      */
     public void setSceneBackgroundColor(Color sceneBackgroundColor) {
@@ -80,6 +80,7 @@ public class Scene {
 
     /**
      * getter
+     *
      * @return
      */
     public Camera getSceneCamera() {
@@ -88,6 +89,7 @@ public class Scene {
 
     /**
      * setter
+     *
      * @param sceneCamera
      */
     public void setSceneCamera(Camera sceneCamera) {
@@ -96,6 +98,7 @@ public class Scene {
 
     /**
      * getter
+     *
      * @return
      */
     public double getCameraScreenDistance() {
@@ -104,6 +107,7 @@ public class Scene {
 
     /**
      * setter
+     *
      * @param cameraScreenDistance
      */
     public void setCameraScreenDistance(double cameraScreenDistance) {
@@ -112,6 +116,7 @@ public class Scene {
 
     /**
      * setter
+     *
      * @param sceneAmbientLight
      */
     public void setSceneAmbientLight(AmbientLight sceneAmbientLight) {
@@ -120,6 +125,7 @@ public class Scene {
 
     /**
      * getter
+     *
      * @return
      */
     public AmbientLight getSceneAmbientLight() {
@@ -128,6 +134,7 @@ public class Scene {
 
     /**
      * getter
+     *
      * @return
      */
     public Geometries getShapesInScene() {
@@ -138,23 +145,23 @@ public class Scene {
 
     /**
      * add a Geomtry to this Scene.
+     *
      * @param myGeometry - a Geometry object to insert the list of shapes in scene.
      */
-    public void addGeometry( Geometry myGeometry){
+    public void addGeometry(Geometry myGeometry) {
         shapesInScene.addGeometry(myGeometry);
     }
 
     /**
      * add multiple Geometries.
+     *
      * @param myGeometries
      */
-    public void addGeometries(Geometry... myGeometries){
-        for (Geometry g: myGeometries) {
+    public void addGeometries(Geometry... myGeometries) {
+        for (Geometry g : myGeometries) {
             addGeometry(g);
         }
     }
-
-
 
 
 }

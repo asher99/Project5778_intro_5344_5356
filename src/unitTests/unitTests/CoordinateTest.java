@@ -33,7 +33,7 @@ public class CoordinateTest {
         Coordinate a = new Coordinate(8.999999999);
         Coordinate b = new Coordinate(9.0);
         Coordinate c = new Coordinate(0.0);
-       Coordinate d = Coordinate.subtract(a,b);
+        Coordinate d = Coordinate.subtract(a, b);
         assertTrue(d.equals(c));
     }
 
@@ -41,8 +41,8 @@ public class CoordinateTest {
     public void add() {
         Coordinate a = new Coordinate(8.9999999999999999);
         Coordinate b = new Coordinate(0.0000000000000001);
-        Coordinate c = Coordinate.add(a,b);
+        Coordinate c = Coordinate.add(a, b);
         System.out.println(c.getCoord());
-        assertTrue(c.getCoord()== 9.0);
+        assertTrue(c.getCoord() == 9.0);
     }
 }

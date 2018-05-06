@@ -19,35 +19,36 @@ public class Geometries extends Geometry {
 
     /**
      * find the intersections of the ray with all Geometries.
+     *
      * @param ray
      * @return Map of all intersection points by the Geometries.
      */
-    public Map<Geometry, List<Point3D>> findIntersections(Ray ray){
+    public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
         Map<Geometry, List<Point3D>> geometriesListMap = new HashMap<>();
 
-        for (Geometry g :geometries ) {
+        for (Geometry g : geometries) {
 
             Map<Geometry, List<Point3D>> temp = g.findIntersections(ray);
-            if(temp != null) {
+            if (temp != null) {
                 geometriesListMap.putAll(temp);
-                }
             }
-            return geometriesListMap;
         }
-
-
+        return geometriesListMap;
+    }
 
 
     /**
      * add geometry 'g' to the list.
+     *
      * @param g
      */
-    public void addGeometry(Geometry g){
+    public void addGeometry(Geometry g) {
         geometries.add(g);
     }
 
     /**
      * getter
+     *
      * @return
      */
     public List<Geometry> getGeometries() {

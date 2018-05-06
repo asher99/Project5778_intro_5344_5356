@@ -67,6 +67,7 @@ public class Color {
 
     /**
      * getter
+     *
      * @return
      */
     public java.awt.Color getColor() {
@@ -146,6 +147,7 @@ public class Color {
 
     /**
      * check if another object is equal to this one.
+     *
      * @param other
      * @return
      */
@@ -158,6 +160,7 @@ public class Color {
 
     /**
      * toString
+     *
      * @return String
      */
     @Override

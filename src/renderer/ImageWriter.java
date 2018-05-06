@@ -29,26 +29,41 @@ public class ImageWriter {
         _image = new BufferedImage(_imageWidth, _imageHeight, BufferedImage.TYPE_INT_RGB);
     }
 
-    public ImageWriter (ImageWriter imageWriter) {
-        this(	imageWriter._imageName,
+    public ImageWriter(ImageWriter imageWriter) {
+        this(imageWriter._imageName,
                 imageWriter._imageWidth, imageWriter._imageHeight,
                 imageWriter._Nx, imageWriter._Ny);
     }
 
     // ***************** Getters/Setters ********************** //
 
-    public int getWidth()  { return _imageWidth;  }
-    public int getHeight() { return _imageHeight; }
+    public int getWidth() {
+        return _imageWidth;
+    }
 
-    public int getNy() { return _Ny; }
-    public int getNx() { return _Nx; }
+    public int getHeight() {
+        return _imageHeight;
+    }
 
-    public void setNy(int _Ny) { this._Ny = _Ny; }
-    public void setNx(int _Nx) { this._Nx = _Nx; }
+    public int getNy() {
+        return _Ny;
+    }
+
+    public int getNx() {
+        return _Nx;
+    }
+
+    public void setNy(int _Ny) {
+        this._Ny = _Ny;
+    }
+
+    public void setNx(int _Nx) {
+        this._Nx = _Nx;
+    }
 
     // ***************** Operations ******************** //
 
-    public void writeToimage(){
+    public void writeToimage() {
         File ouFile = new File(PROJECT_PATH + "/" + _imageName + ".jpg");
 
         try {
@@ -58,17 +73,17 @@ public class ImageWriter {
         }
     }
 
-    public void writePixel(int xIndex, int yIndex, int r, int g, int b){
+    public void writePixel(int xIndex, int yIndex, int r, int g, int b) {
         int rgb = new Color(r, g, b).getRGB();
         _image.setRGB(xIndex, yIndex, rgb);
     }
 
-    public void writePixel(int xIndex, int yIndex, int[] rgbArray){
+    public void writePixel(int xIndex, int yIndex, int[] rgbArray) {
         int rgb = new Color(rgbArray[0], rgbArray[1], rgbArray[2]).getRGB();
         _image.setRGB(xIndex, yIndex, rgb);
     }
 
-    public void writePixel(int xIndex, int yIndex, Color color){
+    public void writePixel(int xIndex, int yIndex, Color color) {
         _image.setRGB(xIndex, yIndex, color.getRGB());
     }
 

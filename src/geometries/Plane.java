@@ -30,9 +30,11 @@ public class Plane extends Geometry {
     double dValue;
 
     // ***************** Constructors ********************** //
+
     /**
      * constructor.
      * set values also for A,B,C and call the method for finding D.
+     *
      * @param myOrthonormal
      * @param myPoint
      * @param emission
@@ -46,17 +48,17 @@ public class Plane extends Geometry {
         bValue = orthonormal.getVector().getY();
         cValue = orthonormal.getVector().getZ();
         findD();
-
     }
 
     /**
      * constructor with default emission.
      * set values also for A,B,C and call the method for finding D.
+     *
      * @param myPoint
      * @param myOrthonormal
      */
     public Plane(Point3D myPoint, Vector myOrthonormal) {
-        super(new Color(255,255,255));
+        super(new Color(255, 255, 255));
         point = myPoint;
         orthonormal = myOrthonormal.normal();
 
@@ -64,12 +66,12 @@ public class Plane extends Geometry {
         bValue = orthonormal.getVector().getY();
         cValue = orthonormal.getVector().getZ();
         findD();
-
     }
 
     /**
      * constructor. receive three points, set one point as the class member "point"
      * and use the three points to calculate the "orthonormal" member.
+     *
      * @param myPoint1
      * @param myPoint2
      * @param myPoint3
@@ -88,10 +90,10 @@ public class Plane extends Geometry {
     /**
      * constructor. receive three points, set one point as the class member "point"
      * and use the three points to calculate the "orthonormal" member.
+     *
      * @param myPoint1
      * @param myPoint2
      * @param myPoint3
-     *
      */
     public Plane(Point3D myPoint1, Point3D myPoint2, Point3D myPoint3) {
         super();
@@ -106,6 +108,7 @@ public class Plane extends Geometry {
 
     /**
      * getter
+     *
      * @return
      */
     public Vector getOrthonormal() {
@@ -115,6 +118,7 @@ public class Plane extends Geometry {
 
     /**
      * getter
+     *
      * @return
      */
     public Point3D getPoint() {
@@ -123,17 +127,18 @@ public class Plane extends Geometry {
 
     /**
      * getter
+     *
      * @return
      */
-    public Color getEmission(){
+    public Color getEmission() {
         return super.getEmission();
     }
-
 
     // ***************** Operations ******************** //
 
     /**
      * the Normal is the "orthonormal" class member.
+     *
      * @param somePoint
      * @return
      */
@@ -146,6 +151,7 @@ public class Plane extends Geometry {
      * we check if the vectors are the same.
      * we check if the other plane point satisfy the equation.
      * if both conditions exist - it is the same plane.
+     *
      * @param obj
      * @return
      */
@@ -159,7 +165,7 @@ public class Plane extends Geometry {
     }
 
     /**
-     *     find the value of D from the equation: "D = -Ax -By -Cz"
+     * find the value of D from the equation: "D = -Ax -By -Cz"
      */
     private void findD() {
 
@@ -168,6 +174,7 @@ public class Plane extends Geometry {
 
     /**
      * check if point (x,y,z) satisfy the equation: "Ax + By + Cz + D = 0".
+     *
      * @param myPoint
      * @return
      */
@@ -176,7 +183,8 @@ public class Plane extends Geometry {
     }
 
     /**
-     *  check if two points in space are lineraly dipendent.
+     * check if two points in space are lineraly dipendent.
+     *
      * @param point1
      * @param point2
      * @return
@@ -204,16 +212,8 @@ public class Plane extends Geometry {
             List<Point3D> result = new ArrayList<Point3D>();
             result.add(intersectionPoint);
             Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
-            geometryListMap.put(this,result);
+            geometryListMap.put(this, result);
             return geometryListMap;
         } else return null;
     }
-
-
-    /*
-    @Override
-    public String toString() {
-        return null;
-    }
-    */
 }

@@ -35,7 +35,7 @@ public class PlaneTest {
     }
 
     @Test
-    public void findIntersections(){
+    public void findIntersections() {
 
         // we may encounter NullPointer exception.
         try {
@@ -51,9 +51,9 @@ public class PlaneTest {
             Camera myCamera1 = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
             Plane myPlane1 = new Plane(new Point3D(10, 0, 0), new Vector(1, 0, 0));
 
-            Map<Geometry,List<Point3D>> alistCenter = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 3, 6, 6));
-            Map<Geometry,List<Point3D>> alistUpper = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 1, 3, 6, 6));
-            Map<Geometry,List<Point3D>> alistLeftDown = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6));
+            Map<Geometry, List<Point3D>> alistCenter = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 2, 3, 6, 6));
+            Map<Geometry, List<Point3D>> alistUpper = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 2, 1, 3, 6, 6));
+            Map<Geometry, List<Point3D>> alistLeftDown = myPlane1.findIntersections(myCamera1.ConstractRaythroughPixel(3, 3, 1, 3, 3, 6, 6));
 
             Point3D expectedCenterPoint = new Point3D(10, 0, 0);
             Point3D expectedUpperPoint = new Point3D(10, 0, 6.666666666666667);
@@ -92,32 +92,32 @@ public class PlaneTest {
             Camera myCamera2 = new Camera(new Point3D(0, 0, 0), new Vector(0, 1, 0), new Vector(0, 0, -1));
             Plane myPlane2 = new Plane(new Point3D(00, 0, 0.05), new Vector(0, 0, 1));
 
-            Map<Geometry,List<Point3D>> output = myPlane2.findIntersections(myCamera2.ConstractRaythroughPixel(100, 100, 26, 1, 5, 120, 120));
+            Map<Geometry, List<Point3D>> output = myPlane2.findIntersections(myCamera2.ConstractRaythroughPixel(100, 100, 26, 1, 5, 120, 120));
 
             assertNull(output);
 
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
     }
 
     /**
      * calculator for findong intersections.
      */
     @Test
-    public void intersectionsCalculator()
-    {
+    public void intersectionsCalculator() {
         try {
             Camera myCamera = new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0));
             Plane myPlane = new Plane(new Point3D(10, -5, 1), new Point3D(10, 5, 1), new Point3D(10, 0, 11));
 
-            Map<Geometry,List<Point3D>> output = myPlane.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
+            Map<Geometry, List<Point3D>> output = myPlane.findIntersections(myCamera.ConstractRaythroughPixel(11, 3, 11, 1, 4, 6, 11));
 
           /*  for (Point3D p: output) {
                 System.out.println(p);
             }
 */
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
     }
-
 
 
 }

@@ -31,6 +31,7 @@ public class Coordinate {
 
     /**
      * constructor
+     *
      * @param newCoord
      */
     public Coordinate(double newCoord) {
@@ -41,6 +42,7 @@ public class Coordinate {
 
     /**
      * kind of copy constructor
+     *
      * @param newCoord
      */
     public Coordinate(Coordinate newCoord) {
@@ -51,6 +53,7 @@ public class Coordinate {
 
     /**
      * getter
+     *
      * @return
      */
     public double getCoord() {
@@ -59,6 +62,7 @@ public class Coordinate {
 
     /**
      * toString
+     *
      * @return
      */
     @Override

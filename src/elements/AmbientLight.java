@@ -8,45 +8,50 @@ import primitives.Color;
  */
 public class AmbientLight {
 
-   protected Color color;
-   protected double Ka;
+    protected Color color;
+    protected double Ka;
 
     /*************constructors**********************/
 
     /**
      * default constructor.
      */
-   public AmbientLight(){color = new Color(255,255,255); Ka = 1.0;}
+    public AmbientLight() {
+        color = new Color(255, 255, 255);
+        Ka = 1.0;
+    }
 
     /**
      * construct AmbientLight with user arguments
+     *
      * @param myColor
      * @param myKa
      */
-   public AmbientLight(Color myColor, double myKa){
+    public AmbientLight(Color myColor, double myKa) {
 
-       color = myColor;
-       if (myKa > 1.0 || myKa < 0.0)
-           throw new ExceptionInInitializerError("scaling is between: (0.0,1.0)");
+        color = myColor;
+        if (myKa > 1.0 || myKa < 0.0)
+            throw new ExceptionInInitializerError("scaling is between: (0.0,1.0)");
 
-       Ka = myKa;
-   }
+        Ka = myKa;
+    }
 
     /*************operations**********************/
     /**
      * return copy of the AmbientLight object scaled by the Ka factor.
+     *
      * @return Color
      */
-    public Color getIntensity()
-    {
+    public Color getIntensity() {
         Color temp = new Color(color);
-         temp.scale(Ka);
-         return temp;
+        temp.scale(Ka);
+        return temp;
     }
 
     /*************getters/setters**********************/
     /**
      * setter
+     *
      * @param color
      */
     public void setColor(Color color) {
@@ -55,6 +60,7 @@ public class AmbientLight {
 
     /**
      * setter
+     *
      * @param ka
      */
     public void setKa(double ka) {
@@ -63,6 +69,7 @@ public class AmbientLight {
 
     /**
      * getter
+     *
      * @return the object's color
      */
     public Color getColor() {
@@ -71,6 +78,7 @@ public class AmbientLight {
 
     /**
      * getter
+     *
      * @return the object's scaling factor
      */
     public double getKa() {

@@ -14,19 +14,20 @@ public class Material {
      * constructor.
      */
     public Material() {
-        Kd= 1;
+        Kd = 1;
         Ks = 1;
         nShininess = 1;
     }
 
     /**
      * constructor.
+     *
      * @param kd
      * @param ks
      * @param shineOnME
      */
-    public Material(double kd,double ks ,int shineOnME){
-        Kd= kd;
+    public Material(double kd, double ks, int shineOnME) {
+        Kd = kd;
         Ks = ks;
         nShininess = shineOnME;
     }
@@ -36,6 +37,7 @@ public class Material {
 
     /**
      * getter
+     *
      * @return
      */
     public double getKd() {
@@ -44,6 +46,7 @@ public class Material {
 
     /**
      * getter
+     *
      * @return
      */
     public double getKs() {
@@ -52,6 +55,7 @@ public class Material {
 
     /**
      * getter
+     *
      * @return
      */
     public int getnShininess() {
@@ -60,6 +64,7 @@ public class Material {
 
     /**
      * setter.
+     *
      * @param kd
      */
     public void setKd(double kd) {
@@ -68,6 +73,7 @@ public class Material {
 
     /**
      * setter
+     *
      * @param nShininess
      */
     public void setnShininess(int nShininess) {
@@ -76,6 +82,7 @@ public class Material {
 
     /**
      * setter.
+     *
      * @param ks
      */
     public void setKs(double ks) {

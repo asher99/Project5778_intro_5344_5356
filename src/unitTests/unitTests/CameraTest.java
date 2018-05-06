@@ -27,13 +27,13 @@ public class CameraTest {
         Point3D cameraPosition = new Point3D(0, 0, 0);
         Vector up = new Vector(0, 0, 1);
         Vector to = new Vector(1, 0, 0);
-        scene1.setSceneCamera( new Camera(cameraPosition, up, to));
+        scene1.setSceneCamera(new Camera(cameraPosition, up, to));
         Ray myRay = scene1.getSceneCamera().ConstractRaythroughPixel(3, 3, 3, 1, scene1.getCameraScreenDistance(), 6, 6);
 
         System.out.println(myRay);
         Point3D a = new Point3D(0, 0, 0);
         double sqrtOf3 = Math.sqrt(3);
-        Vector vec = new Vector(sqrtOf3/3, sqrtOf3/3, sqrtOf3/3);
+        Vector vec = new Vector(sqrtOf3 / 3, sqrtOf3 / 3, sqrtOf3 / 3);
         Ray myTestRay = new Ray(a, vec);
         System.out.println(myTestRay);
         assertTrue(myRay.equals(myTestRay));
@@ -45,14 +45,13 @@ public class CameraTest {
         Point3D cameraPosition2 = new Point3D(7, 1, -3);
         Vector up2 = new Vector(6, 0, 3);
         Vector to2 = new Vector(1, 2, -2);
-        scene2.setSceneCamera( new Camera(cameraPosition2, up2, to2) );
+        scene2.setSceneCamera(new Camera(cameraPosition2, up2, to2));
         Ray myRay2 = scene2.getSceneCamera().ConstractRaythroughPixel(40, 40, 8, 39, scene2.getCameraScreenDistance(), 12, 12);
 
         System.out.println(myRay2);
         Point3D b = new Point3D(7, 1, -3);
-        Vector vec2 = new Vector(-0.04259754999708888,0.3216671361046757,-0.9458941284755191);
+        Vector vec2 = new Vector(-0.04259754999708888, 0.3216671361046757, -0.9458941284755191);
         Ray myTestRay2 = new Ray(b, vec2);
-
 
 
         assertTrue(myRay2.equals(myTestRay2));
@@ -84,17 +83,17 @@ public class CameraTest {
 
         // test 2 for odd numbers.
         Scene scene2 = new Scene("second scene test");
-        scene2.setSceneCamera(new Camera(new Point3D(0,0,0),new Vector(0,0,1),new Vector(1,0,0)));
-        Point3D output = scene2.getSceneCamera().centerOfPixel(1,1,3,3,2,2,new Point3D(2,0,0));
-        Point3D expected = new Point3D(2,-2,2);
+        scene2.setSceneCamera(new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0)));
+        Point3D output = scene2.getSceneCamera().centerOfPixel(1, 1, 3, 3, 2, 2, new Point3D(2, 0, 0));
+        Point3D expected = new Point3D(2, -2, 2);
         assertTrue(output.equals(expected));
         System.out.println(output);
 
         //test 3 for even numbers.
         Scene scene3 = new Scene("third scene test");
-        scene3.setSceneCamera( new Camera(new Point3D(0,0,0),new Vector(0,0,1),new Vector(1,0,0)));
-        Point3D output2 = scene3.getSceneCamera().centerOfPixel(1,1,2,2,2,2,new Point3D(2,0,0));
-        Point3D expected2 = new Point3D(2,-1,1);
+        scene3.setSceneCamera(new Camera(new Point3D(0, 0, 0), new Vector(0, 0, 1), new Vector(1, 0, 0)));
+        Point3D output2 = scene3.getSceneCamera().centerOfPixel(1, 1, 2, 2, 2, 2, new Point3D(2, 0, 0));
+        Point3D expected2 = new Point3D(2, -1, 1);
         assertTrue(output2.equals(expected2));
         System.out.println(output2);
 
@@ -113,7 +112,6 @@ public class CameraTest {
 
         System.out.println(myRay);
     }
-
 
 
 }
