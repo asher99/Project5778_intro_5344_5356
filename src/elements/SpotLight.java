@@ -12,14 +12,29 @@ public class SpotLight extends PointLight {
     Vector direction;
 
     /**
+     * constructor
+     * @param place
+     * @param kc
+     * @param ki
+     * @param kq
+     * @param color
+     * @param direct
+     */
+    public SpotLight(Point3D place, double kc, double ki, double kq, Color color, Vector direct) {
+        super(place, kc, ki, kq, color);
+        direction = direct;
+    }
+
+    /**
      * return the direction of the light.
+     *
      * @param p
      * @return Vector
      */
     @Override
-    public Vector getD(Point3D p){
+    public Vector getD(Point3D p) {
         return direction;
-    };
+    }
 
     /**
      * @return Color of a point
@@ -27,20 +42,20 @@ public class SpotLight extends PointLight {
      * along with the distance from the object - dhe denominator component.
      */
     @Override
-    public Color getIntensity(Point3D p){
+    public Color getIntensity(Point3D p) {
 
         //distance
-        double distance = Point3D.distance(position,p);
-        double denominator = Kc + distance*Ki + distance*Math.pow(Kq,2);
+        double distance = Point3D.distance(position, p);
+        double denominator = Kc + distance * Ki + distance * Math.pow(Kq, 2);
 
         //position
-        Vector l = new Vector(position,p);
-        double numerator = Vector.dotProduct(direction,l.normal());
+        Vector l = new Vector(position, p);
+        double numerator = Vector.dotProduct(direction, l.normal());
 
         //scale
         Color result = new Color(color);
-        result.scale(numerator/denominator);
+        result.scale(numerator / denominator);
 
         return result;
-    };
+    }
 }
