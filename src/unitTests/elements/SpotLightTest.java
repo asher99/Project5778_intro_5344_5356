@@ -53,9 +53,9 @@ public class SpotLightTest {
     public void spotLight1() {
 
         Triangle first = new Triangle(
-                new Point3D(-100,-100,-60),
                 new Point3D(-100,100,-40),
                 new Point3D(100,100,-40),
+                new Point3D(-100,-100,-60),
                 new Color(20,20,20),new Material());
         Triangle second = new Triangle(
                 new Point3D(-100,-100,-60),
@@ -71,7 +71,7 @@ public class SpotLightTest {
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(first,second);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0.1));
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0), 0.1));
 
         SpotLight mySpotLight = new SpotLight(
                 new Point3D(10,10,-10),
