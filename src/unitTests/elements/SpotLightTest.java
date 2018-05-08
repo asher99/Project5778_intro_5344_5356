@@ -31,12 +31,12 @@ public class SpotLightTest {
         myScene.addGeometries(middle);
         myScene.setSceneAmbientLight(new AmbientLight(new Color(120, 120, 120), 0.1));
 
-     /*       SpotLight mySpotLight = new SpotLight(
+       /*   SpotLight mySpotLight = new SpotLight(
                 new Point3D(100,-100,-20),
                 5,5,10,
                 new Color (230,0,230),
                 new Vector(-100,100,30));*/
-    SpotLight mySpotLight = new SpotLight(
+      SpotLight mySpotLight = new SpotLight(
                 new Point3D(-1,1,-3),
                 5,5,12.5,
                 new Color (255,0,255),
