@@ -8,6 +8,7 @@ import renderer.ImageWriter;
 import renderer.Render;
 import scene.Scene;
 import primitives.Color;
+
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class SpotLightTest {
     @Test
     public void spotLight() {
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
-                49,new Color(0,0,60),new Material());
+                49, new Color(0, 0, 60), new Material());
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -36,14 +37,14 @@ public class SpotLightTest {
                 5,5,10,
                 new Color (230,0,230),
                 new Vector(-100,100,30));*/
-      SpotLight mySpotLight = new SpotLight(
-                new Point3D(-1,1,-3),
-                5,5,12.5,
-                new Color (255,0,255),
-                new Vector(2,-2,30));
+        SpotLight mySpotLight = new SpotLight(
+                new Point3D(-1, 1, -3),
+                5, 5, 12.5,
+                new Color(255, 0, 255),
+                new Vector(2, -2, 30));
         myScene.addLightSource(mySpotLight);
 
-        ImageWriter sceneWriter = new ImageWriter("sphere in the spot light",1000,1000,1000,1000);
+        ImageWriter sceneWriter = new ImageWriter("sphere in the spot light", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
@@ -58,15 +59,15 @@ public class SpotLightTest {
     public void spotLight1() {
 
         Triangle first = new Triangle(
-                new Point3D(-100,100,-35),
-                new Point3D(100,100,-35),
-                new Point3D(-100,-100,-65),
-                new Color(20,20,20),new Material());
+                new Point3D(-130, 130, -40),
+                new Point3D(130, 130, -40),
+                new Point3D(-130, -130, -70),
+                new Color(20, 20, 20), new Material());
         Triangle second = new Triangle(
-                new Point3D(-100,-100,-65),
-                new Point3D(100,-100,-65),
-                new Point3D(100,100,-35),
-                new Color(20,20,20),new Material());
+                new Point3D(-130, -130, -70),
+                new Point3D(130, -130, -70),
+                new Point3D(130, 130, -40),
+                new Color(20, 20, 20), new Material());
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
@@ -75,16 +76,16 @@ public class SpotLightTest {
         myScene.setCameraScreenDistance(185);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-        myScene.addGeometries(first,second);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0), 0.1));
+        myScene.addGeometries(first, second);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0.1));
 
         SpotLight mySpotLight = new SpotLight(
-                new Point3D(10,10,-10),
-                5,10,0,
-                new Color (200,0,0), new Vector(0,1,-30));
+                new Point3D(0, 0, -40),
+                10, 5, 0.0001,
+                new Color(200, 0, 0), new Vector(0, 0, -1));
         myScene.addLightSource(mySpotLight);
 
-        ImageWriter sceneWriter = new ImageWriter("triangles in the spot light",1000,1000,1000,1000);
+        ImageWriter sceneWriter = new ImageWriter("triangles in the spot light", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
