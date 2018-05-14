@@ -59,32 +59,59 @@ public class SpotLightTest {
     public void spotLight1() {
 
         Triangle first = new Triangle(
-                new Point3D(-130, 130, -40),
-                new Point3D(130, 130, -40),
-                new Point3D(-130, -130, -70),
-                new Color(20, 20, 20), new Material());
+                new Point3D(-130, 130, -40),//bottom left
+                new Point3D(130, 130, -40),//bottom right
+                new Point3D(130, -130, -50),//top right
+                new Color(40, 40, 40), new Material());
         Triangle second = new Triangle(
-                new Point3D(-130, -130, -70),
-                new Point3D(130, -130, -70),
-                new Point3D(130, 130, -40),
-                new Color(20, 20, 20), new Material());
+                new Point3D(-130, -130, -50),//top left
+                new Point3D(130, -130, -50),//top right
+                new Point3D(-130, 130, -40),//bottom left
+                new Color(40, 40, 40), new Material());
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
 
         Scene myScene = new Scene("triangles in the spot light");
-        myScene.setCameraScreenDistance(185);
+        myScene.setCameraScreenDistance(70);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(first, second);
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0.1));
 
         SpotLight mySpotLight = new SpotLight(
-                new Point3D(0, 0, -40),
-                10, 5, 0.0001,
+                new Point3D(0, 0, -1),
+                0.9, 0.02, 0.1,
                 new Color(200, 0, 0), new Vector(0, 0, -1));
         myScene.addLightSource(mySpotLight);
 
+/*
+        Triangle first = new Triangle(
+                new Point3D(-150, 150, 20),
+                new Point3D(-150, -150, 0),
+                new Point3D(150,-150, 0),
+                new Color(50,50,50), new Material(0, 0, 0));
+        Triangle second = new Triangle(
+                new Point3D(150, 150, 20),
+                new Point3D(-150, 150, 20),
+                new Point3D(150,-150, 0),
+                new Color(50,50,50), new Material(0,0,0));
+        Camera camera = new Camera(new Point3D(0, 0, -150),
+                new Vector(0, 1, 0),
+                new Vector(0, 0, 1) );
+
+        Scene myScene = new Scene("triangles in the spot light");
+        myScene.setCameraScreenDistance(150);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        myScene.addGeometries(first, second);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
+
+        SpotLight mySpotLight = new SpotLight(
+                new Point3D(0, 0, -20),
+                0, 0, 0,
+                new Color(255, 0, 9), new Vector(0, 0, 1));
+        myScene.addLightSource(mySpotLight);*/
         ImageWriter sceneWriter = new ImageWriter("triangles in the spot light", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
         myRender.setScene(myScene);
