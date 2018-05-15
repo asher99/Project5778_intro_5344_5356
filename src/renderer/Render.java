@@ -145,13 +145,13 @@ public class Render {
         // same side of the tangent surface as the light source.
         // if true - return the scaled color.
         // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
-        //if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
+        if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
             result.scale(scalingFactor);
             return result;
-        //}
-        //else{
-        //    return new Color(0,0,0);
-        //}
+        }
+        else{
+            return new Color(0,0,0);
+        }
     }
 
 
