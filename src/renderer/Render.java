@@ -56,8 +56,8 @@ public class Render {
      * @param interval - interval between grid lines.
      */
     public void printGrid(double interval) {
-        for (int i = 0; i <= 499; i++) {
-            for (int j = 499; j > 0; j--) {
+        for (int i = 0; i <= 999; i++) {
+            for (int j = 999; j > 0; j--) {
                 if (i % interval == 0 || j % interval == 0)
                     imageWriter.writePixel(i, j, java.awt.Color.WHITE);
             }
@@ -138,17 +138,20 @@ public class Render {
         Color result = new Color(lightIntensity);
         double scalingFactor = kd * Vector.dotProduct(l, n);
 
+        if (scalingFactor < 0)
+            scalingFactor = scalingFactor*-1;
+
         // check if the Diffusion and Specular components are in the
         // same side of the tangent surface as the light source.
         // if true - return the scaled color.
         // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
-        if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
+        //if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
             result.scale(scalingFactor);
             return result;
-        }
-        else{
-            return new Color(0,0,0);
-        }
+        //}
+        //else{
+        //    return new Color(0,0,0);
+        //}
     }
 
 
