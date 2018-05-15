@@ -46,7 +46,7 @@ public class SpotLight extends PointLight {
 
         //distance
         double distance = Point3D.distance(position, p);
-        double denominator = Kc + distance * Ki + distance * Math.pow(Kq, 2);
+        double denominator = Kc +  Ki*distance + Kq * Math.pow(distance, 2);
 
         //position
         Vector l = new Vector(position, p);

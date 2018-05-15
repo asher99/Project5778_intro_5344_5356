@@ -62,12 +62,12 @@ public class SpotLightTest {
                 new Point3D(-130, 130, -40),//bottom left
                 new Point3D(130, 130, -40),//bottom right
                 new Point3D(130, -130, -50),//top right
-                new Color(40, 40, 40), new Material());
+                new Color(40, 40, 40), new Material(10000000,100,100));
         Triangle second = new Triangle(
                 new Point3D(130, -130, -50),//top right
                  new Point3D(-130, -130, -50),//top left
                 new Point3D(-130, 130, -40),//bottom left
-                new Color(40, 40, 40), new Material());
+                new Color(40, 40, 40), new Material(10000000,100,100));
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
@@ -81,7 +81,7 @@ public class SpotLightTest {
 
         SpotLight mySpotLight = new SpotLight(
                 new Point3D(0, 0, -1),
-                1, 5, 10,
+                1, 0.0125, 0.975,
                 new Color(201, 226, 255), new Vector(0, 1, -26));
         myScene.addLightSource(mySpotLight);
 
