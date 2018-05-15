@@ -95,8 +95,8 @@ public class Render {
             Color lightIntensity = lightSource.getIntensity(p);
             Vector l = lightSource.getL(p);
             //Vector v = new Vector(Point3D.subtract(scene.getSceneCamera().getP0(), p));
-            Vector v = scene.getSceneCamera().getvTo();
-            color.add(calcDiffusive(kd, l, n, lightIntensity),
+            Vector v = new Vector(scene.getSceneCamera().getP0(),p);
+            color.add(calcDiffusive(kd, l, n,v, lightIntensity),
                     calcSpecular(ks, l, n, v, nShininess, lightIntensity));
         }
         return color;
@@ -130,10 +130,11 @@ public class Render {
      * @param kd             - the material diffusive factor.
      * @param l              - vector from the light source to the object.
      * @param n              - the normal vector to the geometry in the intersection point.
+     * @param v              - the Vector from the Camera to the intersection point.
      * @param lightIntensity - the light source intensity.
      * @return scale lightIntensity by: Kd * dotProduct(l,n)
      */
-    public Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
+    public Color calcDiffusive(double kd, Vector l, Vector n, Vector v, Color lightIntensity) {
         Color result = new Color(lightIntensity);
         double scalingFactor = kd * Vector.dotProduct(l, n);
 
@@ -141,7 +142,6 @@ public class Render {
         // same side of the tangent surface as the light source.
         // if true - return the scaled color.
         // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
-        Vector v = scene.getSceneCamera().getvTo();
         if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
             result.scale(scalingFactor);
             return result;
@@ -158,7 +158,7 @@ public class Render {
      * @param ks             - the material specular factor.
      * @param l              - vector from the light source to the object
      * @param n              - the normal vector to the geometry in the intersection point.
-     * @param v              - the Scene Camera vTo component (the direction of the camera).
+     * @param v              - the Vector from the Camera to the intersection point.
      * @param nShininess     - the material shininess.
      * @param lightIntensity - the light source intensity.
      * @return scale lightIntensity by: Ks* dotProduct(-v,r)^nShininess.

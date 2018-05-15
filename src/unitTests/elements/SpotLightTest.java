@@ -81,7 +81,7 @@ public class SpotLightTest {
 
         SpotLight mySpotLight = new SpotLight(
                 new Point3D(0, 0, -1),
-                0.8, 1.5, 0.0001,
+                1, 5, 10,
                 new Color(201, 226, 255), new Vector(0, 1, -26));
         myScene.addLightSource(mySpotLight);
 
