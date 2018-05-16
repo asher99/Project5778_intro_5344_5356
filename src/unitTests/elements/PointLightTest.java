@@ -12,7 +12,7 @@ public class PointLightTest {
 
     @Test
     public void pointLight() {
-       Sphere middle = new Sphere(new Point3D(0, 0, -50),
+      /* Sphere middle = new Sphere(new Point3D(0, 0, -50),
                 49,new Color(0,0,100),new Material(0.275, 0.1075,1));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
@@ -29,6 +29,24 @@ public class PointLightTest {
                 new Point3D(-1.5,1.5,-1),
                 1, 1.7, 0.1,
                 new Color (255,255,255));
+        myScene.addLightSource(mySpotLight);*/
+        Sphere middle = new Sphere(new Point3D(0, 0, -50),
+                49,new Color(0,20,100),new Material(1, 1,1));
+
+        Camera camera = new Camera(new Point3D(0, 0, 0),
+                new Vector(0, -1, 0),
+                new Vector(0, 0, -1));
+        Scene myScene = new Scene("sphere with a point light");
+        myScene.setCameraScreenDistance(50);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        myScene.addGeometries(middle);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
+
+        PointLight mySpotLight = new PointLight(
+                new Point3D(-2,2,-0.5),
+                1, 0.1, 0.1,
+                new Color (255,255,255));
         myScene.addLightSource(mySpotLight);
 
         ImageWriter sceneWriter = new ImageWriter("sphere with a point light",1000,1000,1000,1000);
@@ -44,7 +62,6 @@ public class PointLightTest {
 
     @Test
     public void pointLight1() {
-
 
         Triangle first = new Triangle(
                 new Point3D(-130, 130, -40),//bottom left
