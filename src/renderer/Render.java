@@ -136,7 +136,7 @@ public class Render {
      */
     public Color calcDiffusive(double kd, Vector l, Vector n, Vector v, Color lightIntensity) {
         Color result = new Color(lightIntensity);
-        double scalingFactor = kd * Vector.dotProduct(l, n);
+        double scalingFactor = kd * Vector.dotProduct(l.normal(), n.normal());
 
         if (scalingFactor < 0)
             scalingFactor = scalingFactor*-1;
@@ -172,10 +172,10 @@ public class Render {
         Color result = new Color(lightIntensity);
 
         // calculating "Ks* dotProduct(-v,r)^nShininess" and 'r' itself.
-        double temp = -2 * Vector.dotProduct(l, n.normal());
+        double temp = -2 * Vector.dotProduct(l.normal(), n.normal());
         Vector nComponent = n.multiplyByScalar(temp);
         Vector r = new Vector(l.getVector(),nComponent.getVector());
-        double scalingFactor = ks * Math.pow(Vector.dotProduct(v.multiplyByScalar(-1),r),nShininess);
+        double scalingFactor = ks * Math.pow(Vector.dotProduct(v.multiplyByScalar(-1).normal(),r.normal()),nShininess);
 
 
         // check if the Diffusion and Specular components are in the

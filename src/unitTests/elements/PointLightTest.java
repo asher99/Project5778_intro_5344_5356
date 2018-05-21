@@ -31,7 +31,7 @@ public class PointLightTest {
                 new Color (255,255,255));
         myScene.addLightSource(mySpotLight);*/
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
-                49,new Color(0,20,100),new Material(1, 1,1));
+                49,new Color(0,20,100),new Material(4, 0.6,10));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -45,7 +45,7 @@ public class PointLightTest {
 
         PointLight mySpotLight = new PointLight(
                 new Point3D(-2,2,-0.5),
-                1, 0.1, 0.1,
+                1, 0.01, 0.1,
                 new Color (255,255,255));
         myScene.addLightSource(mySpotLight);
 

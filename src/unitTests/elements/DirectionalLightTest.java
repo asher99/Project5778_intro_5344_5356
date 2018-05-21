@@ -66,10 +66,10 @@ public class DirectionalLightTest {
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(middle);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0));
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
 
         DirectionalLight myDirectionalLight = new DirectionalLight(
-                new Color(20, 0, 0),
+                new Color(90, 0, 0),
                 new Vector(-3, 3, -3));
         myScene.addLightSource(myDirectionalLight);
 
