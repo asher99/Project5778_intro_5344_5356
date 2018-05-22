@@ -12,24 +12,6 @@ public class PointLightTest {
 
     @Test
     public void pointLight() {
-      /* Sphere middle = new Sphere(new Point3D(0, 0, -50),
-                49,new Color(0,0,100),new Material(0.275, 0.1075,1));
-
-        Camera camera = new Camera(new Point3D(0, 0, 0),
-                new Vector(0, -1, 0),
-                new Vector(0, 0, -1));
-        Scene myScene = new Scene("sphere with a point light");
-        myScene.setCameraScreenDistance(60);
-        myScene.setSceneCamera(camera);
-        myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-        myScene.addGeometries(middle);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(120, 120, 120), 0.1));
-
-        PointLight mySpotLight = new PointLight(
-                new Point3D(-1.5,1.5,-1),
-                1, 1.7, 0.1,
-                new Color (255,255,255));
-        myScene.addLightSource(mySpotLight);*/
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
                 49,new Color(0,20,100),new Material(1, 1,20));
 
@@ -44,7 +26,7 @@ public class PointLightTest {
         myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
 
         PointLight mySpotLight = new PointLight(
-                new Point3D(-2,2,-1 ),
+                new Point3D(-1.5,1.5,-1),
                 1, 0.01, 0.1,
                 new Color (255,255,255));
         myScene.addLightSource(mySpotLight);
@@ -67,12 +49,12 @@ public class PointLightTest {
                 new Point3D(-130, 130, -40),//bottom left
                 new Point3D(130, 130, -40),//bottom right
                 new Point3D(130, -130, -50),//top right
-                new Color(20, 20, 20), new Material(1, 2, 20));
+                new Color(20, 20, 20), new Material(1, 1, 20));
         Triangle second = new Triangle(
                 new Point3D(130, -130, -50),//top right
                 new Point3D(-130, -130, -50),//top left
                 new Point3D(-130, 130, -40),//bottom left
-                new Color(20, 20, 20), new Material(1, 2, 20));
+                new Color(20, 20, 20), new Material(1, 1, 20));
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
@@ -82,12 +64,12 @@ public class PointLightTest {
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(first, second);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0.1));
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
 
         PointLight mySpotLight = new PointLight(
                 new Point3D(0, 0, -1),
-                1, 0.0055, 0.00015,
-                new Color(255, 150, 150));
+                0.1, 0.008, 0.00015,
+                new Color(255, 125, 125));
         myScene.addLightSource(mySpotLight);
 
 
