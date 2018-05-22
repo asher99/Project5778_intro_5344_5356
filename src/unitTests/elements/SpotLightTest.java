@@ -20,7 +20,7 @@ public class SpotLightTest {
     @Test
     public void spotLight() {
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
-                49, new Color(0, 0, 60), new Material(0.275, 0.0175, 1));
+                49, new Color(0, 0, 60), new Material(1, 1.5, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -30,7 +30,7 @@ public class SpotLightTest {
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(middle);
-        myScene.setSceneAmbientLight(new AmbientLight(new Color(120, 120, 120), 0.1));
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
 
        /*   SpotLight mySpotLight = new SpotLight(
                 new Point3D(100,-100,-20),
@@ -38,8 +38,8 @@ public class SpotLightTest {
                 new Color (230,0,230),
                 new Vector(-100,100,30));*/
         SpotLight mySpotLight = new SpotLight(
-                new Point3D(-1, 1, -3),
-                1, 2, 5.995,
+                new Point3D(-2, 2, -3),
+                1, 5, 5,
                 new Color(255, 255, 255),
                 new Vector(2, -2, 30));
         myScene.addLightSource(mySpotLight);
