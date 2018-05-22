@@ -18,12 +18,12 @@ public class DirectionalLightTest {
                 new Point3D(-130, 130, -40),//bottom left
                 new Point3D(130, 130, -40),//bottom right
                 new Point3D(130, -130, -50),//top right
-                new Color(20, 20, 20), new Material(0.015, 0.005, 0));
+                new Color(20, 20, 20), new Material(0.015, 1, 1));
         Triangle second = new Triangle(
                 new Point3D(130, -130, -50),//top right
                 new Point3D(-130, -130, -50),//top left
                 new Point3D(-130, 130, -40),//bottom left
-                new Color(20, 20, 20), new Material(0.015, 0.005, 0));
+                new Color(20, 20, 20), new Material(0.015, 1, 1));
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
@@ -37,7 +37,7 @@ public class DirectionalLightTest {
 
         DirectionalLight myDirectionalLight = new DirectionalLight(
                 new Color(255, 0, 0),
-                new Vector(0, 1, -39));
+                new Vector(-3, -1, -8));
         myScene.addLightSource(myDirectionalLight);
 
 
@@ -69,7 +69,7 @@ public class DirectionalLightTest {
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
 
         DirectionalLight myDirectionalLight = new DirectionalLight(
-                new Color(90, 0, 0),
+                new Color(150, 0, 0),
                 new Vector(-3, 3, -3));
         myScene.addLightSource(myDirectionalLight);
 
