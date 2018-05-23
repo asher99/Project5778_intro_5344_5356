@@ -26,8 +26,8 @@ public class PointLightTest {
         myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
 
         PointLight mySpotLight = new PointLight(
-                new Point3D(-1.5,1.5,-1),
-                1, 0.01, 0.1,
+                new Point3D(-2,2,-3),
+                0.5, 0.01, 0.1, // 1, 0.01, 0.1,
                 new Color (255,255,255));
         myScene.addLightSource(mySpotLight);
 
