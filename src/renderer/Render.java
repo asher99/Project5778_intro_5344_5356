@@ -187,6 +187,7 @@ public class Render {
 
     /**
      *
+     * 
      * @param l     - vector from the light source to the object
      * @param p     - intersection point between the ray and the Geometry.
      * @param geo   - Geometry.
