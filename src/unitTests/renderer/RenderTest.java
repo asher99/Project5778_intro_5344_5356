@@ -144,11 +144,28 @@ public class RenderTest {
         myRender.setImageWriter(sceneWriter);
 
         myRender.renderImage();
-
+        //renderPixel(myRender,490,505);
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
 
+    }
+
+    public void renderPixel(Render mr,int i, int j) {
+        Ray ray = mr.getScene().getSceneCamera().ConstractRaythroughPixel(mr.getImageWriter().getNx(), mr.getImageWriter().getNy(),
+                i, j, mr.getScene().getCameraScreenDistance(), mr.getImageWriter().getWidth(), mr.getImageWriter().getHeight());
+
+        //find the intersections of the ray with the scene geometries.
+        Map<Geometry, List<Point3D>> intersectionPoints = mr.getScene().getShapesInScene().findIntersections(ray);
+
+        // write to that pixel the right color.
+        if (intersectionPoints.isEmpty())
+            mr.getImageWriter().writePixel(i, j, mr.getScene().getSceneBackgroundColor());
+        else {
+            Map<Geometry, Point3D> closestPoint = mr.getClosestPoint(intersectionPoints);
+            Map.Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
+            mr.getImageWriter().writePixel(i, j, mr.calcColor(entry.getKey(), entry.getValue()).getColor());
+        }
     }
 
     @Test

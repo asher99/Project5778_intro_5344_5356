@@ -104,9 +104,8 @@ public class Render {
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
                   if (!occluded(l, p, geo)) {
-                Color lightIntensity = lightSource.getIntensity(p);
-                color.add(calcDiffusive(kd, l, n, v, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                      Color lightIntensity = lightSource.getIntensity(p);
+                      color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }
             }
         }
@@ -187,7 +186,6 @@ public class Render {
 
     /**
      *
-     * 
      * @param l     - vector from the light source to the object
      * @param p     - intersection point between the ray and the Geometry.
      * @param geo   - Geometry.
@@ -203,7 +201,13 @@ public class Render {
 
         Ray lightRay = new Ray(geometryPoint, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
-        return !intersectionPoints.isEmpty();
+        if(intersectionPoints.isEmpty())
+            return false;
+        else if(intersectionPoints.containsKey(geo)) {
+            intersectionPoints.remove(geo);
+            return !intersectionPoints.isEmpty();
+        }
+        return true;
     }
 
     /**
