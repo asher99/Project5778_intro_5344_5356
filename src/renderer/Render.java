@@ -97,18 +97,11 @@ public class Render {
             Vector l = lightSource.getL(p);
             //Vector v = new Vector(Point3D.subtract(scene.getSceneCamera().getP0(), p));
             Vector v = new Vector(scene.getSceneCamera().getP0(), p);
-
-            // check if the Diffusion and Specular components are in the
-            // same side of the tangent surface as the light source.
-            // if true - return the scaled color.
-            // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
-            if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                  if (!occluded(l, p, geo)) {
-                Color lightIntensity = lightSource.getIntensity(p);
-                color.add(calcDiffusive(kd, l, n, v, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                }
-            }
+              if (!occluded(l, p, geo)) {
+            Color lightIntensity = lightSource.getIntensity(p);
+            color.add(calcDiffusive(kd, l, n, v, lightIntensity),
+                    calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+              }
         }
         return color;
     }
@@ -152,9 +145,16 @@ public class Render {
         if (scalingFactor < 0)
             scalingFactor = scalingFactor * -1;
 
-
-        result.scale(scalingFactor);
-        return result;
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        } else {
+            return new Color(0, 0, 0);
+        }
     }
 
 
@@ -181,24 +181,28 @@ public class Render {
         double scalingFactor = ks * Math.pow(Vector.dotProduct(v.multiplyByScalar(-1).normal(), r.normal()), nShininess);
 
 
-        result.scale(scalingFactor);
-        return result;
+        // check if the Diffusion and Specular components are in the
+        // same side of the tangent surface as the light source.
+        // if true - return the scaled color.
+        // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
+        if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
+            result.scale(scalingFactor);
+            return result;
+        } else {
+            return new Color(0, 0, 0);
+        }
     }
 
-    /**
-     *
-     * @param l     - vector from the light source to the object
-     * @param p     - intersection point between the ray and the Geometry.
-     * @param geo   - Geometry.
-     * @return
-     */
     private boolean occluded(Vector l, Point3D p, Geometry geo) {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
-
+        /*
         Vector normal = geo.getNormal(p);
         Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, lightDirection) > 0 ? 2 : -2);
         Point3D geometryPoint = Point3D.add(p, epsVector.getVector());
-
+        */
+        Vector epsVector = new Vector(geo.getNormal(p).getVector());
+        epsVector.multiplyByScalar(Vector.dotProduct(epsVector, lightDirection) > 0 ? 2 : -2);
+        Point3D geometryPoint = Point3D.add(p, epsVector.getVector());
 
         Ray lightRay = new Ray(geometryPoint, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
