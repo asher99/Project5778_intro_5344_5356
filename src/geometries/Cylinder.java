@@ -4,6 +4,7 @@ import primitives.*;
 import primitives.Color;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,35 +17,52 @@ import java.util.Map;
 public class Cylinder extends RadialGeometry {
 
     Ray orientation;
-
+    //double t_length;
     // ***************** Constructors ********************** //
 
     /**
      * constructor
      *
      * @param myRadius
+     * //@param length
      * @param myRay
      * @param e
      * @param m
      */
-    public Cylinder(double myRadius, Ray myRay, Color e, Material m) {
+    public Cylinder(double myRadius/*, double length*/, Ray myRay, Color e, Material m) {
         super(myRadius, e, m);
         _radius = myRadius;
         orientation = myRay;
+        //t_length = length;
     }
 
     /**
      * constructor with no color uses the default color.
      *
      * @param myRadius
+     * //@param length
      * @param myRay
      */
-    public Cylinder(double myRadius, Ray myRay) {
+    public Cylinder(double myRadius/*, double length*/, Ray myRay) {
         super(myRadius);
         _radius = myRadius;
         orientation = myRay;
+       // t_length = length;
     }
 
+    /**
+     * constructor with no length uses the default of 1.
+     *
+     * @param myRadius
+     * @param myRay
+     */
+ /*   public Cylinder(double myRadius, Ray myRay) {
+        super(myRadius);
+        _radius = myRadius;
+        orientation = myRay;
+        t_length = 1;
+    }
+    */
     // ***************** Getters/Setters ********************** //
 
     /**
@@ -56,6 +74,15 @@ public class Cylinder extends RadialGeometry {
         return orientation;
     }
 
+    /**
+     * getter
+     *
+     * @return
+     */
+   /* public double getT_length() {
+        return t_length;
+    }
+*/
     /**
      * getter
      *
@@ -120,6 +147,40 @@ public class Cylinder extends RadialGeometry {
      */
     @Override
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
-        return null;
+
+        Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
+        List<Point3D> listOfIntersections = new ArrayList<Point3D>();
+
+        Vector rayDirection = new Vector(myRay.getDirection().getVector());
+        Vector cylinderDirection = new Vector(getOrientaion().getDirection().getVector());
+        Point3D rayPoint = new Point3D(myRay.getPoint());
+        Point3D cylinderPoint = new Point3D(getOrientaion().getPoint());
+
+        double A = Math.pow(rayDirection.getVector().getX(), 2) +
+                Math.pow(rayDirection.getVector().getY(), 2);
+
+        double B = 2 * rayPoint.getX() * rayDirection.getVector().getX() +
+                2 * rayPoint.getY() * rayDirection.getVector().getY();
+
+        double C = Math.pow(rayPoint.getX(), 2) +
+                Math.pow(rayPoint.getY(), 2) - Math.pow(get_radius(),2);
+
+        double sqrtCom = Math.sqrt(Math.pow(B, 2) - 4 * A * C);
+
+        if (sqrtCom < 0)
+            return null;
+
+        double t1 = (-1 * B + sqrtCom) / 2 * A;
+
+        double t2 = (-1 * B - sqrtCom) / 2 * A;
+
+        Point3D intersection1 = Point3D.add(rayPoint,rayDirection.multiplyByScalar(t1).getVector());
+
+        Point3D intersection2 = Point3D.add(rayPoint,rayDirection.multiplyByScalar(t2).getVector());
+
+        listOfIntersections.add(intersection1);
+        listOfIntersections.add(intersection2);
+        geometryListMap.put(this,listOfIntersections);
+        return geometryListMap;
     }
 }
