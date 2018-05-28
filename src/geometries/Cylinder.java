@@ -23,8 +23,7 @@ public class Cylinder extends RadialGeometry {
     /**
      * constructor
      *
-     * @param myRadius
-     * //@param length
+     * @param myRadius //@param length
      * @param myRay
      * @param e
      * @param m
@@ -39,15 +38,14 @@ public class Cylinder extends RadialGeometry {
     /**
      * constructor with no color uses the default color.
      *
-     * @param myRadius
-     * //@param length
+     * @param myRadius //@param length
      * @param myRay
      */
     public Cylinder(double myRadius/*, double length*/, Ray myRay) {
         super(myRadius);
         _radius = myRadius;
         orientation = myRay;
-       // t_length = length;
+        // t_length = length;
     }
 
     /**
@@ -83,6 +81,7 @@ public class Cylinder extends RadialGeometry {
         return t_length;
     }
 */
+
     /**
      * getter
      *
@@ -151,36 +150,53 @@ public class Cylinder extends RadialGeometry {
         Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
-        Vector rayDirection = new Vector(myRay.getDirection().getVector());
-        Vector cylinderDirection = new Vector(getOrientaion().getDirection().getVector());
+        Vector rayDirection = new Vector(myRay.getDirection().getVector()); //V
+        Vector cylinderDirection = new Vector(getOrientaion().getDirection().getVector()); // Va
         Point3D rayPoint = new Point3D(myRay.getPoint());
-        Point3D cylinderPoint = new Point3D(getOrientaion().getPoint());
 
-        double A = Math.pow(rayDirection.getVector().getX(), 2) +
-                Math.pow(rayDirection.getVector().getY(), 2);
+        Vector delta = new Vector(Point3D.subtract(orientation.getPoint(), rayPoint));
 
-        double B = 2 * rayPoint.getX() * rayDirection.getVector().getX() +
-                2 * rayPoint.getY() * rayDirection.getVector().getY();
+        Vector temp = new Vector(Point3D.subtract(cylinderDirection.multiplyByScalar(Vector.dotProduct(rayDirection, cylinderDirection)).getVector(), rayDirection.getVector()));
+        double A = Vector.dotProduct(temp, temp);
 
-        double C = Math.pow(rayPoint.getX(), 2) +
-                Math.pow(rayPoint.getY(), 2) - Math.pow(get_radius(),2);
+        Vector temp1 = new Vector(Point3D.subtract(
+                (cylinderDirection.multiplyByScalar(Vector.dotProduct(delta,
+                        cylinderDirection)).getVector()), delta.getVector()));
 
-        double sqrtCom = Math.sqrt(Math.pow(B, 2) - 4 * A * C);
+        double scaleB = Vector.dotProduct(rayDirection, cylinderDirection);
+        Vector vecB = new Vector(Point3D.subtract(rayDirection.getVector(),
+                cylinderDirection.multiplyByScalar(scaleB).getVector()));
 
+        double B = 2 * Vector.dotProduct(vecB, temp1);
+
+        double C = Vector.dotProduct(temp, temp) - Math.pow(_radius, 2);
+
+        double sqrtCom = Math.pow(B, 2) - 4 * A * C;
+
+        double t1 = (-1 * B + Math.sqrt(sqrtCom)) / 2 * A;
+
+        double t2 = (-1 * B - Math.sqrt(sqrtCom)) / 2 * A;
+
+        // there is no real solution
         if (sqrtCom < 0)
-            return null;
+            return geometryListMap;
+        // one intersection
+        if (sqrtCom == 0) {
+            if (t1 < 0) {
+                return geometryListMap; // the intersection is not visible.
+            }
+            Point3D p = Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector());
+            listOfIntersections.add(p);
+            geometryListMap.put(this, listOfIntersections);
+            return geometryListMap;
+        }
 
-        double t1 = (-1 * B + sqrtCom) / 2 * A;
-
-        double t2 = (-1 * B - sqrtCom) / 2 * A;
-
-        Point3D intersection1 = Point3D.add(rayPoint,rayDirection.multiplyByScalar(t1).getVector());
-
-        Point3D intersection2 = Point3D.add(rayPoint,rayDirection.multiplyByScalar(t2).getVector());
-
-        listOfIntersections.add(intersection1);
-        listOfIntersections.add(intersection2);
-        geometryListMap.put(this,listOfIntersections);
+        // two intersections
+        if (t1 >= 0)
+            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector()))));
+        if (t2 >= 0)
+            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector()))));
+        geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
     }
 }
