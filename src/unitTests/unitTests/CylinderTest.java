@@ -45,4 +45,8 @@ public class CylinderTest {
         assertTrue(testVector2.equals(expectedVector2));
     }
 
+    @Test
+    public void findIntersections(){
+
+    }
 }

@@ -91,4 +91,40 @@ public class SpotLightTest {
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
     }
+
+    @Test
+    public void cylinder() {
+
+        Cylinder c = new Cylinder(10,new Ray(new Point3D(0,0,-30),new Vector(0,1,0)),
+                new Color(20,20,20),new Material(1,1,20) );
+
+        Camera camera = new Camera(new Point3D(0, 0, 0),
+                new Vector(0, -1, 0),
+                new Vector(0, 0, -1));
+
+        Scene myScene = new Scene("cylinder");
+        myScene.setCameraScreenDistance(170);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        myScene.addGeometries();
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0.1));
+
+        SpotLight mySpotLight = new SpotLight(
+                new Point3D(0, 0, -1),
+                1, 0.125, 0.0025,
+                new Color(255, 125, 55), new Vector(0, 1, -26));
+        myScene.addLightSource(mySpotLight);
+
+
+        ImageWriter sceneWriter = new ImageWriter("cylinder", 1000, 1000, 1000, 1000);
+        Render myRender = new Render();
+        myRender.setScene(myScene);
+        myRender.setImageWriter(sceneWriter);
+
+        myRender.renderImage();
+
+        //myRender.printGrid(100);
+        myRender.getImageWriter().writeToimage();
+    }
+
 }
