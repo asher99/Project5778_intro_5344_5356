@@ -54,7 +54,7 @@ public class SpotLight extends PointLight {
 
         //scale
         Color result = new Color(color);
-        result.scale(numerator / denominator);
+        result.scale(Math.abs(numerator / denominator));
 
         return result;
     }

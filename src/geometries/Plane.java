@@ -209,13 +209,14 @@ public class Plane extends Geometry {
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
 
         double scalart = (Vector.dotProduct(orthonormal, new Vector(myRay.getPoint(), point))) / (Vector.dotProduct(orthonormal, myRay.getDirection()));
-        if (scalart >= 0) {
+        // neglect sides in plane.
+        //if (scalart >= 0) {
             Point3D intersectionPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(scalart).getVector());
             List<Point3D> result = new ArrayList<Point3D>();
             result.add(intersectionPoint);
             Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
             geometryListMap.put(this, result);
             return geometryListMap;
-        } else return null;
+        //} else return null;
     }
 }

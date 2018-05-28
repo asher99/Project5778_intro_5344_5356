@@ -134,7 +134,9 @@ public class Sphere extends RadialGeometry {
 
         }
         geometryListMap.put(this,listOfIntersections);
-        return geometryListMap;
+        if(listOfIntersections.isEmpty())
+            return null;
+        else return geometryListMap;
     }
 
     /*

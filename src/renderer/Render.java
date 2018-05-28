@@ -198,7 +198,6 @@ public class Render {
         Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, lightDirection) > 0 ? 2 : -2);
         Point3D geometryPoint = Point3D.add(p, epsVector.getVector());
 
-
         Ray lightRay = new Ray(geometryPoint, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
         if(intersectionPoints.isEmpty())
@@ -207,7 +206,7 @@ public class Render {
             intersectionPoints.remove(geo);
             return !intersectionPoints.isEmpty();
         }
-        return true;
+        else return !intersectionPoints.isEmpty();
     }
 
     /**

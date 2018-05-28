@@ -133,7 +133,7 @@ public class RenderTest {
 
         SpotLight mySpotLight = new SpotLight(
                 new Point3D(0, 0, -1),
-                1, 0.125, 0.0025,
+                1, 0.0125, 0.0025,
                 new Color(255, 125, 55), new Vector(-5, 5, -13));
         myScene.addLightSource(mySpotLight);
 
