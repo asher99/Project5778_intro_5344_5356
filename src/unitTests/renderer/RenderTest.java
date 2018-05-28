@@ -143,8 +143,8 @@ public class RenderTest {
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
 
-        myRender.renderImage();
-        //renderPixel(myRender,490,505);
+        //myRender.renderImage();
+        renderPixel(myRender,490,505);
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
