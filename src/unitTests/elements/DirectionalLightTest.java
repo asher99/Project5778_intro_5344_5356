@@ -79,6 +79,7 @@ public class DirectionalLightTest {
         myRender.setImageWriter(sceneWriter);
 
         myRender.renderImage();
+        //myRender.renderPixel(490,510);
 
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();

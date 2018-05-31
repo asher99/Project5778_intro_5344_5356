@@ -103,6 +103,7 @@ public class Coordinate {
         // if our coordinate is too small relatively to other return negative of other
         if (thisExp - otherExp < ACCURACY) return new Coordinate(-b.coord);
         double result = a.coord - b.coord;
+        //double result = b.coord - a.coord;
 
         int resultExp = getExp(result);     // if the result is too small tell that it is zero
         return resultExp - thisExp < ACCURACY ? new Coordinate(0.0) : new Coordinate(result);

@@ -117,8 +117,8 @@ public class RenderTest {
                 new Point3D(-130, 130, -40),//bottom left
                 new Color(40, 40, 40), new Material(1, 1, 20));
 
-        Sphere middle = new Sphere(new Point3D(0, 0, -40),
-                30, new Color(0, 20, 100), new Material(1, 2, 20));
+        Sphere middle = new Sphere(new Point3D(0, 0, -15),
+                12, new Color(0, 20, 100), new Material(1, 2, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -143,9 +143,9 @@ public class RenderTest {
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
 
-        //myRender.renderImage();
-        renderPixel(myRender,490,505);
-        //myRender.printGrid(100);
+        myRender.renderImage();
+        //renderPixel(myRender,490,505);
+        myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
 

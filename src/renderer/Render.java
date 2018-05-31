@@ -103,10 +103,10 @@ public class Render {
             // if true - return the scaled color.
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                  if (!occluded(l, p, geo)) {
-                      Color lightIntensity = lightSource.getIntensity(p);
-                      color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                }
+                  //if (!occluded(l, p, geo)) {
+                Color lightIntensity = lightSource.getIntensity(p);
+                color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                //}
             }
         }
         return color;
@@ -223,6 +223,30 @@ public class Render {
         }
         return intersectionPoint;
     }*/
+
+
+    /**
+     * render a specific pixel.
+     * this method is used for debugging, enabling check what exactly get wrong in a certain pixel
+     * @param i
+     * @param j
+     */
+    public void renderPixel(int i, int j) {
+        Ray ray = this.scene.getSceneCamera().ConstractRaythroughPixel(this.imageWriter.getNx(), this.imageWriter.getNy(),
+                i, j, this.scene.getCameraScreenDistance(), this.imageWriter.getWidth(), this.imageWriter.getHeight());
+
+        //find the intersections of the ray with the scene geometries.
+        Map<Geometry, List<Point3D>> intersectionPoints = this.scene.getShapesInScene().findIntersections(ray);
+
+        // write to that pixel the right color.
+        if (intersectionPoints.isEmpty())
+            this.imageWriter.writePixel(i, j, this.scene.getSceneBackgroundColor());
+        else {
+            Map<Geometry, Point3D> closestPoint = this.getClosestPoint(intersectionPoints);
+            Map.Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
+            this.imageWriter.writePixel(i, j, this.calcColor(entry.getKey(), entry.getValue()).getColor());
+        }
+    }
 
 
     /****************setters/getters********************/

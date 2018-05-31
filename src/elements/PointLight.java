@@ -65,13 +65,13 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * calculate the vector from the light source to the point on the Geometry.
-     *
+     * actually return the opposite vector, fashion choice - DEAL WITH IT!
      * @param p
      * @return Vector
      */
     @Override
     public Vector getL(Point3D p) {
-        return new Vector(position);
+        return new Vector(position,p).normal();
     }
 
     ;

@@ -97,9 +97,10 @@ public class Vector {
      * @return double (dot product)
      */
     public static double dotProduct(Vector a, Vector b) {
-        return a.vector.getX() * b.vector.getX() +
+        double result = a.vector.getX() * b.vector.getX() +
                 a.vector.getY() * b.vector.getY() +
                 a.vector.getZ() * b.vector.getZ();
+        return result;
     }
 
     /**

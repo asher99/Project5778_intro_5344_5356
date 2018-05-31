@@ -6,6 +6,9 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class PointLightTest {
@@ -36,7 +39,8 @@ public class PointLightTest {
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
 
-        myRender.renderImage();
+        //myRender.renderImage();
+        myRender.renderPixel(500,500);
 
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
