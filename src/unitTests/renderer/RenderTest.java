@@ -145,7 +145,7 @@ public class RenderTest {
 
         myRender.renderImage();
         //renderPixel(myRender,490,505);
-        myRender.printGrid(100);
+       // myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
 
