@@ -22,7 +22,7 @@ public class SpotLight extends PointLight {
      */
     public SpotLight(Point3D place, double kc, double ki, double kq, Color color, Vector direct) {
         super(place, kc, ki, kq, color);
-        direction = direct;
+        direction = direct.normal();
     }
 
     /**
