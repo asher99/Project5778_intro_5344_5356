@@ -95,7 +95,7 @@ public class SpotLightTest {
     @Test
     public void cylinder() {
 
-        Cylinder c = new Cylinder(2, new Ray(new Point3D(0, 0, -100), new Vector(0, 1, 0)),
+        Cylinder c = new Cylinder(5, new Ray(new Point3D(0, 0, -50), new Vector(0, 1, 0)),
                 new Color(100, 20, 20), new Material(1, 1, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
