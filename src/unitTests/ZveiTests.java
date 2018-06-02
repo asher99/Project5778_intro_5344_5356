@@ -106,7 +106,7 @@ public class ZveiTests {
 
     public void triangle_hide_sphere(Triangle tr, double index){
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
-                    48.8,new Color(0,20,100),new Material(1, 1,20));
+                49,new Color(0,20,100),new Material(1.5, 1,20));
 
        // Triangle triangle = new Triangle(new Point3D(0,1,-0.99),new Point3D(-2,5,-0.99),new Point3D(2,5,-0.99),
         //        new Color(255,0,0),new Material(1,1,20));
@@ -122,8 +122,8 @@ public class ZveiTests {
         myScene.setSceneAmbientLight(new AmbientLight(new Color(20, 20, 20), 0.1));
 
         PointLight myPointLight = new PointLight(
-                new Point3D(-2,2,-3),
-                0.5, 0.01, 0.1, // 1, 0.01, 0.1,
+                new Point3D(-2,1,5),
+                1, 0.01, 0.025, // 1, 0.01, 0.1,
                 new Color (255,255,255));
         myScene.addLightSource(myPointLight);
 
@@ -139,29 +139,48 @@ public class ZveiTests {
         myRender.getImageWriter().writeToimage();
     }
 
-    public void renderPixel(Render mr,int i, int j) {
-        Ray ray = mr.getScene().getSceneCamera().ConstractRaythroughPixel(mr.getImageWriter().getNx(), mr.getImageWriter().getNy(),
-                i, j, mr.getScene().getCameraScreenDistance(), mr.getImageWriter().getWidth(), mr.getImageWriter().getHeight());
-
-        //find the intersections of the ray with the scene geometries.
-        Map<Geometry, List<Point3D>> intersectionPoints = mr.getScene().getShapesInScene().findIntersections(ray);
-
-        // write to that pixel the right color.
-        if (intersectionPoints.isEmpty())
-            mr.getImageWriter().writePixel(i, j, mr.getScene().getSceneBackgroundColor());
-        else {
-            Map<Geometry, Point3D> closestPoint = mr.getClosestPoint(intersectionPoints);
-            Map.Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
-            mr.getImageWriter().writePixel(i, j, mr.calcColor(entry.getKey(), entry.getValue()).getColor());
-        }
-
-
-    }
 
     public Triangle shiftTriangleRight(Triangle tr, double offset){
 
         Point3D offsetPoint = new Point3D(offset,0,0);
         return new Triangle(Point3D.add(tr.getA(),offsetPoint),Point3D.add(tr.getB(),offsetPoint),Point3D.add(tr.getC(),offsetPoint),tr.getEmission(),tr.getMaterial());
+    }
+
+    @Test
+    public void ballOnPlaneDirectionalLight(){
+
+        double z = -40;
+        Triangle upRight = new Triangle(
+                new Point3D(-50,50,z),
+                new Point3D(50,50,z),
+                new Point3D(50,-50,z),
+                new Color(150,30,0),
+                new Material(2,0.5,10));
+
+        Triangle downLeft = new Triangle(
+                new Point3D(50,-50,z),
+                new Point3D(-50,-50,z),
+                new Point3D(-50,50,z),
+                new Color(30,150,0),
+                new Material(2,0.5,10));
+
+        Camera cm = new Camera(new Point3D(0,0,-10), new Vector(1,0,0), new Vector(0,0,-1));
+
+        Scene scene = new Scene("ball on plane");
+        scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
+        scene.setCameraScreenDistance(50);
+        scene.setSceneCamera(cm);
+        scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        scene.addGeometries(upRight,downLeft);
+
+        ImageWriter writer = new ImageWriter("ball on plane",1000,1000,1000,1000);
+        Render myRender = new Render();
+        myRender.setScene(scene);
+        myRender.setImageWriter(writer);
+
+        myRender.renderImage();
+        myRender.getImageWriter().writeToimage();
+
     }
 
 }

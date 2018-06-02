@@ -104,24 +104,6 @@ public class ImageWriterTest {
 
     }
 
-    public void testRenderSpecificIndex(int i, int j, Render render) {
-
-
-        Ray ray = render.getScene().getSceneCamera().ConstractRaythroughPixel(render.getImageWriter().getNx(), render.getImageWriter().getNy(),
-                i, j, render.getScene().getCameraScreenDistance(), render.getImageWriter().getWidth(),render.getImageWriter().getHeight());
-
-        //find the intersections of the ray with the scene geometries.
-        Map<Geometry, List<Point3D>> intersectionPoints = render.getScene().getShapesInScene().findIntersections(ray);
-
-        // write to that pixel the right color.
-        if (intersectionPoints.isEmpty())
-            render.getImageWriter().writePixel(i, j, render.getScene().getSceneBackgroundColor());
-        else {
-            Map<Geometry, Point3D> closestPoint = render.getClosestPoint(intersectionPoints);
-            Map.Entry<Geometry, Point3D> entry = closestPoint.entrySet().iterator().next();
-            render.getImageWriter().writePixel(i, j, render.calcColor(entry.getKey(), entry.getValue()).getColor());
-        }
-    }
 
     @Test
     public void writeToImage4(){

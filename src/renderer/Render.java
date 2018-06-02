@@ -58,8 +58,8 @@ public class Render {
      * @param interval - interval between grid lines.
      */
     public void printGrid(double interval) {
-        for (int i = 0; i <= 999; i++) {
-            for (int j = 999; j > 0; j--) {
+        for (int i = 0; i <= imageWriter.getNx()-1; i++) {
+            for (int j = imageWriter.getNy() - 1; j > 0; j--) {
                 if (i % interval == 0 || j % interval == 0)
                     imageWriter.writePixel(i, j, java.awt.Color.WHITE);
             }
@@ -103,10 +103,10 @@ public class Render {
             // if true - return the scaled color.
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                  //if (!occluded(l, p, geo)) {
-                Color lightIntensity = lightSource.getIntensity(p);
-                color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                //}
+                  if (!occluded(l, p, geo)) {
+                    Color lightIntensity = lightSource.getIntensity(p);
+                    color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                }
             }
         }
         return color;
@@ -119,15 +119,15 @@ public class Render {
     public Map<Geometry, Point3D> getClosestPoint(Map<Geometry, List<Point3D>> intersectionPoints) {
 
         double distance = Double.MAX_VALUE;
-        Point3D p0 = scene.getSceneCamera().getP0();
+        Point3D p = getScene().getSceneCamera().getP0();
         Map<Geometry, Point3D> minDistancePoint = new HashMap<Geometry, Point3D>();
 
         for (HashMap.Entry<Geometry, List<Point3D>> pair : intersectionPoints.entrySet()) {
             for (Point3D point : pair.getValue()) {
-                if (p0.distance(p0, point) < distance) {
+                if (p.distance(p, point) < distance) {
                     minDistancePoint.clear(); // make it empty
                     minDistancePoint.put(pair.getKey(), new Point3D(point));
-                    distance = p0.distance(p0, point);
+                    distance = p.distance(p, point);
                 }
             }
         }
@@ -194,19 +194,42 @@ public class Render {
     private boolean occluded(Vector l, Point3D p, Geometry geo) {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
 
-        Vector normal = geo.getNormal(p);
+        /*Vector normal = geo.getNormal(p);
         Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, lightDirection) > 0 ? 2 : -2);
-        Point3D geometryPoint = Point3D.add(p, epsVector.getVector());
+        Point3D geometryPoint = Point3D.add(p, epsVector.getVector());*/
 
-        Ray lightRay = new Ray(geometryPoint, lightDirection);
+        Ray lightRay = new Ray(/*geometryPoint*/p, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
         if(intersectionPoints.isEmpty())
             return false;
-        else if(intersectionPoints.containsKey(geo)) {
+        /*else if(intersectionPoints.containsKey(geo)) {
             intersectionPoints.remove(geo);
             return !intersectionPoints.isEmpty();
+       }
+        else return !intersectionPoints.isEmpty();*/
+        else {
+
+            if(intersectionPoints.containsKey(geo)) {
+                intersectionPoints.remove(geo);
+                if (intersectionPoints.isEmpty())
+                    return false;
+            }
+
+            // check if someone block the way:
+            // if the vector between the point on the Geometry and the intersection point
+            // equals to the ray direction vector.
+            boolean isSomeoneBlockMyWay = false;
+            for (HashMap.Entry<Geometry, List<Point3D>> pair : intersectionPoints.entrySet()) {
+                for (Point3D point : pair.getValue()) {
+                    Vector offset = new Vector(lightRay.getPoint(),point);
+                    if(lightRay.getDirection().equals(offset.normal())) {
+                        isSomeoneBlockMyWay = true;
+                        break;
+                    }
+                }
+            }
+            return isSomeoneBlockMyWay;
         }
-        else return !intersectionPoints.isEmpty();
     }
 
     /**
