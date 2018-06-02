@@ -1,9 +1,6 @@
 package renderer;
 
-import elements.AmbientLight;
-import elements.Camera;
-import elements.PointLight;
-import elements.SpotLight;
+import elements.*;
 import geometries.Geometry;
 import geometries.Sphere;
 import geometries.Triangle;
@@ -87,7 +84,11 @@ public class shadowTest {
                 new Point3D(12, 12, 0),
                 1, 0.00075, 0.0008,
                 new Color(255, 255, 255), new Vector(-12, -12, -15));
+
+        DirectionalLight myDirectionalLight = new DirectionalLight(new Color(40,0,0),new Vector(1.5,-3,-1));
         myScene.addLightSource(mySpotLight);
+        myScene.addLightSource(myDirectionalLight);
+
 
 
         ImageWriter sceneWriter = new ImageWriter("shadows test", 1000, 1000, 1000, 1000);

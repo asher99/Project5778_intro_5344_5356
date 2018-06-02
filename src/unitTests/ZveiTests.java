@@ -1,7 +1,4 @@
-import elements.AmbientLight;
-import elements.Camera;
-import elements.DirectionalLight;
-import elements.PointLight;
+import elements.*;
 import geometries.Geometry;
 import geometries.Sphere;
 import geometries.Triangle;
@@ -149,29 +146,63 @@ public class ZveiTests {
     @Test
     public void ballOnPlaneDirectionalLight(){
 
-        double z = -40;
+        double z = -12;
         Triangle upRight = new Triangle(
-                new Point3D(-50,50,z),
-                new Point3D(50,50,z),
-                new Point3D(50,-50,z),
-                new Color(150,30,0),
-                new Material(2,0.5,10));
+                new Point3D(100,100,z),
+                new Point3D(-100,100,z),
+                new Point3D(100,-100,z),
+                new Color(200,200,200),
+                new Material(800,0.2,10));
 
         Triangle downLeft = new Triangle(
-                new Point3D(50,-50,z),
-                new Point3D(-50,-50,z),
-                new Point3D(-50,50,z),
-                new Color(30,150,0),
-                new Material(2,0.5,10));
+                new Point3D(100,-100,z),
+                new Point3D(-100,-100,z),
+                new Point3D(-100,100,z),
+                new Color(200,200,200),
+                new Material(800,0.2,10));
 
-        Camera cm = new Camera(new Point3D(0,0,-10), new Vector(1,0,0), new Vector(0,0,-1));
+        Sphere middle = new Sphere(new Point3D(50,50,-7),4.99,
+                new Color(0,0,0),new Material(2,2,10));
+
+        Camera cm = new Camera(new Point3D(0,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+
+        /*DirectionalLight dl_blue = new DirectionalLight(new Color(0,0,100),new Vector(5,-5,-1));
+        DirectionalLight dl_green = new DirectionalLight(new Color(0,100,0),new Vector(5,5,-1));
+        DirectionalLight dl_red = new DirectionalLight(new Color(100,0,0),new Vector(-5,5,-1));
+        DirectionalLight dl_yellow = new DirectionalLight(new Color(100,100,0),new Vector(-5,-5,-1));*/
+
+        PointLight sl_green = new PointLight(
+                new Point3D(-100,-100,-10),
+                1,0.005,0.0075,
+                new Color(0,255,0));
+
+        PointLight sl_blue = new PointLight(
+                new Point3D(-100,100,-10),
+                1,0.005,0.0075,
+                new Color(0,0,255));
+
+        PointLight sl_red = new PointLight(
+                new Point3D(100,-100,-10),
+                1,0.005,0.0075,
+                new Color(255,0,0));
+
+        PointLight sl_yellow = new PointLight(
+                new Point3D(100,100,-10),
+                1,0.005,0.0075,
+                new Color(255,255,0));
+
+
 
         Scene scene = new Scene("ball on plane");
         scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
         scene.setCameraScreenDistance(50);
         scene.setSceneCamera(cm);
         scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-        scene.addGeometries(upRight,downLeft);
+        scene.addGeometries(upRight,downLeft,middle);
+        scene.addLightSource(sl_blue);
+        scene.addLightSource(sl_green);
+        scene.addLightSource(sl_red);
+        scene.addLightSource(sl_yellow);
 
         ImageWriter writer = new ImageWriter("ball on plane",1000,1000,1000,1000);
         Render myRender = new Render();
