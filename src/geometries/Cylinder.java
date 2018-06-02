@@ -112,6 +112,7 @@ public class Cylinder extends RadialGeometry {
      */
     @Override
     public Vector getNormal(Point3D somePoint) {
+
         // first, we need to have all components for Pythgore theorem.
         // we already have the radius - which is one of the bases,
         // and the reminder will be the vector from the point that defines the orientation to somePoint.
@@ -132,9 +133,10 @@ public class Cylinder extends RadialGeometry {
         Vector toPointInFront = new Vector(orientation.getPoint(), pointInFront);
 
         if (Vector.dotProduct(orientation.getDirection(), toPointBehind) == 0)
-            return toPointBehind.normal();
+           return toPointBehind.normal();
         else
             return toPointInFront.normal();
+
     }
 
     /**
@@ -192,10 +194,18 @@ public class Cylinder extends RadialGeometry {
         }
 
         // two intersections
-        if (t1 >= 0)
-            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector()))));
-        if (t2 >= 0)
+        if (t1 < 0 && t2 < 0) {
+            return geometryListMap;
+        } else if (t1 < 0) {
             listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector()))));
+        } else if (t2 < 0) {
+            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector()))));
+        } else {
+            listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
+            listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
+
+        }
+
         geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
     }

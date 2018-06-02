@@ -76,7 +76,7 @@ public class SpotLightTest {
 
         SpotLight mySpotLight = new SpotLight(
                 new Point3D(0, 0, -1),
-                1, 0.125, 0.0025,
+                1, 0.00125, 0.000025,
                 new Color(255, 125, 55), new Vector(0, 1, -26));
         myScene.addLightSource(mySpotLight);
 
@@ -95,7 +95,7 @@ public class SpotLightTest {
     @Test
     public void cylinder() {
 
-        Cylinder c = new Cylinder(2, new Ray(new Point3D(0, 0, -100), new Vector(0, 1, 0)),
+        Cylinder c = new Cylinder(5, new Ray(new Point3D(0, 0, -50), new Vector(0, 1, 0)),
                 new Color(100, 20, 20), new Material(1, 1, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
