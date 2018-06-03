@@ -77,9 +77,9 @@ public class Render {
      */
     public Color calcColor(Geometry geo, Point3D p, Ray inRay, int level, double k) {
 
-        if (level == 0 || Coordinate.isZero(k)) {
+     /*   if (level == 0 || Coordinate.isZero(k)) {
             return new Color(0, 0, 0);
-        }
+        }*/
 
         //ambient light
         Color color = scene.getSceneAmbientLight().getIntensity();
@@ -98,8 +98,8 @@ public class Render {
         for (LightSource lightSource : scene.getSceneLightSources()) {
             Vector l = lightSource.getL(p);
 
-            //Vector v = new Vector(scene.getSceneCamera().getP0(), p);
-            Vector v = new Vector(inRay.getDirection().getVector());
+            Vector v = new Vector(scene.getSceneCamera().getP0(), p);
+            //Vector v = new Vector(inRay.getDirection().getVector());
 
             // check if the Diffusion and Specular components are in the
             // same side of the tangent surface as the light source.
@@ -112,7 +112,7 @@ public class Render {
                 }
             }
         }
-
+/*
         Ray reflectedRay = constructReflectedRay(n, geo, p, inRay);
         Map<Geometry, Point3D> reflectedPoint = findClosestIntersection(reflectedRay);
         double kr = geo.getMaterial().getKr();
@@ -125,7 +125,8 @@ public class Render {
         double kt = geo.getMaterial().getKt();
         Color refractedLight = calcColor(geo, refractedPoint, refractedRay, level - 1, k * kt).scale(kt);
         return Color.add(reflectedLight.getColor(), refractedLight.getColor());
-        //return color;
+        */
+        return color;
     }
 
     private Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
