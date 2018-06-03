@@ -17,7 +17,7 @@ import java.util.Map;
 public class Cylinder extends RadialGeometry {
 
     Ray orientation;
-    //double t_length;
+
     // ***************** Constructors ********************** //
 
     /**
@@ -28,11 +28,10 @@ public class Cylinder extends RadialGeometry {
      * @param e
      * @param m
      */
-    public Cylinder(double myRadius/*, double length*/, Ray myRay, Color e, Material m) {
+    public Cylinder(double myRadius, Ray myRay, Color e, Material m) {
         super(myRadius, e, m);
         _radius = myRadius;
         orientation = myRay;
-        //t_length = length;
     }
 
     /**
@@ -45,7 +44,6 @@ public class Cylinder extends RadialGeometry {
         super(myRadius);
         _radius = myRadius;
         orientation = myRay;
-        // t_length = length;
     }
 
     /**
@@ -54,13 +52,7 @@ public class Cylinder extends RadialGeometry {
      * @param myRadius
      * @param myRay
      */
- /*   public Cylinder(double myRadius, Ray myRay) {
-        super(myRadius);
-        _radius = myRadius;
-        orientation = myRay;
-        t_length = 1;
-    }
-    */
+
     // ***************** Getters/Setters ********************** //
 
     /**
@@ -72,15 +64,7 @@ public class Cylinder extends RadialGeometry {
         return orientation;
     }
 
-    /**
-     * getter
-     *
-     * @return
-     */
-   /* public double getT_length() {
-        return t_length;
-    }
-*/
+
 
     /**
      * getter
@@ -141,7 +125,7 @@ public class Cylinder extends RadialGeometry {
 
     /**
      * return map of the Ray intersection points with the Cylinder.
-     * no implementation, for now.
+     *
      *
      * @param myRay
      * @return
@@ -152,7 +136,7 @@ public class Cylinder extends RadialGeometry {
         Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
-        Vector rayDirection = new Vector(myRay.getDirection().getVector()); //V
+        Vector rayDirection = new Vector(myRay.getDirection().getVector()); // V
         Vector cylinderDirection = new Vector(getOrientaion().getDirection().getVector()); // Va
         Point3D rayPoint = new Point3D(myRay.getPoint());
 
@@ -171,13 +155,13 @@ public class Cylinder extends RadialGeometry {
 
         double B = 2 * Vector.dotProduct(vecB, temp1);
 
-        double C = Vector.dotProduct(temp, temp) - Math.pow(_radius, 2);
+        double C = Vector.dotProduct(temp1, temp1) - Math.pow(_radius, 2);
 
-        double sqrtCom = Math.pow(B, 2) - 4 * A * C;
+        double sqrtCom = Math.pow(B, 2) - (4 * A * C);
 
-        double t1 = (-1 * B + Math.sqrt(sqrtCom)) / 2 * A;
+        double t1 = (-B + Math.sqrt(sqrtCom)) / (2 * A);
 
-        double t2 = (-1 * B - Math.sqrt(sqrtCom)) / 2 * A;
+        double t2 = (-B - Math.sqrt(sqrtCom)) / (2 * A);
 
         // there is no real solution
         if (sqrtCom < 0)
@@ -203,9 +187,7 @@ public class Cylinder extends RadialGeometry {
         } else {
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
-
         }
-
         geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
     }
