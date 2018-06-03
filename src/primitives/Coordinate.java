@@ -16,6 +16,15 @@ public class Coordinate {
     private static final int ACCURACY = -20;
 
     /**
+     * checks if number is close to zero
+     * @param number
+     * @return
+     */
+    public static boolean isZero(double number) {
+        return getExp(number) < ACCURACY;
+    }
+
+    /**
      * double store format: seee eeee eeee (1.)mmmm … mmmm
      * 1 bit sign, 11 bits exponent, 53 bits (52 stored) normalized mantissa
      *

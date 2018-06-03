@@ -2,9 +2,7 @@ package renderer;
 
 import elements.LightSource;
 import geometries.Geometry;
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
+import primitives.*;
 import primitives.Vector;
 import scene.Scene;
 
@@ -58,7 +56,7 @@ public class Render {
      * @param interval - interval between grid lines.
      */
     public void printGrid(double interval) {
-        for (int i = 0; i <= imageWriter.getNx()-1; i++) {
+        for (int i = 0; i <= imageWriter.getNx() - 1; i++) {
             for (int j = imageWriter.getNy() - 1; j > 0; j--) {
                 if (i % interval == 0 || j % interval == 0)
                     imageWriter.writePixel(i, j, java.awt.Color.WHITE);
@@ -77,7 +75,11 @@ public class Render {
      * @param p
      * @return
      */
-    public Color calcColor(Geometry geo, Point3D p) {
+    public Color calcColor(Geometry geo, Point3D p, Ray inRay, int level, double k) {
+
+        if (level == 0 || Coordinate.isZero(k)) {
+            return new Color(0, 0, 0);
+        }
 
         //ambient light
         Color color = scene.getSceneAmbientLight().getIntensity();
@@ -95,21 +97,48 @@ public class Render {
         // foreach light source in the scene: add the diffusion and specular lights.
         for (LightSource lightSource : scene.getSceneLightSources()) {
             Vector l = lightSource.getL(p);
-            //Vector v = new Vector(Point3D.subtract(scene.getSceneCamera().getP0(), p));
-            Vector v = new Vector(scene.getSceneCamera().getP0(), p);
+
+            //Vector v = new Vector(scene.getSceneCamera().getP0(), p);
+            Vector v = new Vector(inRay.getDirection().getVector());
 
             // check if the Diffusion and Specular components are in the
             // same side of the tangent surface as the light source.
             // if true - return the scaled color.
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                  if (!occluded(l, p, geo)) {
+                if (!occluded(l, p, geo)) {
                     Color lightIntensity = lightSource.getIntensity(p);
                     color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }
             }
         }
-        return color;
+
+        Ray reflectedRay = constructReflectedRay(n, geo, p, inRay);
+        Map<Geometry, Point3D> reflectedPoint = findClosestIntersection(reflectedRay);
+        double kr = geo.getMaterial().getKr();
+
+        Color reflectedLight = calcColor(geo, reflectedPoint, reflectedRay, level–1, k * kr).scale(kr);
+        // Recursive call for a refracted ray
+        Ray refractedRay = constructRefractedRay(geo, p, inRay);
+        Map<Geometry, Point3D> refractedPoint = findClosestIntersection(refractedRay);
+
+        double kt = geo.getMaterial().getKt();
+        Color refractedLight = calcColor(geo, refractedPoint, refractedRay, level - 1, k * kt).scale(kt);
+        return Color.add(reflectedLight.getColor(), refractedLight.getColor());
+        //return color;
+    }
+
+    private Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
+        return null;
+    }
+
+    private Map<Geometry, Point3D> findClosestIntersection(Ray reflectedRay) {
+        return null;
+    }
+
+    private Ray constructReflectedRay(Vector n, Geometry geo, Point3D p, Ray inRay) {
+        return null;
+
     }
 
     /**
@@ -185,10 +214,9 @@ public class Render {
     }
 
     /**
-     *
-     * @param l     - vector from the light source to the object
-     * @param p     - intersection point between the ray and the Geometry.
-     * @param geo   - Geometry.
+     * @param l   - vector from the light source to the object
+     * @param p   - intersection point between the ray and the Geometry.
+     * @param geo - Geometry.
      * @return
      */
     private boolean occluded(Vector l, Point3D p, Geometry geo) {
@@ -200,7 +228,7 @@ public class Render {
 
         Ray lightRay = new Ray(/*geometryPoint*/p, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
-        if(intersectionPoints.isEmpty())
+        if (intersectionPoints.isEmpty())
             return false;
         /*else if(intersectionPoints.containsKey(geo)) {
             intersectionPoints.remove(geo);
@@ -209,7 +237,7 @@ public class Render {
         else return !intersectionPoints.isEmpty();*/
         else {
 
-            if(intersectionPoints.containsKey(geo)) {
+            if (intersectionPoints.containsKey(geo)) {
                 intersectionPoints.remove(geo);
                 if (intersectionPoints.isEmpty())
                     return false;
@@ -221,8 +249,8 @@ public class Render {
             boolean isSomeoneBlockMyWay = false;
             for (HashMap.Entry<Geometry, List<Point3D>> pair : intersectionPoints.entrySet()) {
                 for (Point3D point : pair.getValue()) {
-                    Vector offset = new Vector(lightRay.getPoint(),point);
-                    if(lightRay.getDirection().equals(offset.normal())) {
+                    Vector offset = new Vector(lightRay.getPoint(), point);
+                    if (lightRay.getDirection().equals(offset.normal())) {
                         isSomeoneBlockMyWay = true;
                         break;
                     }
@@ -251,6 +279,7 @@ public class Render {
     /**
      * render a specific pixel.
      * this method is used for debugging, enabling check what exactly get wrong in a certain pixel
+     *
      * @param i
      * @param j
      */
