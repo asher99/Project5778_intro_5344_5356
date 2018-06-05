@@ -107,7 +107,7 @@ public class SpotLightTest {
                 new Point3D(-130, 130, -25),//bottom left
                 new Color(40, 40, 100), new Material(4, 0.2, 5));
 
-        Cylinder c = new Cylinder(10, new Ray(new Point3D(0, 0, -20), new Vector(0, 1, 0)),
+        Cylinder c = new Cylinder(5, new Ray(new Point3D(0, 0, -20), new Vector(0, 1, 0)),
                 new Color(80, 20, 20), new Material(1, 1, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
@@ -154,7 +154,7 @@ public class SpotLightTest {
                 new Point3D(-130, 130, -25),//bottom left
                 new Color(40, 40, 100), new Material(4, 0.2, 5));
 
-        LimitedCylinder c = new LimitedCylinder(10, new Point3D(0, 10, -20), new Ray(new Point3D(0, 0, -20), new Vector(0, 1, 0)),
+        LimitedCylinder c = new LimitedCylinder(10, new Point3D(0, 5, -20), new Ray(new Point3D(0, 0, -20), new Vector(0, 1, 0)),
                 new Color(80, 20, 20), new Material(1, 1, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
@@ -162,7 +162,7 @@ public class SpotLightTest {
                 new Vector(0, 0, -1));
 
         Scene myScene = new Scene("limited cylinder");
-        myScene.setCameraScreenDistance(170);
+        myScene.setCameraScreenDistance(70);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(c, first, second);

@@ -180,11 +180,17 @@ public class Cylinder extends RadialGeometry {
         // two intersections
         if (t1 < 0 && t2 < 0) {
             return geometryListMap;
-        } else if (t1 < 0) {
+        }/* else if (t1 < 0) {
             listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector()))));
         } else if (t2 < 0) {
             listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector()))));
-        } else {
+        } */
+        else if(t1<0&& t2>0){
+            listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
+        } else if(t1>0 && t2<0){
+            listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
+        }
+        else {
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
         }

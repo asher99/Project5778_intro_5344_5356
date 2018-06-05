@@ -123,21 +123,22 @@ public class LimitedCylinder extends Cylinder {
     @Override
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
         Cylinder endlessC = new Cylinder(_radius, orientation, emission, material);
-        Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
+        Map<Geometry, List<Point3D>> geometryListMap = new HashMap<Geometry, List<Point3D>>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
         geometryListMap = endlessC.findIntersections(myRay);
 
         for (HashMap.Entry<Geometry, List<Point3D>> pair : geometryListMap.entrySet()) {
-
             for (Point3D p : pair.getValue()) {
                 if (isOnCylinder(p))
                     listOfIntersections.add(p);
             }
+            if (listOfIntersections.isEmpty())
+                break;
+            geometryListMap.put(pair.getKey(), listOfIntersections);
+            listOfIntersections.clear();
 
         }
-        geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
     }
-
 }
