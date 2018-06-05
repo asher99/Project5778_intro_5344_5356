@@ -156,10 +156,22 @@ public class Render {
         /* return color;*/
     }
 
+    /**
+     * Construct a new refracted Ray from an intersecting Ray.
+     * @param geo
+     * @param p     - define ray: the intersection point.
+     * @param inRay - define ray: use the same direction of the original Ray.
+     * @return refracted ray
+     */
     private Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
         return new Ray(p, inRay.getDirection());
     }
 
+    /**
+     * finding the closest that intersect Ray.
+     * @param reflectedRay
+     * @return
+     */
     private Map.Entry<Geometry, Point3D> findClosestIntersection(Ray reflectedRay) {
         Map<Geometry,List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(reflectedRay);
         if(intersectionPoints.isEmpty())
@@ -169,6 +181,14 @@ public class Render {
         return closestPoint.entrySet().iterator().next();
     }
 
+    /**
+     * Construct a new reflected Ray from an intersecting Ray.
+     * @param n
+     * @param geo
+     * @param p
+     * @param inRay
+     * @return
+     */
     private Ray constructReflectedRay(Vector n, Geometry geo, Point3D p, Ray inRay) {
         double scalar = -2 * Vector.dotProduct(n, inRay.getDirection());
         n = n.multiplyByScalar(scalar);
@@ -181,6 +201,8 @@ public class Render {
     }
 
     /**
+     * find the closest point to "p" within map "intersectionPoints"
+     * @param p
      * @param intersectionPoints
      * @return
      */
