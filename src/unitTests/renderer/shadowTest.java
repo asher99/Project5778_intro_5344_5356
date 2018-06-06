@@ -20,8 +20,11 @@ public class shadowTest {
         Sphere middle = new Sphere(new Point3D(0, 0, -50),
                 49,new Color(0,20,100),new Material(1.5, 1,20));
 
-        Triangle triangle = new Triangle(new Point3D(0,1,-0.99),new Point3D(-2,5,-0.99),new Point3D(2,5,-0.99),
+        Triangle triangle = new Triangle(new Point3D(-1,1,-0.99),new Point3D(-3,5,-0.99),new Point3D(1,5,-0.99),
                new Color(255,0,0),new Material(1,1,20));
+
+
+
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -45,8 +48,8 @@ public class shadowTest {
         myRender.setImageWriter(sceneWriter);
 
         myRender.renderImage();
-        //myRender.renderPixel(300,500);
-        //myRender.printGrid(100);
+        myRender.renderPixel(350,500);
+        //myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
     }
 

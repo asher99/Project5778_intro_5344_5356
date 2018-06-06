@@ -4,10 +4,13 @@ package primitives;
  * class Ray.
  * ray in space is determined by a point and a direction.
  * the direction is normal vector.
+ * the point is the ray origin.
  */
 public class Ray {
 
+    // Ray orientation
     protected Vector direction;
+    //Ray origin
     protected Point3D point;
 
     /**
@@ -43,6 +46,17 @@ public class Ray {
     }
 
     // ***************** Operations ******************** //
+
+
+    /**
+     * check if a point is on the ray.
+     * @param otherPoint
+     * @return
+     */
+    public boolean isOnRay(Point3D otherPoint){
+        Vector offset = new Vector(point,otherPoint);
+        return direction.equals(offset.normal());
+    }
 
     /**
      * toString
