@@ -117,27 +117,42 @@ public class Sphere extends RadialGeometry {
         if (d > _radius)
             return null;
         // if there is one intersection
-        if (new Coordinate(d).equals(new Coordinate(_radius)))
-            listOfIntersections.add(Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(tm).getVector()));
+        if (new Coordinate(d).equals(new Coordinate(_radius))) {
 
+            Point3D interPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(tm).getVector());
+            if (myRay.isOnRay(interPoint))
+                listOfIntersections.add(interPoint);
+        }
+
+        // if there are two intersections
         else if (d < _radius) {
             double th = Math.sqrt(Math.pow(_radius, 2) - Math.pow(d, 2));
 
             double t1 = tm + th;
             double t2 = tm - th;
 
-            if (t1 >= 0)
-                listOfIntersections.add(Point3D.add(myRay.getPoint(),
-                        myRay.getDirection().multiplyByScalar(t2).getVector()));
-            if (t2 >= 0)
-                listOfIntersections.add(Point3D.add(myRay.getPoint(),
-                        myRay.getDirection().multiplyByScalar(t1).getVector()));
+            if (t1 >= 0) {
+                Point3D interPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(t2).getVector());
+                if (myRay.isOnRay(interPoint))
+                    listOfIntersections.add(interPoint);
+            }
+            if (t2 >= 0) {
+                Point3D interPoint = Point3D.add(myRay.getPoint(), myRay.getDirection().multiplyByScalar(t1).getVector());
+                if (myRay.isOnRay(interPoint))
+                    listOfIntersections.add(interPoint);
+            }
 
         }
-        geometryListMap.put(this,listOfIntersections);
-        if(listOfIntersections.isEmpty())
+
+
+        // return
+        if(listOfIntersections.isEmpty()){
             return null;
-        else return geometryListMap;
+        }
+        else {
+            geometryListMap.put(this, listOfIntersections);
+            return geometryListMap;
+        }
     }
 
     /*

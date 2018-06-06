@@ -66,4 +66,47 @@ public class ReflectionTest {
 
 
     }
+
+    @Test
+    public void twoTriangles(){
+
+        double z = -12;
+        double z2 = -8;
+
+        Triangle back = new Triangle(
+                new Point3D(-100,-100,z),
+                new Point3D(-100,100,z),
+                new Point3D(100,0,z),
+                new Color(90,0,0),
+                new Material(2,0.2,0,0,10));
+
+        Triangle front = new Triangle(
+                new Point3D(-50,-50,z2),
+                new Point3D(-50,50,z2),
+                new Point3D(50,0,z2),
+                new Color(0,90,0),
+                new Material(2,0.2,0,1,10));
+
+        Camera cm = new Camera(new Point3D(0,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+
+        Scene scene = new Scene("Two Triangles");
+        scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
+        scene.setCameraScreenDistance(50);
+        scene.setSceneCamera(cm);
+        scene.addGeometries(back,front);
+        scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+
+        ImageWriter writer = new ImageWriter("Two Triangles",1000,1000,1000,1000);
+        Render myRender = new Render();
+        myRender.setScene(scene);
+        myRender.setImageWriter(writer);
+
+
+        myRender.renderImage();
+        //myRender.printGrid(100);
+        myRender.renderPixel(500,500);
+        myRender.getImageWriter().writeToimage();
+
+
+    }
 }
