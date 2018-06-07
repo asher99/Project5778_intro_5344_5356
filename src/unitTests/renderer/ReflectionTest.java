@@ -64,8 +64,6 @@ public class ReflectionTest {
         myRender.renderPixel(503, 497);
         //myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
-
-
     }
 
     @Test

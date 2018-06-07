@@ -149,6 +149,7 @@ public class LimitedCylinder extends Cylinder {
 
         Map<Geometry, List<Point3D>> temp2 = plane2.findIntersections(myRay);
 
+        if(temp1 != null)
         for (HashMap.Entry<Geometry, List<Point3D>> pair : temp1.entrySet()) {
             for (Point3D p1 : pair.getValue()) {
                 if (new Vector(Point3D.subtract(orientation.getPoint(), p1)).sizeOfVector() <= _radius && p1!=null)
@@ -156,6 +157,7 @@ public class LimitedCylinder extends Cylinder {
             }
         }
 
+        if(temp2 != null)
         for (HashMap.Entry<Geometry, List<Point3D>> pair : temp2.entrySet()) {
             for (Point3D p2 : pair.getValue()) {
                 if (new Vector(Point3D.subtract(orientation.getPoint(), p2)).sizeOfVector() <= _radius && p2!=null)
