@@ -22,16 +22,16 @@ public class ReflectionTest {
                 new Point3D(-130, 130, -25),//bottom left
                 new Point3D(130, 130, -25),//bottom right
                 new Point3D(130, -130, -35),//top right
-                new Color(40, 40, 40), new Material(4, 0.2, 0, 1, 5));
+                new Color(100, 0, 0), new Material(2, 0.2, 1, 0, 5));
 
         Triangle second = new Triangle(
                 new Point3D(130, -130, -35),//top right
                 new Point3D(-130, -130, -35),//top left
                 new Point3D(-130, 130, -25),//bottom left
-                new Color(40, 40, 40), new Material(4, 0.2, 1, 0, 5));
+                new Color(0, 100, 0), new Material(2, 0.2, 1, 0, 5));
 
-        Sphere middle = new Sphere(new Point3D(0, 0, -30),
-                20, new Color(0, 20, 100), new Material(1, 1, 1, 0, 20));
+        Sphere middle = new Sphere(new Point3D(0, 0, -10),
+                8, new Color(0, 20, 100), new Material(0.4, 0.1, 0, 0.7, 20));
 
         Camera camera = new Camera(new Point3D(0, 0, 0),
                 new Vector(0, -1, 0),
@@ -60,7 +60,8 @@ public class ReflectionTest {
         myRender.setImageWriter(sceneWriter);
 
         myRender.renderImage();
-        myRender.renderPixel(450, 450);
+        myRender.renderPixel(504, 497);
+        myRender.renderPixel(503, 497);
         //myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
 
@@ -72,19 +73,27 @@ public class ReflectionTest {
 
         double z = -12;
         double z2 = -8;
+        double z3 = -4;
 
         Triangle back = new Triangle(
                 new Point3D(-100,-100,z),
                 new Point3D(-100,100,z),
                 new Point3D(100,0,z),
-                new Color(90,0,0),
+                new Color(255,0,0),
                 new Material(2,0.2,0,0,10));
 
-        Triangle front = new Triangle(
+        Triangle middle = new Triangle(
                 new Point3D(-50,-50,z2),
                 new Point3D(-50,50,z2),
                 new Point3D(50,0,z2),
-                new Color(0,90,0),
+                new Color(0,0,255),
+                new Material(2,0.2,1,0,10));
+
+        Triangle front = new Triangle(
+                new Point3D(-10,-10,z3),
+                new Point3D(-10,10,z3),
+                new Point3D(10,0,z3),
+                new Color(0,255,0),
                 new Material(2,0.2,0,1,10));
 
         Camera cm = new Camera(new Point3D(0,0,0), new Vector(1,0,0), new Vector(0,0,-1));
@@ -93,7 +102,7 @@ public class ReflectionTest {
         scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
         scene.setCameraScreenDistance(50);
         scene.setSceneCamera(cm);
-        scene.addGeometries(back,front);
+        scene.addGeometries(back,middle,front);
         scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
 
         ImageWriter writer = new ImageWriter("Two Triangles",1000,1000,1000,1000);

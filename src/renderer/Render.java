@@ -66,7 +66,7 @@ public class Render {
         for (int i = 0; i <= imageWriter.getNx() - 1; i++) {
             for (int j = imageWriter.getNy() - 1; j > 0; j--) {
                 if (i % interval == 0 || j % interval == 0)
-                    imageWriter.writePixel(i, j, java.awt.Color.WHITE);
+                    imageWriter.writePixel(i, j, java.awt.Color.ORANGE);
             }
         }
     }
@@ -158,13 +158,18 @@ public class Render {
 
     /**
      * Construct a new refracted Ray from an intersecting Ray.
+     * using epsilon vector to avoid Floating point arithmetic.
      * @param geo
      * @param p     - define ray: the intersection point.
      * @param inRay - define ray: use the same direction of the original Ray.
      * @return refracted ray
      */
     private Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
-        return new Ray(p, inRay.getDirection());
+
+        Vector normal = geo.getNormal(p);
+        Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, inRay.getDirection()) > 0 ? 2 : -2);
+        Point3D geometryPoint = Point3D.add(p, epsVector.getVector());
+        return new Ray(geometryPoint, inRay.getDirection());
     }
 
     /**
