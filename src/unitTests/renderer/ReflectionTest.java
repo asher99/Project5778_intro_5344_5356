@@ -63,8 +63,6 @@ public class ReflectionTest {
         myRender.renderPixel(450, 450);
         //myRender.printGrid(50);
         myRender.getImageWriter().writeToimage();
-
-
     }
 
     @Test
