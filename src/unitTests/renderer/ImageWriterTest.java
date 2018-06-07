@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class ImageWriterTest {
+public class  ImageWriterTest {
 
     @Test
     public void writeToimage() {
