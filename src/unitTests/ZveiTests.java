@@ -1,5 +1,6 @@
 import elements.*;
 import geometries.Geometry;
+import geometries.Plane;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.Test;
@@ -211,6 +212,48 @@ public class ZveiTests {
 
         myRender.renderImage();
         myRender.getImageWriter().writeToimage();
+
+    }
+
+
+
+
+    @Test
+    public void background_mirror(){
+
+        Camera cm = new Camera(new Point3D(0,-30,0), new Vector(1,0,0), new Vector(0,1,-1));
+
+        Plane background_left = new Plane(new Point3D(0,0,-50),new Vector(0,2,3),
+                new Color(100,0,0),new Material(0,1,1,0,20));
+
+        Plane background_right = new Plane(new Point3D(0,0,-50),new Vector(0,-2,3),
+                new Color(0,0,100),new Material(0,1,1,0,20));
+
+
+        Sphere MetalBall = new Sphere(new Point3D(0,0,-30),20,
+                new Color(84,86,90),new Material(4,10,0,0,20));
+
+        PointLight plight = new PointLight(new Point3D(-20,0,-10),
+                1,0.0025,0.0075, new Color(10, 60, 4));
+
+        Scene scene = new Scene("background_mirror");
+        scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
+        scene.setCameraScreenDistance(150);
+        scene.setSceneCamera(cm);
+        scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        scene.addGeometries(background_left,background_right,MetalBall);
+        scene.addLightSource(plight);
+
+        ImageWriter writer = new ImageWriter("background_mirror",700,700,700,700);
+        Render myRender = new Render();
+        myRender.setScene(scene);
+        myRender.setImageWriter(writer);
+
+        myRender.renderImage();
+        myRender.printGrid(100);
+        myRender.renderPixel(250,350);
+        myRender.getImageWriter().writeToimage();
+
 
     }
 
