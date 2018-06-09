@@ -166,16 +166,16 @@ public class ProjectTests {
                 new Color(20, 20, 20), new Material(1, 1, 0, 0, 10));
 
         Plane mirror = new Plane(new Point3D(0, 0, -200), new Vector(0, 0, 1),
-                new Color(0, 0, 200), new Material(1, 1, 0, 1, 10));
+                new Color(0, 0, 200), new Material(1, 1, 0, 0, 10));
 
         Color ballSilver = new Color(128, 128, 128);
-        Material ballMaterial = new Material(1, 1, 1, 0, 20);
+        Material ballMaterial = new Material(1, 1, 0, 1, 20);
 
         Sphere ball1 = new Sphere(new Point3D(-50, -21, -47), 10, ballSilver, ballMaterial);
 
         Sphere ball2 = new Sphere(new Point3D(-20, -15, -47), 10, ballSilver, ballMaterial);
 
-        Sphere ball3 = new Sphere(new Point3D(0, -15, -47), 10, ballSilver, ballMaterial);
+        Sphere ball3 = new Sphere(new Point3D(0, -15, -47), 10, ballSilver,ballMaterial );
 
         Sphere ball4 = new Sphere(new Point3D(20, -15, -47), 10, ballSilver, ballMaterial);
 
@@ -211,8 +211,8 @@ public class ProjectTests {
                 new Vector(0, 0, -1));
 
 
-        Scene myScene = new Scene("row of balls");
-        myScene.setCameraScreenDistance(1000);
+        Scene myScene = new Scene("row of balls1");
+        myScene.setCameraScreenDistance(130);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(/**/floor, mirror,
@@ -236,7 +236,7 @@ public class ProjectTests {
         // myScene.addLightSource(myDirectionalLight);
         myScene.addLightSource(myPointLight);
 
-        ImageWriter sceneWriter = new ImageWriter("row of balls", 3000, 3000, 3000, 3000);
+        ImageWriter sceneWriter = new ImageWriter("row of balls1", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);

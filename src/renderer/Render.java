@@ -20,7 +20,7 @@ public class Render {
     private Scene scene;
     private ImageWriter imageWriter;
 
-    final static int MAX_CALC_COLOR_LEVEL = 1;
+    final static int MAX_CALC_COLOR_LEVEL = 3;
 
 /**************** operations *******************/
 
