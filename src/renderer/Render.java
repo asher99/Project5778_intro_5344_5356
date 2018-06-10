@@ -114,8 +114,10 @@ public class Render {
             // if true - return the scaled color.
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                if (!occluded(lightSource,l, p, geo)) {
+                double shadowK = occluded(lightSource,l, p, geo);
+                if (! new Coordinate(0).equals(shadowK*k)) {
                     Color lightIntensity = lightSource.getIntensity(p);
+                    lightIntensity.scale(shadowK);
                     color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }
             }
@@ -286,7 +288,7 @@ public class Render {
      * @param geo - Geometry.
      * @return
      */
-    private boolean occluded(LightSource ls, Vector l, Point3D p, Geometry geo) {
+    private double occluded(LightSource ls, Vector l, Point3D p, Geometry geo) {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
 
         Vector normal = geo.getNormal(p);
@@ -296,18 +298,13 @@ public class Render {
         Ray lightRay = new Ray(/*geometryPoint*/p, lightDirection);
         Map<Geometry, List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(lightRay);
         if (intersectionPoints.isEmpty())
-            return false;
-        /*else if(intersectionPoints.containsKey(geo)) {
-            intersectionPoints.remove(geo);
-            return !intersectionPoints.isEmpty();
-       }
-        else return !intersectionPoints.isEmpty();*/
+            return 1;
         else {
 
             if (intersectionPoints.containsKey(geo)) {
                 intersectionPoints.remove(geo);
                 if (intersectionPoints.isEmpty())
-                    return false;
+                    return 1;
             }
 
             // Check if someone block the way:
@@ -318,7 +315,7 @@ public class Render {
             //       between the point on Geometry and the LightSource position
             //       is bigger than the distance
             //       between the point on the Geometry and the blocking Geometry.
-            boolean isSomeoneBlockMyWay = false;
+            double shadowK = 1;
             for (HashMap.Entry<Geometry, List<Point3D>> pair : intersectionPoints.entrySet()) {
                 for (Point3D point : pair.getValue()) {
                     Vector offset = new Vector(lightRay.getPoint(), point);
@@ -330,18 +327,18 @@ public class Render {
                             Vector pToIntersectionPoint = new Vector(p,point);
 
                             if (pToIntersectionPoint.sizeOfVector() < pToLsPosition.sizeOfVector()){
-                                isSomeoneBlockMyWay = true;
+                                shadowK *= pair.getKey().getMaterial().getKt();
                                 break;
                             }
                         }
                         else {
-                            isSomeoneBlockMyWay = true;
+                            shadowK *= pair.getKey().getMaterial().getKt();
                             break;
                         }
                     }
                 }
             }
-            return isSomeoneBlockMyWay;
+            return shadowK;
         }
     }
 
