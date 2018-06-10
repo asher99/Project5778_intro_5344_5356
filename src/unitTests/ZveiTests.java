@@ -218,8 +218,8 @@ public class ZveiTests {
 
 
 
-    @Test
-    public void background_mirrors(){
+    //@Test
+    public void background_mirrors(Vector spotLightDirection, int photoIndex){
 
         Camera cm = new Camera(new Point3D(0,0,0), new Vector(0,0,1), new Vector(0,1,0));
 
@@ -245,7 +245,7 @@ public class ZveiTests {
                 1,0.0025,0.0075, new Color(10, 60, 4));
 
         SpotLight behindBall = new SpotLight(new Point3D(0,42,0),1,0.0025,0.0075,
-                new Color(255,255,255),new Vector(0,-1,0));
+                new Color(255,255,255)/*new Vector(0,-1,0)*/,spotLightDirection);
 
         SpotLight inFrontBall = new SpotLight(new Point3D(0,-2,0),1,0.0025,0.0075,
                 new Color(155,155,155),new Vector(0,1,0));
@@ -259,7 +259,7 @@ public class ZveiTests {
         //scene.addLightSource(plight);
         scene.addLightSources(inFrontBall,behindBall);
 
-        ImageWriter writer = new ImageWriter("background_mirrors",800,800,800,800);
+        ImageWriter writer = new ImageWriter("background_mirrors_"+photoIndex ,800,800,800,800);
         Render myRender = new Render();
         myRender.setScene(scene);
         myRender.setImageWriter(writer);
@@ -270,6 +270,75 @@ public class ZveiTests {
         myRender.getImageWriter().writeToimage();
 
 
+    }
+
+    @Test
+    public void mirrors_room_GIF(){
+
+        Vector illumination = new Vector(0,-1,3);
+        Vector offset = new Vector(0,0,-0.2);
+
+        for(int i = 0; i < 30; i++){
+            background_mirrors(Vector.VectorialAdd(illumination,offset),i);
+        }
+
+    }
+
+
+    @Test
+    public void transparent_ball(){
+        Triangle first = new Triangle(
+                new Point3D(-130, 130, -25),//bottom left
+                new Point3D(130, 130, -25),//bottom right
+                new Point3D(130, -130, -35),//top right
+                new Color(60, 60, 60), new Material(2, 0.2, 1, 0, 5));
+
+        Triangle second = new Triangle(
+                new Point3D(130, -130, -35),//top right
+                new Point3D(-130, -130, -35),//top left
+                new Point3D(-130, 130, -25),//bottom left
+                new Color(60, 60, 60), new Material(2, 0.2, 1, 0, 5));
+
+        Sphere middle_layer1 = new Sphere(new Point3D(0, 0, -10),
+                9, new Color(100, 0, 0), new Material(0.4, 0.1, 0, 1, 20));
+
+        Sphere middle_layer2 = new Sphere(new Point3D(0, 0, -10),
+                6, new Color(0, 0, 100), new Material(0.4, 0.1, 1, 0, 20));
+
+        Sphere middle_layer3 = new Sphere(new Point3D(0, 0, -10),
+                3, new Color(0, 100, 0), new Material(0.4, 0.1, 1, 0, 20));
+
+        Camera camera = new Camera(new Point3D(0, 0, 0),
+                new Vector(0, -1, 0),
+                new Vector(0, 0, -1));
+
+        Scene myScene = new Scene("transparent_ball");
+        myScene.setCameraScreenDistance(70);
+        myScene.setSceneCamera(camera);
+        myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
+        myScene.addGeometries(/*first, second,*/ middle_layer1,middle_layer2/*,middle_layer3*/);
+        myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
+
+        SpotLight mySpotLight = new SpotLight(
+                new Point3D(12, 12, 0),
+                1, 0.00075, 0.0008,
+                new Color(255, 255, 255), new Vector(-12, -12, -15));
+
+        DirectionalLight myDirectionalLight = new DirectionalLight(new Color(40, 0, 0), new Vector(1.5, -3, -1));
+        myScene.addLightSource(mySpotLight);
+        //myScene.addLightSource(myDirectionalLight);
+
+
+        ImageWriter sceneWriter = new ImageWriter("transparent_ball", 1000, 1000, 1000, 1000);
+        Render myRender = new Render();
+        myRender.setScene(myScene);
+        myRender.setImageWriter(sceneWriter);
+
+        myRender.renderImage();
+        myRender.renderPixel(504, 497);
+        myRender.renderPixel(503, 497);
+        //myRender.printGrid(50);
+        myRender.getImageWriter().writeToimage();
     }
 
 }
