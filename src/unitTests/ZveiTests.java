@@ -219,39 +219,54 @@ public class ZveiTests {
 
 
     @Test
-    public void background_mirror(){
+    public void background_mirrors(){
 
-        Camera cm = new Camera(new Point3D(0,-30,0), new Vector(1,0,0), new Vector(0,1,-1));
+        Camera cm = new Camera(new Point3D(0,0,0), new Vector(0,0,1), new Vector(0,1,0));
 
-        Plane background_left = new Plane(new Point3D(0,0,-50),new Vector(0,2,3),
-                new Color(100,0,0),new Material(0,1,1,0,20));
+        Plane background_left = new Plane(new Point3D(0,80,0),new Vector(3,-1,0),
+                new Color(0,0,0),new Material(0,1,1,0,20));
 
-        Plane background_right = new Plane(new Point3D(0,0,-50),new Vector(0,-2,3),
-                new Color(0,0,100),new Material(0,1,1,0,20));
+        Plane background_right = new Plane(new Point3D(0,80,0),new Vector(-3,-1,0),
+                new Color(0,0,0),new Material(0,1,1,0,20));
+
+        Plane background_up = new Plane(new Point3D(0,80,0),new Vector(0,-1,-3),
+                new Color(0,0,0),new Material(0,1,1,0,20));
+
+        Plane background_down = new Plane(new Point3D(0,80,0),new Vector(0,-1,3),
+                new Color(0,0,0),new Material(0,1,1,0,20));
 
 
-        Sphere MetalBall = new Sphere(new Point3D(0,0,-30),20,
-                new Color(84,86,90),new Material(4,10,0,0,20));
+        /*Sphere MetalBall = new Sphere(new Point3D(0,20,0),12,
+                new Color(0,50,0),new Material(3,0.1,1,0,10));*/
+        Sphere MetalBall = new Sphere(new Point3D(0,20,0),12,
+                new Color(160,122,24),new Material(3,0.1,1,0,10));
 
         PointLight plight = new PointLight(new Point3D(-20,0,-10),
                 1,0.0025,0.0075, new Color(10, 60, 4));
 
-        Scene scene = new Scene("background_mirror");
+        SpotLight behindBall = new SpotLight(new Point3D(0,42,0),1,0.0025,0.0075,
+                new Color(255,255,255),new Vector(0,-1,0));
+
+        SpotLight inFrontBall = new SpotLight(new Point3D(0,-2,0),1,0.0025,0.0075,
+                new Color(155,155,155),new Vector(0,1,0));
+
+        Scene scene = new Scene("background_mirrors");
         scene.setSceneAmbientLight(new AmbientLight(new Color(0,0,0),1));
         scene.setCameraScreenDistance(150);
         scene.setSceneCamera(cm);
         scene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-        scene.addGeometries(background_left,background_right,MetalBall);
-        scene.addLightSource(plight);
+        scene.addGeometries(background_left,background_right,background_up,background_down,MetalBall);
+        //scene.addLightSource(plight);
+        scene.addLightSources(inFrontBall,behindBall);
 
-        ImageWriter writer = new ImageWriter("background_mirror",700,700,700,700);
+        ImageWriter writer = new ImageWriter("background_mirrors",800,800,800,800);
         Render myRender = new Render();
         myRender.setScene(scene);
         myRender.setImageWriter(writer);
 
         myRender.renderImage();
-        myRender.printGrid(100);
-        myRender.renderPixel(250,350);
+        //myRender.printGrid(100);
+        myRender.renderPixel(400,500);
         myRender.getImageWriter().writeToimage();
 
 
