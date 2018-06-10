@@ -88,6 +88,10 @@ public class PointLight extends Light implements LightSource {
         return null;
     }
 
-    ;
-
+    /**
+     * @return the light source position in space.
+     */
+    public Point3D getPosition() {
+        return position;
+    }
 }

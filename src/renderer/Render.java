@@ -1,6 +1,7 @@
 package renderer;
 
 import elements.LightSource;
+import elements.PointLight;
 import geometries.Geometry;
 import primitives.*;
 import primitives.Vector;
@@ -20,7 +21,7 @@ public class Render {
     private Scene scene;
     private ImageWriter imageWriter;
 
-    final static int MAX_CALC_COLOR_LEVEL = 2;
+    final static int MAX_CALC_COLOR_LEVEL = 5;
 
 /**************** operations *******************/
 
@@ -113,7 +114,7 @@ public class Render {
             // if true - return the scaled color.
             // if false - return just a (0,0,0) color that can't change the result in the rendering procedure.
             if ((Vector.dotProduct(l, n) > 0 && Vector.dotProduct(v, n) > 0) || (Vector.dotProduct(l, n) < 0 && Vector.dotProduct(v, n) < 0)) {
-                if (!occluded(l, p, geo)) {
+                if (!occluded(lightSource,l, p, geo)) {
                     Color lightIntensity = lightSource.getIntensity(p);
                     color.add(calcDiffusive(kd, l, n, v, lightIntensity), calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }
@@ -285,7 +286,7 @@ public class Render {
      * @param geo - Geometry.
      * @return
      */
-    private boolean occluded(Vector l, Point3D p, Geometry geo) {
+    private boolean occluded(LightSource ls, Vector l, Point3D p, Geometry geo) {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
 
         Vector normal = geo.getNormal(p);
@@ -309,16 +310,34 @@ public class Render {
                     return false;
             }
 
-            // check if someone block the way:
-            // if the vector between the point on the Geometry and the intersection point
-            // equals to the ray direction vector.
+            // Check if someone block the way:
+            //       if the vector between the point on the Geometry and the intersection point
+            //       equals to the ray direction vector.
+            //
+            //     Also, if the LightSource have position make sure that the distance
+            //       between the point on Geometry and the LightSource position
+            //       is bigger than the distance
+            //       between the point on the Geometry and the blocking Geometry.
             boolean isSomeoneBlockMyWay = false;
             for (HashMap.Entry<Geometry, List<Point3D>> pair : intersectionPoints.entrySet()) {
                 for (Point3D point : pair.getValue()) {
                     Vector offset = new Vector(lightRay.getPoint(), point);
                     if (lightRay.getDirection().equals(offset.normal())) {
-                        isSomeoneBlockMyWay = true;
-                        break;
+
+                        // in case the LightSource has origin.
+                        if (ls instanceof PointLight){
+                            Vector pToLsPosition = new Vector(p,((PointLight) ls).getPosition());
+                            Vector pToIntersectionPoint = new Vector(p,point);
+
+                            if (pToIntersectionPoint.sizeOfVector() < pToLsPosition.sizeOfVector()){
+                                isSomeoneBlockMyWay = true;
+                                break;
+                            }
+                        }
+                        else {
+                            isSomeoneBlockMyWay = true;
+                            break;
+                        }
                     }
                 }
             }
