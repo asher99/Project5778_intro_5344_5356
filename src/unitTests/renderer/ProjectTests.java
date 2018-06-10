@@ -17,7 +17,7 @@ public class ProjectTests {
         Plane floor = new Plane(new Point3D(0, 5, -50), new Vector(0, -1, 0),
                 new Color(25, 25, 25), new Material(1, 1, 0, 0, 20));
 
-        Plane mirror = new Plane(new Point3D(80, -100, 0), new Vector(1, -1, 0),
+        Plane mirror = new Plane(new Point3D(0, 0, -100), new Vector(0, 0, -1),
                 new Color(100, 100, 100), new Material(1, 1, 0, 0, 5));
 
 
@@ -46,7 +46,7 @@ public class ProjectTests {
                 new Ray(new Point3D(47, 4, -6), new Vector(0, 1, 0))
                 , cylinderColor, cylinderMaterial);
 
-        LimitedCylinder bar1 = new LimitedCylinder(3, new Point3D(-47, -160, -3),
+        LimitedCylinder bar1 = new LimitedCylinder(3, new Point3D(-47, -160, -6),
                 new Ray(new Point3D(47, -160, -6), new Vector(1, 0, 0))
                 , cylinderColor, cylinderMaterial);
 
@@ -115,13 +115,13 @@ public class ProjectTests {
 
         Camera camera = new Camera(/*new Point3D(0, -40, -25),
                 new Vector(1, 0, 0),
-                new Vector(0, 1, 0));
-                new Point3D(0, 0, 20),
+                new Vector(0, 1, 0));*/
+                new Point3D(0, -20, 100),
                 new Vector(0, -1, 0),
-                new Vector(0, 0, -1));*/
-                new Point3D(-200, -50, -47),
+                new Vector(0, 0, -1));
+               /* new Point3D(-200, -60, -47),
                 new Vector(-1, -1, 0),
-                new Vector(1, -1, 0));
+                new Vector(1, -1, 0));*/
 
         Scene myScene = new Scene("newton Cradle");
         myScene.setCameraScreenDistance(220);
