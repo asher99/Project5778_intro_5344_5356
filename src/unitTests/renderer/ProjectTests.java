@@ -14,12 +14,24 @@ public class ProjectTests {
     @Test
     public void newtonCradle() {
 
-        Plane floor = new Plane(new Point3D(0, 5, -50), new Vector(0, -1, 0),
+       /* Plane floor = new Plane(new Point3D(0, 5, -50), new Vector(0, -1, 0),
                 new Color(25, 25, 25), new Material(1, 1, 0, 0, 20));
 
         Plane mirror = new Plane(new Point3D(0, 0, -100), new Vector(0, 0, -1),
                 new Color(100, 100, 100), new Material(1, 1, 0, 0, 5));
+*/
 
+        Triangle floor1 = new Triangle(new Point3D(-750, 4, -300), new Point3D(-750, 4, 100), new Point3D(750, 4, 100)
+                , new Color(168, 119, 90), new Material(1, 1, 0, 0, 1));
+
+        Triangle floor2 = new Triangle(new Point3D(750, 4, 100), new Point3D(750, 4, -300), new Point3D(-750, 4, -300)
+                , new Color(168, 119, 90), new Material(1, 1, 0, 0, 1));
+
+        Triangle mirror1 = new Triangle(new Point3D(950, 10, -300), new Point3D(-950, -1000, -300), new Point3D(-950, 10, -300)
+                , new Color(46, 139, 87), new Material(1, 1, 0, 0, 1));
+
+        Triangle mirror2 = new Triangle(new Point3D(950, 10, -300), new Point3D(950, -1000, -300), new Point3D(-950, -1000, -300)
+                , new Color(46, 139, 87), new Material(1, 1, 0, 0, 1));
 
         Triangle base1 = new Triangle(new Point3D(50, 4, 0), new Point3D(-50, 4, 0), new Point3D(50, 4, -100)
                 , new Color(0, 0, 0), new Material(1, 1, 0, 0, 1));
@@ -116,7 +128,7 @@ public class ProjectTests {
         Camera camera = new Camera(/*new Point3D(0, -40, -25),
                 new Vector(1, 0, 0),
                 new Vector(0, 1, 0));*/
-                new Point3D(0, -20, 100),
+                new Point3D(0, -30, 80),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
                /* new Point3D(-200, -60, -47),
@@ -127,8 +139,8 @@ public class ProjectTests {
         myScene.setCameraScreenDistance(220);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-        myScene.addGeometries(/**/floor, mirror, base1, base2,
-                side1, side2, side3, side4, bar1, bar2,
+        myScene.addGeometries(floor1,floor2, mirror1,mirror2, base1, base2,
+                side1, side2/**/, side3, side4, bar1, bar2,
                 ball1, ball2, ball3, ball4, ball5,
                 string11, string21, string31, string41, string51,
                 string12, string22, string32, string42, string52);
@@ -146,7 +158,7 @@ public class ProjectTests {
         // DirectionalLight myDirectionalLight = new DirectionalLight(new Color(40, 0, 0), new Vector(1.5, -3, -1));
         myScene.addLightSource(mySpotLight);
         // myScene.addLightSource(myDirectionalLight);
-        // myScene.addLightSource(myPointLight);
+         myScene.addLightSource(myPointLight);
 
         ImageWriter sceneWriter = new ImageWriter("newton Cradle", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
