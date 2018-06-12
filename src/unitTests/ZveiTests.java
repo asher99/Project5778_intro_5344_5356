@@ -218,8 +218,8 @@ public class ZveiTests {
 
 
 
-    //@Test
-    public void background_mirrors(Vector spotLightDirection, int photoIndex){
+    @Test
+    public void background_mirrors(){
 
         Camera cm = new Camera(new Point3D(0,0,0), new Vector(0,0,1), new Vector(0,1,0));
 
@@ -245,7 +245,7 @@ public class ZveiTests {
                 1,0.0025,0.0075, new Color(10, 60, 4));
 
         SpotLight behindBall = new SpotLight(new Point3D(0,42,0),1,0.0025,0.0075,
-                new Color(255,255,255)/*new Vector(0,-1,0)*/,spotLightDirection);
+                new Color(255,255,255),new Vector(0,-1,0));
 
         SpotLight inFrontBall = new SpotLight(new Point3D(0,-2,0),1,0.0025,0.0075,
                 new Color(155,155,155),new Vector(0,1,0));
@@ -259,7 +259,7 @@ public class ZveiTests {
         //scene.addLightSource(plight);
         scene.addLightSources(inFrontBall,behindBall);
 
-        ImageWriter writer = new ImageWriter("background_mirrors_"+photoIndex ,800,800,800,800);
+        ImageWriter writer = new ImageWriter("background_mirrors",800,800,800,800);
         Render myRender = new Render();
         myRender.setScene(scene);
         myRender.setImageWriter(writer);
@@ -272,14 +272,14 @@ public class ZveiTests {
 
     }
 
-    @Test
+
     public void mirrors_room_GIF(){
 
         Vector illumination = new Vector(0,-1,3);
         Vector offset = new Vector(0,0,-0.2);
 
         for(int i = 0; i < 30; i++){
-            background_mirrors(Vector.VectorialAdd(illumination,offset),i);
+            //background_mirrors(Vector.VectorialAdd(illumination,offset),i);
         }
 
     }
