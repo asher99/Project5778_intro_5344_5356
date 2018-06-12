@@ -136,7 +136,7 @@ public class ProjectTests {
                 new Vector(1, -1, 0));*/
 
         Scene myScene = new Scene("newton Cradle");
-        myScene.setCameraScreenDistance(220);
+        myScene.setCameraScreenDistance(660);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(floor1,floor2, mirror1,mirror2, base1, base2,
@@ -160,7 +160,7 @@ public class ProjectTests {
         // myScene.addLightSource(myDirectionalLight);
          myScene.addLightSource(myPointLight);
 
-        ImageWriter sceneWriter = new ImageWriter("newton Cradle", 1000, 1000, 1000, 1000);
+        ImageWriter sceneWriter = new ImageWriter("newton Cradle", 3000, 3000, 3000, 3000);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
