@@ -22,30 +22,68 @@ public class Grid {
     // is the size of each voxel to construct the voxels a constant
     int delta;
 
+    // store how many Voxels are on the length of the axis.
+    int voxelsOnAxis;
+
 // ***************** Constructors ********************** //
 
-    public Grid(Geometries geo, Point3D org, int d) {
-        grid = voxelisation(geo);
+    /**
+     * construct grid
+     * @param geo
+     * @param org
+     * @param d
+     * @param n
+     */
+    public Grid(Geometries geo, Point3D org, int d, int n) {
 
         origin = org;
-
         delta = d;
-
+        voxelsOnAxis = n;
+        grid = voxelisation();
     }
 
     // ***************** Getters/Setters ********************** //
 
+    public HashMap<Point3D, Voxel> getGrid() {
+        return grid;
+    }
+
+
     // ***************** Operations ******************** //
 
     /**
-     * gets a list of geometries of the scene and adds them to the voxels
-     * and returns a map of all the voxels that build the scene
-     *
-     * @param geo
+     * initialize the grid hash-map.
      * @return
      */
-    public HashMap<Point3D, Voxel> voxelisation(Geometries geo) {
-        return null;    //  To Do
+    public HashMap<Point3D, Voxel> voxelisation() {
+
+        HashMap<Point3D,Voxel> voxelHash = new HashMap<>();
+
+        for (int z = 0; z <voxelsOnAxis; z++){
+            for (int y = 0; y <voxelsOnAxis; y++){
+                for (int x = 0; x <voxelsOnAxis; x++){
+                    Point3D index = new Point3D(x*delta, y*delta, z*delta);
+                    Point3D key = Point3D.add(origin,index);
+                    voxelHash.put(key, new Voxel(origin,delta,new Geometries()));
+                }
+            }
+        }
+        return voxelHash;
+    }
+
+
+    /**
+     * receive a point in space, and return the appropriate Voxel.
+     * @param p
+     * @return
+     */
+    public Point3D findVoxel(Point3D p){
+        Point3D offset = Point3D.subtract(p,origin);
+        int x = (int)(offset.getX() / delta);
+        int y = (int)(offset.getY() / delta);
+        int z = (int)(offset.getZ() / delta);
+
+        return new Point3D(origin.getX() + x*delta, origin.getY() + y*delta, origin.getZ() + z*delta);
     }
     
 

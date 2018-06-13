@@ -95,8 +95,8 @@ public class Voxel {
 
 
     public Point3D nextVoxelOrigin(Ray inRay){
-        Point3D offset = new Point3D(inRay.getPoint().getX() + delta,inRay.getPoint().getY() + delta,inRay.getPoint().getZ() + delta);
-        return null;
+        /*Point3D offset = new Point3D(inRay.getPoint().getX() + delta,inRay.getPoint().getY() + delta,inRay.getPoint().getZ() + delta);
+        */return null;
     }
 
 
