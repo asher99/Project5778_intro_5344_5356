@@ -4,6 +4,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.net.PortUnreachableException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,5 +52,19 @@ public class Geometries extends Geometry {
      */
     public List<Geometry> getGeometries() {
         return geometries;
+    }
+
+    /**
+     * To String
+     * @return
+     */
+    @Override
+    public String toString() {
+        String string = new String();
+        for (Geometry geo:getGeometries()) {
+            string += (geo.toString() + '\n');
+        }
+
+        return string;
     }
 }

@@ -38,6 +38,18 @@ public class Voxel {
     // operations:
 
     /**
+     * add multiple Geometries to the Voxel Geometries.
+     * @param geometries
+     */
+    public void addGeometries(Geometry... geometries){
+
+        for (Geometry geo:geometries) {
+            voxelGeometries.addGeometry(geo);
+        }
+    }
+
+
+    /**
      * return if a voxel is empty from Geometries.
      * @return
      */
@@ -99,5 +111,10 @@ public class Voxel {
         */return null;
     }
 
-
+    @Override
+    public String toString() {
+        return  "Voxel origin: " + voxelOrigin.toString() +
+                "\nVoxel Geometries: " + voxelGeometries.toString() +
+                "\nVoxel end: " + voxelFinish.toString();
+    }
 }
