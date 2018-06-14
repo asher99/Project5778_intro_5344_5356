@@ -5,7 +5,6 @@ import geometries.Triangle;
 import grid.Grid;
 import grid.Voxel;
 import org.junit.Test;
-import org.omg.CORBA.portable.ValueOutputStream;
 import primitives.*;
 
 import java.util.HashMap;
@@ -21,7 +20,7 @@ public class gridTest {
         Geometries geos = new Geometries();
 
         Grid myGrid = new Grid(geos,new Point3D(-10,-10,-10),5,4);
-        Point3D a = myGrid.findVoxel(new Point3D(-18,19,13));
+        Point3D a = myGrid.findVoxel(new Point3D(-8,9,3));
 
         Voxel v = myGrid.getGrid().get(a);
         System.out.println(v);
@@ -56,12 +55,16 @@ public class gridTest {
         List voxelList6 = myGrid.rayTrace(testRay6);
 
         System.out.println(voxelList1);
+        System.out.println();
         System.out.println(voxelList2);
+        System.out.println();
         System.out.println(voxelList3);
+        System.out.println();
         System.out.println(voxelList4);
+        System.out.println();
         System.out.println(voxelList5);
+        System.out.println();
         System.out.println(voxelList6);
-
 
     }
 

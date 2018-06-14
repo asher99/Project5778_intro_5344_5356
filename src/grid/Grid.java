@@ -108,15 +108,14 @@ public class Grid {
         List<Voxel> voxelList = new LinkedList<>();
 
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
+        Point3D next = inRay.getPoint();
 
         while (!(current == null)){
 
-            voxelList.add(current);
-            Point3D next = Vector.VectorialAdd(new Vector(inRay.getPoint()),inRay.getDirection().multiplyByScalar(delta)).getVector();
-            //
-            // in case we decide to increase accuracy by multiplying delta/x,
-            // we need to check if the list contains already this voxel
-            //
+            if (!voxelList.contains(current))
+                voxelList.add(current);
+
+            next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
             current = grid.get(findVoxel(next));
         }
 
