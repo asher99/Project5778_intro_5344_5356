@@ -1,6 +1,7 @@
 package grid;
 
 import geometries.Geometries;
+import geometries.Geometry;
 import primitives.*;
 import primitives.Vector;
 
@@ -110,6 +111,7 @@ public class Grid {
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
         Point3D next = inRay.getPoint();
 
+        // when the ray get out if the grid - the 'current' voxel is null.
         while (!(current == null)){
 
             if (!voxelList.contains(current))
@@ -121,6 +123,20 @@ public class Grid {
 
         return voxelList;
     }
+
+
+    /**
+     * set background Geometry.
+     * @param geos
+     */
+    public void setBackgroundGeometries(Geometry... geos){
+
+        for ( Geometry g :geos) {
+            backgroundGeometries.addGeometry(g);
+        }
+    }
+
+
     
 
 }
