@@ -252,15 +252,11 @@ public class ProjectTests {
 
     @Test
     public void gridedProject() {
-        Geometries geos = new Geometries();
 
-        Grid myGrid = new Grid(geos, new Point3D(115, 0, 81), 46, 5);
-
-
-        Triangle floor1 = new Triangle(new Point3D(-750, 1, -300), new Point3D(-750, 1, 100), new Point3D(750, 1, 100)
+        Triangle floor1 = new Triangle(new Point3D(-750, 0, -300), new Point3D(-750, 0, 100), new Point3D(750, 0, 100)
                 , new Color(168, 119, 90), new Material(1, 1, 0, 0, 1));
 
-        Triangle floor2 = new Triangle(new Point3D(750, 1, 100), new Point3D(750, 1, -300), new Point3D(-750, 1, -300)
+        Triangle floor2 = new Triangle(new Point3D(750, 0, 100), new Point3D(750, 0, -300), new Point3D(-750, 0, -300)
                 , new Color(168, 119, 90), new Material(1, 1, 0, 0, 1));
 
         Triangle mirror1 = new Triangle(new Point3D(950, 10, -300), new Point3D(-950, -1000, -300), new Point3D(-950, 10, -300)
@@ -269,10 +265,16 @@ public class ProjectTests {
         Triangle mirror2 = new Triangle(new Point3D(950, 10, -300), new Point3D(950, -1000, -300), new Point3D(-950, -1000, -300)
                 , new Color(46, 139, 87), new Material(1, 1, 0, 0, 1));
 
-        Triangle base1 = new Triangle(new Point3D(50, 4, 0), new Point3D(-50, 4, 0), new Point3D(50, 4, -100)
+        Triangle base1 = new Triangle(new Point3D(50, -4, 0), new Point3D(-50, -4, 0), new Point3D(50, -4, -100)
                 , new Color(0, 0, 0), new Material(1, 1, 0, 0, 1));
 
-        Triangle base2 = new Triangle(new Point3D(50, 4, -100), new Point3D(-50, 4, -100), new Point3D(-50, 4, 0)
+        Triangle base2 = new Triangle(new Point3D(50, -4, -100), new Point3D(-50, -4, -100), new Point3D(-50, -4, 0)
+                , new Color(0, 0, 0), new Material(1, 1, 0, 0, 1));
+
+        Triangle baseFront1 = new Triangle(new Point3D(50, -4, 0), new Point3D(-50, -4, 0), new Point3D(-50, 0, 0)
+                , new Color(0, 0, 0), new Material(1, 1, 0, 0, 1));
+
+        Triangle baseFront2 = new Triangle(new Point3D(50, -4, 0), new Point3D(50, 0, 0), new Point3D(-50, 0, 0)
                 , new Color(0, 0, 0), new Material(1, 1, 0, 0, 1));
 
         Color cylinderColor = new Color(0, 0, 150);
@@ -378,12 +380,14 @@ public class ProjectTests {
 *   -69 <-> -115         -184 <-> -230      -103 <-> -149
 *
 * */
+       /* Geometries geos = new Geometries();
+        Grid myGrid = new Grid(geos, new Point3D(115, 0, 81), 46, 5);
 
         myGrid.getGrid().get(new Point3D(-23, 0, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -46, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -92, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -138, -57)).addGeometries(string11);
-        
+
         myGrid.getGrid().get(new Point3D(23, 0, -57)).addGeometries(string21,string31,string41);
         myGrid.getGrid().get(new Point3D(23, -46, -57)).addGeometries(string21,string31,string41);
         myGrid.getGrid().get(new Point3D(23, -92, -57)).addGeometries(string21,string31,string41);
@@ -413,12 +417,12 @@ public class ProjectTests {
         myGrid.getGrid().get(new Point3D(69, -92, 35)).addGeometries(string52);
         myGrid.getGrid().get(new Point3D(69, -138, 35)).addGeometries(string52);
 
-        myGrid.getGrid().get(new Point3D(69, 0, 35)).addGeometries(base1);
+        myGrid.getGrid().get(new Point3D(69, 0, 35)).addGeometries(base1,baseFront1,baseFront2);
 
-        myGrid.getGrid().get(new Point3D(23, 0, 35)).addGeometries(base1);
+        myGrid.getGrid().get(new Point3D(23, 0, 35)).addGeometries(base1,baseFront1,baseFront2);
         myGrid.getGrid().get(new Point3D(23, 0, -57)).addGeometries(base1,base2);
 
-        myGrid.getGrid().get(new Point3D(-23, 0, 35)).addGeometries(base1,base2);
+        myGrid.getGrid().get(new Point3D(-23, 0, 35)).addGeometries(base1,base2,baseFront1,baseFront2);
 
         myGrid.getGrid().get(new Point3D(69, 0, -11)).addGeometries(ball5,ball4,base1,side4);
         myGrid.getGrid().get(new Point3D(23, 0, -11)).addGeometries(ball4,ball3,ball2,base1,base2);
@@ -446,15 +450,18 @@ public class ProjectTests {
         myGrid.getGrid().get(new Point3D(69, -46, -11)).addGeometries(side4);
         myGrid.getGrid().get(new Point3D(69, -92, -11)).addGeometries(side4);
 
-        Scene myScene = new Scene("newton Cradle");
-        myScene.setCameraScreenDistance(660);
+        myGrid.setBackgroundGeometries(floor1,floor2,mirror1,mirror2);
+*/
+        Scene myScene = new Scene("grided newton Cradle");
+        myScene.setCameraScreenDistance(320);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-       /* myScene.addGeometries(floor1, floor2, mirror1, mirror2, base1, base2,
+        myScene.addGeometries(/**/floor1, floor2, mirror1, mirror2, base1, base2,
+                baseFront1,baseFront2,
                 side1, side2, side3, side4, bar1, bar2,
                 ball1, ball2, ball3, ball4, ball5,
                 string11, string21, string31, string41, string51,
-                string12, string22, string32, string42, string52);*/
+                string12, string22, string32, string42, string52);/**/
 
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
 
@@ -469,7 +476,7 @@ public class ProjectTests {
         myScene.addLightSource(mySpotLight);
         myScene.addLightSource(myPointLight);
 
-        ImageWriter sceneWriter = new ImageWriter("newton Cradle", 3000, 3000, 3000, 3000);
+        ImageWriter sceneWriter = new ImageWriter("grided newton Cradle", 1000, 1000, 1000, 1000);
         Render myRender = new Render();
         myRender.setScene(myScene);
         myRender.setImageWriter(sceneWriter);
