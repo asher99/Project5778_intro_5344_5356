@@ -98,6 +98,11 @@ public class Grid {
     }
 
 
+    /**
+     * receive a ray and return the track of it: list of voxels the ray intersect.
+     * @param inRay
+     * @return
+     */
     public List<Voxel> rayTrace(Ray inRay){
 
         List<Voxel> voxelList = new LinkedList<>();
@@ -106,9 +111,16 @@ public class Grid {
 
         while (!(current == null)){
 
+            voxelList.add(current);
+            Point3D next = Vector.VectorialAdd(new Vector(inRay.getPoint()),inRay.getDirection().multiplyByScalar(delta)).getVector();
+            //
+            // in case we decide to increase accuracy by multiplying delta/x,
+            // we need to check if the list contains already this voxel
+            //
+            current = grid.get(findVoxel(next));
         }
 
-        return null;
+        return voxelList;
     }
     
 
