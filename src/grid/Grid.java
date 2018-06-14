@@ -1,6 +1,7 @@
 package grid;
 
 import geometries.Geometries;
+import geometries.Geometry;
 import primitives.*;
 import primitives.Vector;
 
@@ -98,18 +99,44 @@ public class Grid {
     }
 
 
+    /**
+     * receive a ray and return the track of it: list of voxels the ray intersect.
+     * @param inRay
+     * @return
+     */
     public List<Voxel> rayTrace(Ray inRay){
 
         List<Voxel> voxelList = new LinkedList<>();
 
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
+        Point3D next = inRay.getPoint();
 
+        // when the ray get out if the grid - the 'current' voxel is null.
         while (!(current == null)){
 
+            if (!voxelList.contains(current))
+                voxelList.add(current);
+
+            next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
+            current = grid.get(findVoxel(next));
         }
 
-        return null;
+        return voxelList;
     }
+
+
+    /**
+     * set background Geometry.
+     * @param geos
+     */
+    public void setBackgroundGeometries(Geometry... geos){
+
+        for ( Geometry g :geos) {
+            backgroundGeometries.addGeometry(g);
+        }
+    }
+
+
     
 
 }
