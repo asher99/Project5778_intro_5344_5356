@@ -1,4 +1,5 @@
 package primitives;
+import java.util.Objects;
 
 /**
  * class point3D for point in the space.
@@ -66,6 +67,15 @@ public class Point3D extends Point2D {
     @Override
     public boolean equals(Object other) {
         return super.equals(other) && z.equals(((Point3D) other).z);
+    }
+
+    /**
+     * overriding hashMap.
+     * @return
+     */
+    @Override
+    public int hashCode(){
+        return Objects.hash(super.x.getCoord(), super.y.getCoord(), z.getCoord());
     }
 
     /**

@@ -2,9 +2,9 @@ package grid;
 
 import geometries.Geometries;
 import primitives.*;
+import primitives.Vector;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class Grid for a 3D grid in the scene.
@@ -15,6 +15,7 @@ public class Grid {
 
     // hash map that holds all voxels of the scene
     HashMap<Point3D, Voxel> grid;
+    Geometries backgroundGeometries;
 
     // the origin of the grid (starting point)
     Point3D origin;
@@ -40,6 +41,7 @@ public class Grid {
         delta = d;
         voxelsOnAxis = n;
         grid = voxelisation();
+        backgroundGeometries = new Geometries();
     }
 
     // ***************** Getters/Setters ********************** //
@@ -48,6 +50,13 @@ public class Grid {
         return grid;
     }
 
+    /**
+     * get origin of the grid.
+     * @return
+     */
+    public Point3D getOrigin() {
+        return origin;
+    }
 
     // ***************** Operations ******************** //
 
@@ -57,14 +66,15 @@ public class Grid {
      */
     public HashMap<Point3D, Voxel> voxelisation() {
 
-        HashMap<Point3D,Voxel> voxelHash = new HashMap<>();
+        HashMap<Point3D,Voxel> voxelHash = new HashMap<>(voxelsOnAxis*voxelsOnAxis*voxelsOnAxis);
 
         for (int z = 0; z <voxelsOnAxis; z++){
             for (int y = 0; y <voxelsOnAxis; y++){
                 for (int x = 0; x <voxelsOnAxis; x++){
                     Point3D index = new Point3D(x*delta, y*delta, z*delta);
                     Point3D key = Point3D.add(origin,index);
-                    voxelHash.put(key, new Voxel(origin,delta,new Geometries()));
+                    Voxel value = new Voxel(key,delta,new Geometries());
+                    voxelHash.put(key, value);
                 }
             }
         }
@@ -83,7 +93,22 @@ public class Grid {
         int y = (int)(offset.getY() / delta);
         int z = (int)(offset.getZ() / delta);
 
-        return new Point3D(origin.getX() + x*delta, origin.getY() + y*delta, origin.getZ() + z*delta);
+        Point3D index = new Point3D(origin.getX() + x*delta, origin.getY() + y*delta, origin.getZ() + z*delta);
+        return  index;
+    }
+
+
+    public List<Voxel> rayTrace(Ray inRay){
+
+        List<Voxel> voxelList = new LinkedList<>();
+
+        Voxel current = grid.get(findVoxel(inRay.getPoint()));
+
+        while (!(current == null)){
+
+        }
+
+        return null;
     }
     
 
