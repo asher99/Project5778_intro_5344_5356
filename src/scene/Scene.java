@@ -6,6 +6,7 @@ import elements.Light;
 import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
+import grid.Grid;
 import primitives.Point3D;
 import primitives.Vector;
 
@@ -22,6 +23,7 @@ public class Scene {
     private String sceneName;
     private Color sceneBackgroundColor;
     private Geometries shapesInScene;
+    private Grid grid;
     private Camera sceneCamera;
     private double cameraScreenDistance;
     private AmbientLight sceneAmbientLight;
@@ -154,6 +156,22 @@ public class Scene {
         return shapesInScene;
     }
 
+    /**
+     * getter
+     * @return
+     */
+    public Grid getGrid() {
+        return grid;
+    }
+
+    /**
+     * setter
+     * @param grid
+     */
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
     // ***************** Operations ******************** //
 
     /**
@@ -193,6 +211,7 @@ public class Scene {
             addLightSource(ls);
         }
     }
+
 
 
 }
