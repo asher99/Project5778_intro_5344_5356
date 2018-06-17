@@ -494,8 +494,9 @@ public class ProjectTests {
         myRender.getScene().setGrid(myGrid);
         myRender.setImageWriter(sceneWriter);
 
-        myRender.renderImage3DDDA();
-        myRender.renderPixel3DDA(300,800);
+        //myRender.renderImage3DDDA();
+        myRender.renderImage();
+        //myRender.renderPixel3DDA(300,800);
         myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 

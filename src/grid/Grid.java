@@ -125,8 +125,13 @@ public class Grid {
                 return intersections;
             }
 
-            next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
-            current = grid.get(findVoxel(next));
+            //next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
+            //current = grid.get(findVoxel(next));
+            next = new Point3D(next.getX()+inRay.getDirection().getVector().getX()*delta,
+                    next.getY() + inRay.getDirection().getVector().getY()*delta,
+                    next.getZ() - inRay.getDirection().getVector().getZ()*delta);
+
+            current = grid.get(findVoxel(new Point3D(next.getX(),next.getY(),-next.getZ())));
         }
 
         return null;
