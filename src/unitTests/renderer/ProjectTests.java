@@ -464,7 +464,7 @@ public class ProjectTests {
         myGrid.setBackgroundGeometries(floor1,floor2,mirror1,mirror2);
 
         Scene myScene = new Scene("grided newton Cradle");
-        myScene.setCameraScreenDistance(230);
+        myScene.setCameraScreenDistance(420);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(floor1, floor2, mirror1, mirror2, base1, base2,
@@ -495,6 +495,8 @@ public class ProjectTests {
         myRender.setImageWriter(sceneWriter);
 
         myRender.renderImage3DDDA();
+        myRender.renderPixel3DDA(300,800);
+        myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
     }

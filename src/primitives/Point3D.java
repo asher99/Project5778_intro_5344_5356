@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Point3D extends Point2D {
 
     //additional coordinate for the z axis.
-    Coordinate z;
+    private Coordinate z;
 
     // ***************** Constructor ********************** //
 

@@ -244,7 +244,7 @@ public class Render3DDDA extends Render {
      * @param i
      * @param j
      */
-    public void renderPixel(int i, int j) {
+    public void renderPixel3DDA(int i, int j) {
 
         // construct ray through that pixel
         Ray ray = scene.getSceneCamera().ConstractRaythroughPixel(imageWriter.getNx(), imageWriter.getNy(),
