@@ -136,7 +136,11 @@ public class Grid {
         }
     }
 
-
-    
-
+    /**
+     * return background Geometries
+     * @return
+     */
+    public Geometries getBackgroundGeometries() {
+        return backgroundGeometries;
+    }
 }

@@ -54,6 +54,8 @@ public class Render {
         }
     }
 
+
+
     private Color calcColor(Geometry geo, Point3D p, Ray inRay) {
         return calcColor(geo, p, inRay, MAX_CALC_COLOR_LEVEL, 1);
     }
