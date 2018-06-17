@@ -104,8 +104,9 @@ public class Grid {
      * @param inRay
      * @return
      */
-    public List<Voxel> rayTrace(Ray inRay){
+    public Map<Geometry,Point3D> rayTrace(Ray inRay){
 
+        Map<Geometry,Point3D> intersections = new HashMap<Geometry,Point3D>();
         List<Voxel> voxelList = new LinkedList<>();
 
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
@@ -117,11 +118,19 @@ public class Grid {
             if (!voxelList.contains(current))
                 voxelList.add(current);
 
+            intersections = current.ClosestIntersection(inRay);
+
+            // if we found intersection in one of the voxels, the tracing is over.
+            if(!intersections.isEmpty()){
+                return intersections;
+            }
+
             next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
             current = grid.get(findVoxel(next));
         }
 
-        return voxelList;
+        return null;
+        // return backgroundIntersection(inRay)
     }
 
 

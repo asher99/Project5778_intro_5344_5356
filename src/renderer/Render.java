@@ -18,10 +18,10 @@ import java.util.Map.Entry;
 public class Render {
 
     //fields
-    private Scene scene;
-    private ImageWriter imageWriter;
+    protected Scene scene;
+    protected ImageWriter imageWriter;
 
-    final static int MAX_CALC_COLOR_LEVEL = 7;
+    protected final static int MAX_CALC_COLOR_LEVEL = 7;
 
 /**************** operations *******************/
 
@@ -56,7 +56,7 @@ public class Render {
 
 
 
-    private Color calcColor(Geometry geo, Point3D p, Ray inRay) {
+    protected Color calcColor(Geometry geo, Point3D p, Ray inRay) {
         return calcColor(geo, p, inRay, MAX_CALC_COLOR_LEVEL, 1);
     }
 
@@ -169,7 +169,7 @@ public class Render {
      * @param inRay - define ray: use the same direction of the original Ray.
      * @return refracted ray
      */
-    private Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
+    protected Ray constructRefractedRay(Geometry geo, Point3D p, Ray inRay) {
 
         Vector normal = geo.getNormal(p);
         Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, inRay.getDirection()) > 0 ? 2 : -2);
@@ -182,7 +182,7 @@ public class Render {
      * @param reflectedRay
      * @return
      */
-    private Map.Entry<Geometry, Point3D> findClosestIntersection(Ray reflectedRay) {
+    protected Map.Entry<Geometry, Point3D> findClosestIntersection(Ray reflectedRay) {
         Map<Geometry,List<Point3D>> intersectionPoints = scene.getShapesInScene().findIntersections(reflectedRay);
         if(intersectionPoints.isEmpty())
             return null;
@@ -199,7 +199,7 @@ public class Render {
      * @param inRay
      * @return
      */
-    private Ray constructReflectedRay(Vector n, Geometry geo, Point3D p, Ray inRay) {
+    protected Ray constructReflectedRay(Vector n, Geometry geo, Point3D p, Ray inRay) {
         double scalar = -2 * Vector.dotProduct(n, inRay.getDirection());
         n = n.multiplyByScalar(scalar);
 
@@ -290,7 +290,7 @@ public class Render {
      * @param geo - Geometry.
      * @return
      */
-    private double occluded(LightSource ls, Vector l, Point3D p, Geometry geo) {
+    protected double occluded(LightSource ls, Vector l, Point3D p, Geometry geo) {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
 
         Vector normal = geo.getNormal(p);
