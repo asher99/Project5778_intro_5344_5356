@@ -392,7 +392,7 @@ public class ProjectTests {
 *
 * */
         Geometries geos = new Geometries();
-        Grid myGrid = new Grid(geos, new Point3D(115, 0, 81), 46, 5);
+        Grid myGrid = new Grid(geos, new Point3D(115, 0, 81), -46, 5);
 
         myGrid.getGrid().get(new Point3D(-23, 0, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -46, -57)).addGeometries(string11);
@@ -464,15 +464,15 @@ public class ProjectTests {
         myGrid.setBackgroundGeometries(floor1,floor2,mirror1,mirror2);
 
         Scene myScene = new Scene("grided newton Cradle");
-        myScene.setCameraScreenDistance(1100);
+        myScene.setCameraScreenDistance(230);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
-       /* myScene.addGeometries(floor1, floor2, mirror1, mirror2, base1, base2,
+        myScene.addGeometries(floor1, floor2, mirror1, mirror2, base1, base2,
                 baseFront1,baseFront2,
                 side1, side2, side3, side4, bar1, bar2,
                 ball1, ball2, ball3, ball4, ball5,
                 string11, string21, string31, string41, string51,
-                string12, string22, string32, string42, string52);*/
+                string12, string22, string32, string42, string52);
 
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
 
@@ -488,12 +488,13 @@ public class ProjectTests {
         //myScene.addLightSource(mySpotLight);
         myScene.addLightSource(myPointLight);
 
-        ImageWriter sceneWriter = new ImageWriter("grided newton Cradle", 5000, 5000, 5000, 5000);
-        Render myRender = new Render();
+        ImageWriter sceneWriter = new ImageWriter("grided newton Cradle", 1000, 1000, 1000, 1000);
+        Render3DDDA myRender = new Render3DDDA();
         myRender.setScene(myScene);
+        myRender.getScene().setGrid(myGrid);
         myRender.setImageWriter(sceneWriter);
 
-        myRender.renderImage();
+        myRender.renderImage3DDDA();
         myRender.getImageWriter().writeToimage();
 
     }

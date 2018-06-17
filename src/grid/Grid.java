@@ -121,7 +121,7 @@ public class Grid {
             intersections = current.ClosestIntersection(inRay);
 
             // if we found intersection in one of the voxels, the tracing is over.
-            if(!intersections.isEmpty()){
+            if(!(intersections == null)){
                 return intersections;
             }
 

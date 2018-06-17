@@ -21,7 +21,7 @@ public class Render {
     protected Scene scene;
     protected ImageWriter imageWriter;
 
-    protected final static int MAX_CALC_COLOR_LEVEL = 7;
+    protected final static int MAX_CALC_COLOR_LEVEL = 1;
 
 /**************** operations *******************/
 
@@ -55,7 +55,13 @@ public class Render {
     }
 
 
-
+    /**
+     * call the real calcColor method.
+     * @param geo
+     * @param p
+     * @param inRay
+     * @return
+     */
     protected Color calcColor(Geometry geo, Point3D p, Ray inRay) {
         return calcColor(geo, p, inRay, MAX_CALC_COLOR_LEVEL, 1);
     }
@@ -285,6 +291,7 @@ public class Render {
     }
 
     /**
+     * find if a point is occluded - there is a Geometry blocking the way to the light source.
      * @param l   - vector from the light source to the object
      * @param p   - intersection point between the ray and the Geometry.
      * @param geo - Geometry.

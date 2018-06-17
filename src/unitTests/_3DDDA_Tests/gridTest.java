@@ -34,7 +34,7 @@ public class gridTest {
         System.out.println(test);*/
     }
 
-    @Test
+    /*@Test
     public void rayTrace(){
 
         Geometries geos = new Geometries();
@@ -66,6 +66,6 @@ public class gridTest {
         System.out.println();
         System.out.println(voxelList6);
 
-    }
+    }*/
 
 }
