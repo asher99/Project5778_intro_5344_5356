@@ -107,16 +107,11 @@ public class Grid {
     public Map<Geometry,Point3D> rayTrace(Ray inRay){
 
         Map<Geometry,Point3D> intersections = new HashMap<Geometry,Point3D>();
-        List<Voxel> voxelList = new LinkedList<>();
-
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
         Point3D next = inRay.getPoint();
 
         // when the ray get out if the grid - the 'current' voxel is null.
         while (!(current == null)){
-
-            if (!voxelList.contains(current))
-                voxelList.add(current);
 
             intersections = current.ClosestIntersection(inRay);
 
@@ -127,9 +122,9 @@ public class Grid {
 
             //next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
             //current = grid.get(findVoxel(next));
-            next = new Point3D(next.getX()+inRay.getDirection().getVector().getX()*delta,
-                    next.getY() + inRay.getDirection().getVector().getY()*delta,
-                    next.getZ() - inRay.getDirection().getVector().getZ()*delta);
+            next = new Point3D(next.getX()+inRay.getDirection().getVector().getX()*(delta/10),
+                    next.getY() + inRay.getDirection().getVector().getY()*(delta/10),
+                    next.getZ() - inRay.getDirection().getVector().getZ()*(delta/10));
 
             current = grid.get(findVoxel(new Point3D(next.getX(),next.getY(),-next.getZ())));
         }

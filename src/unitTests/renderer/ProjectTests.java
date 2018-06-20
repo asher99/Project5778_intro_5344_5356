@@ -3,6 +3,7 @@ package renderer;
 import elements.*;
 import geometries.*;
 import grid.Grid;
+import grid.Voxel;
 import org.junit.Test;
 import primitives.*;
 import scene.Scene;
@@ -494,10 +495,13 @@ public class ProjectTests {
         myRender.getScene().setGrid(myGrid);
         myRender.setImageWriter(sceneWriter);
 
-        //myRender.renderImage3DDDA();
-        myRender.renderImage();
-        //myRender.renderPixel3DDA(300,800);
-        myRender.printGrid(100);
+
+        //Voxel a = myGrid.getGrid().get(new Point3D(69,0,-11));
+
+        myRender.renderImage3DDDA();
+        //myRender.renderImage();
+        //.renderPixel3DDA(380,650);
+        //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
     }
