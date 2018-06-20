@@ -16,6 +16,7 @@ public class Camera {
     Vector vUp;
     Vector vTo;
     Vector vRight;
+
     // ***************** Constructor ********************** //
 
     /**
@@ -65,7 +66,6 @@ public class Camera {
         return new Ray(p0, vectorTowardsPixel.normal());
     }
 
-
     /**
      * calculated the center of the pixel in which the ray pass.
      *
@@ -86,25 +86,12 @@ public class Camera {
         xPosition = (i - (Nx * 0.5)) * pWidth - pWidth * 0.5;
         yPosition = (j - (Ny * 0.5)) * pHeight - pHeight * 0.5;
 
-       /* if (Nx % 2 == 0) {
-            xPosition = (i - Nx * 0.5) * pWidth - pWidth * 0.5;
-        } else {
-            xPosition = (i - Nx * 0.5) * pWidth;
-        }
-
-        if (Ny % 2 == 0) {
-            yPosition = (j - Ny * 0.5) * pHeight - pHeight * 0.5;
-        } else {
-            yPosition = (j - Ny * 0.5) * pHeight;
-        }*/
-
         // finding the vectors in x axis and y axis.
         Vector vUpMovment = vUp.multiplyByScalar(-1 * yPosition);
         Vector vRightMovment = vRight.multiplyByScalar(xPosition);
 
         // we add the sum of the vectors to the center of the matrix.
         return Point3D.add(Point3D.add(centerOfMatrix, vUpMovment.getVector()), vRightMovment.getVector());
-
     }
 
     /*************getters/setters**********************/

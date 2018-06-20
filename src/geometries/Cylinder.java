@@ -60,11 +60,9 @@ public class Cylinder extends RadialGeometry {
      *
      * @return
      */
-    public Ray getOrientaion() {
+    public Ray getOrientation() {
         return orientation;
     }
-
-
 
     /**
      * getter
@@ -117,7 +115,7 @@ public class Cylinder extends RadialGeometry {
         Vector toPointInFront = new Vector(orientation.getPoint(), pointInFront);
 
         if (Vector.dotProduct(orientation.getDirection(), toPointBehind) == 0)
-           return toPointBehind.normal();
+            return toPointBehind.normal();
         else
             return toPointInFront.normal();
 
@@ -126,25 +124,32 @@ public class Cylinder extends RadialGeometry {
     /**
      * return map of the Ray intersection points with the Cylinder.
      *
-     *
      * @param myRay
      * @return
      */
     @Override
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
 
+        // creating the map and list for returning
         Map<Geometry, List<Point3D>> geometryListMap = new HashMap<>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
+        // we get the vector from the light source  V
+        // and the orientation of the cylinder  Va
         Vector rayDirection = new Vector(myRay.getDirection().getVector()); // V
-        Vector cylinderDirection = new Vector(getOrientaion().getDirection().getVector()); // Va
+        Vector cylinderDirection = new Vector(getOrientation().getDirection().getVector()); // Va
         Point3D rayPoint = new Point3D(myRay.getPoint());
 
+        // calculating the delta of the point
         Vector delta = new Vector(Point3D.subtract(orientation.getPoint(), rayPoint));
 
+        // calculating the A component
+        // A = (V - (V * Va) Va)^2
         Vector temp = new Vector(Point3D.subtract(cylinderDirection.multiplyByScalar(Vector.dotProduct(rayDirection, cylinderDirection)).getVector(), rayDirection.getVector()));
         double A = Vector.dotProduct(temp, temp);
 
+        // calculating the B component
+        // 2( (V - ( V * Va)Va) *( delta - (delta * Va)Va))
         Vector temp1 = new Vector(Point3D.subtract(
                 (cylinderDirection.multiplyByScalar(Vector.dotProduct(delta,
                         cylinderDirection)).getVector()), delta.getVector()));
@@ -155,6 +160,8 @@ public class Cylinder extends RadialGeometry {
 
         double B = 2 * Vector.dotProduct(vecB, temp1);
 
+        // calculating the C component
+        // (delta - (delta * Va)Va)^2 - r^2
         double C = Vector.dotProduct(temp1, temp1) - Math.pow(_radius, 2);
 
         double sqrtCom = Math.pow(B, 2) - (4 * A * C);
@@ -180,20 +187,15 @@ public class Cylinder extends RadialGeometry {
         // two intersections
         if (t1 < 0 && t2 < 0) {
             return geometryListMap;
-        }/* else if (t1 < 0) {
-            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector()))));
-        } else if (t2 < 0) {
-            listOfIntersections.add(new Point3D(Point3D.subtract(rayPoint, Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector()))));
-        } */
-        else if(t1<0&& t2>0){
+        } else if (t1 < 0 && t2 > 0) {
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
-        } else if(t1>0 && t2<0){
+        } else if (t1 > 0 && t2 < 0) {
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
-        }
-        else {
+        } else {
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t1).getVector())));
             listOfIntersections.add(new Point3D(Point3D.add(rayPoint, rayDirection.multiplyByScalar(t2).getVector())));
         }
+
         geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
     }

@@ -95,7 +95,7 @@ public class Render {
 
         if (level == 0 || Coordinate.isZero(k)) {
             return new Color(0, 0, 0);
-        }/**/
+        }
 
         //ambient light
         Color color = scene.getSceneAmbientLight().getIntensity();
@@ -147,7 +147,6 @@ public class Render {
             reflectedLight.scale(kr);
         }
 
-
         // Recursive call for a refracted ray
         Ray refractedRay = constructRefractedRay(geo, p, inRay);
         Map.Entry<Geometry, Point3D> refractedPoint = findClosestIntersection(refractedRay);
@@ -164,7 +163,6 @@ public class Render {
 
         color.add(reflectedLight, refractedLight);
         return color;
-        /* return color;*/
     }
 
     /**
@@ -285,7 +283,6 @@ public class Render {
         Vector r = new Vector(l.getVector(), nComponent.getVector());
         double scalingFactor = ks * Math.pow(Vector.dotProduct(v.multiplyByScalar(-1).normal(), r.normal()), nShininess);
 
-
         result.scale(scalingFactor);
         return result;
     }
@@ -390,7 +387,6 @@ public class Render {
             this.imageWriter.writePixel(i, j, this.calcColor(entry.getKey(), entry.getValue(),ray).getColor());
         }
     }
-
 
     /****************setters/getters********************/
 

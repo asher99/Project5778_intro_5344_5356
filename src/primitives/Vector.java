@@ -10,9 +10,6 @@ public class Vector {
     // any vector is based on a 3d point
     protected Point3D vector;
 
-    //  a static object, represent the zero-vector.
-    public static Vector zeroVector = new Vector(0, 0, 0);
-
     // ***************** Constructor ********************** //
 
     /**
@@ -173,7 +170,6 @@ public class Vector {
      */
     @Override
     public String toString() {
-
         return vector.toString();
     }
 
@@ -185,7 +181,6 @@ public class Vector {
      * @return
      */
     public Point3D getVector() {
-
         return vector;
     }
 }

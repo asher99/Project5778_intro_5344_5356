@@ -26,9 +26,6 @@ public class DirectionalLight extends Light implements LightSource {
         return super.color;
     }
 
-    ;
-
-
     /**
      * calculate the vector from the light source to the point on the Geometry.
      * no implementation for DirectionalLight.
@@ -41,9 +38,6 @@ public class DirectionalLight extends Light implements LightSource {
         return direction;
     }
 
-    ;
-
-
     /**
      * return the direction of the light.
      * why it have a Point3D arg?
@@ -55,6 +49,4 @@ public class DirectionalLight extends Light implements LightSource {
     public Vector getD(Point3D p) {
         return direction;
     }
-
-    ;
 }

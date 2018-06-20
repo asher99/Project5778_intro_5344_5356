@@ -18,6 +18,15 @@ public class LimitedCylinder extends Cylinder {
 
     // ***************** Constructors ********************** //
 
+    /**
+     * constructor
+     *
+     * @param myRadius
+     * @param tp
+     * @param myRay
+     * @param e
+     * @param m
+     */
     public LimitedCylinder(double myRadius, Point3D tp, Ray myRay, Color e, Material m) {
         super(myRadius, myRay, e, m);
         top = tp;
@@ -42,8 +51,8 @@ public class LimitedCylinder extends Cylinder {
      * @return
      */
     @Override
-    public Ray getOrientaion() {
-        return super.getOrientaion();
+    public Ray getOrientation() {
+        return super.getOrientation();
     }
 
     /**
@@ -137,34 +146,38 @@ public class LimitedCylinder extends Cylinder {
      */
     @Override
     public Map<Geometry, List<Point3D>> findIntersections(Ray myRay) {
-        //Cylinder endlessC = new Cylinder(_radius, orientation, emission, material);
+
         Map<Geometry, List<Point3D>> geometryListMap = new HashMap<Geometry, List<Point3D>>();
         List<Point3D> listOfIntersections = new ArrayList<Point3D>();
 
+        // the bottom base of the cylinder
         Plane plane1 = new Plane(orientation.getPoint(), orientation.getDirection());
 
+        // the top base of the cylinder
         Plane plane2 = new Plane(top, orientation.getDirection());
 
         Map<Geometry, List<Point3D>> temp1 = plane1.findIntersections(myRay);
 
         Map<Geometry, List<Point3D>> temp2 = plane2.findIntersections(myRay);
 
-        if(temp1 != null)
-        for (HashMap.Entry<Geometry, List<Point3D>> pair : temp1.entrySet()) {
-            for (Point3D p1 : pair.getValue()) {
-                if (new Vector(Point3D.subtract(orientation.getPoint(), p1)).sizeOfVector() <= _radius && p1!=null)
-                    listOfIntersections.add(p1);
+        // removing all points that beyond the radius
+        if (temp1 != null)
+            for (HashMap.Entry<Geometry, List<Point3D>> pair : temp1.entrySet()) {
+                for (Point3D p1 : pair.getValue()) {
+                    if (new Vector(Point3D.subtract(orientation.getPoint(), p1)).sizeOfVector() <= _radius && p1 != null)
+                        listOfIntersections.add(p1);
+                }
             }
-        }
 
-        if(temp2 != null)
-        for (HashMap.Entry<Geometry, List<Point3D>> pair : temp2.entrySet()) {
-            for (Point3D p2 : pair.getValue()) {
-                if (new Vector(Point3D.subtract(orientation.getPoint(), p2)).sizeOfVector() <= _radius && p2!=null)
-                    listOfIntersections.add(p2);
+        if (temp2 != null)
+            for (HashMap.Entry<Geometry, List<Point3D>> pair : temp2.entrySet()) {
+                for (Point3D p2 : pair.getValue()) {
+                    if (new Vector(Point3D.subtract(orientation.getPoint(), p2)).sizeOfVector() <= _radius && p2 != null)
+                        listOfIntersections.add(p2);
+                }
             }
-        }
 
+        // using the infinity cylinder to find all the intersections in the body of the limited cylinder
         geometryListMap = super.findIntersections(myRay);
 
         for (HashMap.Entry<Geometry, List<Point3D>> pair : geometryListMap.entrySet()) {
@@ -173,7 +186,7 @@ public class LimitedCylinder extends Cylinder {
                     listOfIntersections.add(p);
             }
         }
-        if(listOfIntersections.isEmpty())
+        if (listOfIntersections.isEmpty())
             return null;
         geometryListMap.put(this, listOfIntersections);
         return geometryListMap;
