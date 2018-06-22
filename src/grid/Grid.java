@@ -18,6 +18,9 @@ public class Grid {
     HashMap<Point3D, Voxel> grid;
     Geometries backgroundGeometries;
 
+    // represent the camera position.
+    Point3D viewPoint;
+
     // the origin of the grid (starting point)
     Point3D origin;
 
@@ -107,6 +110,8 @@ public class Grid {
     public Map<Geometry,Point3D> rayTrace(Ray inRay){
 
         Map<Geometry,Point3D> intersections = new HashMap<Geometry,Point3D>();
+        //Map<Geometry,Point3D> intersectionsUp = new HashMap<Geometry,Point3D>();
+       // Map<Geometry,Point3D> intersectionsDown = new HashMap<Geometry,Point3D>();
         Voxel current = grid.get(findVoxel(inRay.getPoint()));
         Point3D next = inRay.getPoint();
 
@@ -117,16 +122,17 @@ public class Grid {
 
             // if we found intersection in one of the voxels, the tracing is over.
             if(!(intersections == null)){
-                return intersections;
+               //if(current.inVoxel(intersections.entrySet().iterator().next().getValue()))
+                    return intersections;
             }
 
             //next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
             //current = grid.get(findVoxel(next));
-            next = new Point3D(next.getX()+inRay.getDirection().getVector().getX()*(delta/10),
-                    next.getY() + inRay.getDirection().getVector().getY()*(delta/10),
-                    next.getZ() - inRay.getDirection().getVector().getZ()*(delta/10));
+            next = new Point3D(next.getX()-inRay.getDirection().getVector().getX()*(delta/2),
+                    next.getY() - inRay.getDirection().getVector().getY()*(delta/2),
+                    next.getZ() - inRay.getDirection().getVector().getZ()*(delta/2));
 
-            current = grid.get(findVoxel(new Point3D(next.getX(),next.getY(),-next.getZ())));
+            current = grid.get(findVoxel(new Point3D(next.getX(),next.getY(),next.getZ())));
         }
 
         return null;
@@ -151,5 +157,55 @@ public class Grid {
      */
     public Geometries getBackgroundGeometries() {
         return backgroundGeometries;
+    }
+
+
+    /**
+     * return the voxel above voxel.
+     * @param v
+     * @return
+     */
+    public Voxel up(Voxel v){
+        return grid.get(Point3D.add(v.voxelOrigin, new Point3D(0,delta,0)));
+    }
+
+    /**
+     * return the voxel under voxel.
+     * @param v
+     * @return
+     */
+    public Voxel down(Voxel v){
+        return grid.get(Point3D.add(v.voxelOrigin, new Point3D(0,-delta,0)));
+    }
+
+    /**
+     * return the closest intersection
+     * @param maps
+     * @return
+     */
+    public Map<Geometry,Point3D> closest(Map<Geometry,Point3D>... maps){
+
+        Map<Geometry,Point3D> closest = null;
+        Map.Entry<Geometry,Point3D> tempPair = null;
+        Point3D tempPoint;
+        double tempDist = Double.MAX_VALUE;
+        for (Map<Geometry,Point3D> m: maps){
+            if (m != null) {
+                tempPair = m.entrySet().iterator().next();
+                if (Point3D.distance(tempPair.getValue(), viewPoint) < tempDist) {
+                    tempDist = Point3D.distance(tempPair.getValue(), viewPoint);
+                    closest = m;
+                }
+            }
+        }
+        return closest;
+    }
+
+    /**
+     * setting the point of view.
+     * @param viewPoint
+     */
+    public void setViewPoint(Point3D viewPoint) {
+        this.viewPoint = viewPoint;
     }
 }

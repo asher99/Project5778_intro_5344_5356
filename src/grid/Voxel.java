@@ -63,9 +63,9 @@ public class Voxel {
      * @return
      */
     public boolean inVoxel(Point3D p){
-        return ( voxelOrigin.getX() <= p.getX() && p.getX() <= voxelFinish.getX()
-                  &&  voxelOrigin.getY() <= p.getY() && p.getY() <= voxelFinish.getY()
-                  &&  voxelOrigin.getZ() <= p.getZ() && p.getZ() <= voxelFinish.getZ());
+        return ( voxelOrigin.getX() >= p.getX() && p.getX() >= voxelFinish.getX()
+                  &&  voxelOrigin.getY() >= p.getY() && p.getY() >= voxelFinish.getY()
+                  &&  voxelOrigin.getZ() >= p.getZ() && p.getZ() >= voxelFinish.getZ());
     }
 
     /**

@@ -437,7 +437,14 @@ public class ProjectTests {
         myGrid.getGrid().get(new Point3D(-23, 0, 35)).addGeometries(base1,base2,baseFront1,baseFront2);
 
         myGrid.getGrid().get(new Point3D(69, 0, -11)).addGeometries(ball5,ball4,base1,side4);
+        myGrid.getGrid().get(new Point3D(69, 0, 35)).addGeometries(ball5,ball4);//
+
         myGrid.getGrid().get(new Point3D(23, 0, -11)).addGeometries(ball4,ball3,ball2,base1,base2);
+        myGrid.getGrid().get(new Point3D(23, 0, 35)).addGeometries(ball5,ball4,ball3,ball2);//
+
+        myGrid.getGrid().get(new Point3D(-23, 0, 35)).addGeometries(ball1);//
+
+
 
         myGrid.getGrid().get(new Point3D(-23, -138, -11)).addGeometries(bar1,side3);
         myGrid.getGrid().get(new Point3D(23, -138, -11)).addGeometries(bar1);
@@ -456,9 +463,11 @@ public class ProjectTests {
         myGrid.getGrid().get(new Point3D(-23, -92, -57)).addGeometries(side2);
 
         myGrid.getGrid().get(new Point3D(-23, 0, -11)).addGeometries(side3,ball1,base1,base2,string11,string22);
+        myGrid.getGrid().get(new Point3D(-23, 0, 35)).addGeometries(side3); //
         myGrid.getGrid().get(new Point3D(-23, -46, -11)).addGeometries(side3);
         myGrid.getGrid().get(new Point3D(-23, -92, -11)).addGeometries(side3);
 
+        myGrid.getGrid().get(new Point3D(69, 0, 35)).addGeometries(side4); //
         myGrid.getGrid().get(new Point3D(69, -46, -11)).addGeometries(side4);
         myGrid.getGrid().get(new Point3D(69, -92, -11)).addGeometries(side4);
 
@@ -495,12 +504,13 @@ public class ProjectTests {
         myRender.getScene().setGrid(myGrid);
         myRender.setImageWriter(sceneWriter);
 
-
+        myGrid.setViewPoint(camera.getP0());
         //Voxel a = myGrid.getGrid().get(new Point3D(69,0,-11));
 
         myRender.renderImage3DDDA();
         //myRender.renderImage();
-        //.renderPixel3DDA(380,650);
+        myRender.renderPixel3DDA(372,659);
+        myRender.renderPixel3DDA(510,17);
         //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
