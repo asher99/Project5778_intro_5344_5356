@@ -6,7 +6,7 @@ import primitives.Color;
  * class AmbientLigt.
  * determine the ambient light of a scene.
  */
-public class AmbientLight extends Light{
+public class AmbientLight extends Light {
 
     //protected Color color;
     protected double Ka;

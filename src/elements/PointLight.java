@@ -54,27 +54,24 @@ public class PointLight extends Light implements LightSource {
     public Color getIntensity(Point3D p) {
 
         double distance = Point3D.distance(position, p);
-        double denominator = Kc + Ki*distance + Kq * Math.pow(distance, 2);
+        double denominator = Kc + Ki * distance + Kq * Math.pow(distance, 2);
 
         Color result = new Color(super.color);
         result.scale(1 / denominator);
         return result;
     }
 
-    ;
-
     /**
      * calculate the vector from the light source to the point on the Geometry.
      * actually return the opposite vector, fashion choice - DEAL WITH IT!
+     *
      * @param p
      * @return Vector
      */
     @Override
     public Vector getL(Point3D p) {
-        return new Vector(position,p).normal();
+        return new Vector(position, p).normal();
     }
-
-    ;
 
     /**
      * return the direction of the light.

@@ -1,11 +1,10 @@
 package renderer;
 
-import elements.LightSource;
-import elements.PointLight;
+import elements.*;
 import geometries.*;
 import primitives.*;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,6 @@ public class Render3DDDA extends Render {
                 // construct ray through that pixel
                 Ray ray = scene.getSceneCamera().ConstractRaythroughPixel(imageWriter.getNx(), imageWriter.getNy(),
                         i, j, scene.getCameraScreenDistance(), imageWriter.getWidth(), imageWriter.getHeight());
-
 
                 // RAY TRACING
                 Map<Geometry, Point3D> intersections = scene.getGrid().rayTrace(ray);
@@ -55,7 +53,6 @@ public class Render3DDDA extends Render {
                 }
             }
         }
-
     }
 
     /**
@@ -69,7 +66,6 @@ public class Render3DDDA extends Render {
     private Color calcColor3DDDA(Geometry geo, Point3D p, Ray inRay) {
         return calcColor3DDDA(geo, p, inRay, MAX_CALC_COLOR_LEVEL, 1);
     }
-
 
     /**
      * calculate color in a point.
@@ -89,7 +85,7 @@ public class Render3DDDA extends Render {
 
         if (level == 0 || Coordinate.isZero(k)) {
             return new Color(0, 0, 0);
-        }/**/
+        }
 
         //ambient light
         Color color = scene.getSceneAmbientLight().getIntensity();
@@ -139,7 +135,6 @@ public class Render3DDDA extends Render {
             reflectedLight.scale(kr);
         }
 
-
         // Recursive call for a refracted ray
         Ray refractedRay = constructRefractedRay(geo, p, inRay);
         Map.Entry<Geometry, Point3D> refractedPoint = findClosestIntersection3DDDA(refractedRay);
@@ -155,7 +150,6 @@ public class Render3DDDA extends Render {
 
         color.add(reflectedLight, refractedLight);
         return color;
-
     }
 
 
@@ -172,7 +166,6 @@ public class Render3DDDA extends Render {
             return null;
         return intersection.entrySet().iterator().next();
     }
-
 
     /**
      * find if a point is occluded - there is a Geometry blocking the way to the light source.
@@ -195,7 +188,6 @@ public class Render3DDDA extends Render {
         if (intersectionPoints == null)
             return 1;
         else {
-
             if (intersectionPoints.containsKey(geo)) {
                 intersectionPoints.remove(geo);
                 if (intersectionPoints.isEmpty())
@@ -224,7 +216,6 @@ public class Render3DDDA extends Render {
 
                     if (pToIntersectionPoint.sizeOfVector() < pToLsPosition.sizeOfVector()) {
                         shadowK *= intersection.getKey().getMaterial().getKt();
-
                     }
                 } else {
                     shadowK *= intersection.getKey().getMaterial().getKt();
@@ -232,9 +223,7 @@ public class Render3DDDA extends Render {
             }
             return shadowK;
         }
-
     }
-
 
     /**
      * render a specific pixel.
@@ -245,18 +234,15 @@ public class Render3DDDA extends Render {
      * @param j
      */
     public void renderPixel3DDA(int i, int j) {
-
         // construct ray through that pixel
         Ray ray = scene.getSceneCamera().ConstractRaythroughPixel(imageWriter.getNx(), imageWriter.getNy(),
                 i, j, scene.getCameraScreenDistance(), imageWriter.getWidth(), imageWriter.getHeight());
-
 
         // RAY TRACING
         Map<Geometry, Point3D> intersections = scene.getGrid().rayTrace(ray);
 
         // if there is no intersection in the voxels: try the background geometries.
         if (intersections == null) {
-
             for (Geometry g : scene.getGrid().getBackgroundGeometries().getGeometries()) {
                 Map<Geometry, List<Point3D>> intersectionPoints = g.findIntersections(ray);
                 if (!(intersectionPoints == null)) {
@@ -282,6 +268,3 @@ public class Render3DDDA extends Render {
         }
     }
 }
-
-
-
