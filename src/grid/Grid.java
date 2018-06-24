@@ -101,7 +101,6 @@ public class Grid {
         return  index;
     }
 
-
     /**
      * receive a ray and return the track of it: list of voxels the ray intersect.
      * @param inRay
@@ -122,12 +121,9 @@ public class Grid {
 
             // if we found intersection in one of the voxels, the tracing is over.
             if(!(intersections == null)){
-               //if(current.inVoxel(intersections.entrySet().iterator().next().getValue()))
                     return intersections;
             }
 
-            //next = Vector.VectorialAdd(new Vector(next),inRay.getDirection().multiplyByScalar(delta)).getVector();
-            //current = grid.get(findVoxel(next));
             next = new Point3D(next.getX()-inRay.getDirection().getVector().getX()*(delta/2),
                     next.getY() - inRay.getDirection().getVector().getY()*(delta/2),
                     next.getZ() - inRay.getDirection().getVector().getZ()*(delta/2));
@@ -136,7 +132,6 @@ public class Grid {
         }
 
         return null;
-        // return backgroundIntersection(inRay)
     }
 
 

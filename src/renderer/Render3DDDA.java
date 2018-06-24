@@ -13,6 +13,10 @@ import java.util.Map;
  */
 public class Render3DDDA extends Render {
 
+    /**
+     * the main method of the project.
+     * rendering the scene with its background, lights and geometries to image.
+     */
     public void renderImage3DDDA() {
 
         for (int i = 0; i < imageWriter.getNx(); i++) {
@@ -180,10 +184,8 @@ public class Render3DDDA extends Render {
         Vector lightDirection = l.normal().multiplyByScalar(-1); // from point to light source
 
         Vector normal = geo.getNormal(p);
-        /*Vector epsVector = normal.multiplyByScalar(Vector.dotProduct(normal, lightDirection) > 0 ? 2 : -2);
-        Point3D geometryPoint = Point3D.add(p, epsVector.getVector());*/
 
-        Ray lightRay = new Ray(/*geometryPoint*/p, lightDirection);
+        Ray lightRay = new Ray(p, lightDirection);
         Map<Geometry, Point3D> intersectionPoints = scene.getGrid().rayTrace(lightRay);
         if (intersectionPoints == null)
             return 1;

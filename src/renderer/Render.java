@@ -17,11 +17,10 @@ import java.util.Map.Entry;
  */
 public class Render {
 
-    //fields
     protected Scene scene;
     protected ImageWriter imageWriter;
 
-    protected final static int MAX_CALC_COLOR_LEVEL = 1;
+    protected final static int MAX_CALC_COLOR_LEVEL = 7;
 
 /**************** operations *******************/
 
@@ -53,7 +52,6 @@ public class Render {
             }
         }
     }
-
 
     /**
      * call the real calcColor method.

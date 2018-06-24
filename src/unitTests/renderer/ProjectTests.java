@@ -259,7 +259,6 @@ public class ProjectTests {
     @Test
     public void gridedProject() {
 
-        //Color woodColor = new Color(168, 119, 90);
         Color woodColor = new Color(70, 49, 33);
 
         Triangle floor1 = new Triangle(new Point3D(-750, 0, -300), new Point3D(-750, 0, 100), new Point3D(750, 0, 100)
@@ -376,7 +375,7 @@ public class ProjectTests {
                 , stringColor, stringMaterial);
 
         Camera camera = new Camera(
-                new Point3D(0, -60, 80),
+                new Point3D(0, -70, 80),
                 new Vector(0, -1, 0),
                 new Vector(0, 0, -1));
 
@@ -393,8 +392,8 @@ public class ProjectTests {
 *
 * */
         Geometries geos = new Geometries();
+        //Grid myGrid = new Grid(geos, new Point3D(437, 322, 403), -46, 19);
         Grid myGrid = new Grid(geos, new Point3D(115, 0, 81), -46, 5);
-
         myGrid.getGrid().get(new Point3D(-23, 0, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -46, -57)).addGeometries(string11);
         myGrid.getGrid().get(new Point3D(-23, -92, -57)).addGeometries(string11);
@@ -473,8 +472,8 @@ public class ProjectTests {
 
         myGrid.setBackgroundGeometries(floor1,floor2,mirror1,mirror2);
 
-        Scene myScene = new Scene("grided newton Cradle");
-        myScene.setCameraScreenDistance(420);
+        Scene myScene = new Scene("grided newton Cradle1");
+        myScene.setCameraScreenDistance(2200);
         myScene.setSceneCamera(camera);
         myScene.setSceneBackgroundColor(new java.awt.Color(0, 0, 0));
         myScene.addGeometries(floor1, floor2, mirror1, mirror2, base1, base2,
@@ -486,32 +485,23 @@ public class ProjectTests {
 
         myScene.setSceneAmbientLight(new AmbientLight(new Color(0, 0, 0), 0));
 
-        SpotLight mySpotLight = new SpotLight(
-                new Point3D(-60, -100, -150),
-                1, 0.0075, 0.0008,
-                new Color(255, 255, 255), new Vector(0, -1, 1));
-
         PointLight myPointLight = new PointLight(
                 new Point3D(0, -100, -50),
                 1, 0.0076, 0.0001, new Color(201, 226, 255));
 
-        //myScene.addLightSource(mySpotLight);
         myScene.addLightSource(myPointLight);
 
-        ImageWriter sceneWriter = new ImageWriter("grided newton Cradle", 1000, 1000, 1000, 1000);
+        ImageWriter sceneWriter = new ImageWriter("grided newton Cradle1", 5000, 5000, 5000, 5000);
         Render3DDDA myRender = new Render3DDDA();
         myRender.setScene(myScene);
         myRender.getScene().setGrid(myGrid);
         myRender.setImageWriter(sceneWriter);
 
         myGrid.setViewPoint(camera.getP0());
-        //Voxel a = myGrid.getGrid().get(new Point3D(69,0,-11));
+
 
         myRender.renderImage3DDDA();
         //myRender.renderImage();
-        myRender.renderPixel3DDA(372,659);
-        myRender.renderPixel3DDA(510,17);
-        //myRender.printGrid(100);
         myRender.getImageWriter().writeToimage();
 
     }
